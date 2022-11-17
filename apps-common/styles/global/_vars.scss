@@ -1,0 +1,7 @@
+@use 'sass:math';
+$breakpoints: (
+  largeDesktop: 1200px,
+  desktop: 1024px,
+  tablet: 768px,
+  phone: math.div(850px, 2)
+);
