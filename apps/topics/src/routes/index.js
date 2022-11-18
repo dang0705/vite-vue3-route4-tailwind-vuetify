@@ -1,10 +1,9 @@
 import innerTabs from "@topics/routes/inner-tabs";
-import { currentTopicName } from "@topics/configs/topic-names";
 import { base } from "@topics/configs/get-router-base";
 import initRouter from "@common-routes";
 import beforeEach from "@topics-routes/middlewares/before-each";
 import afterEach from "@topics-routes/middlewares/after-each";
-const children = innerTabs[currentTopicName];
+const children = innerTabs[topicName];
 
 const routes = ({ indexRedirect = null } = {}) => [
   {
@@ -17,7 +16,7 @@ const routes = ({ indexRedirect = null } = {}) => [
     path: "/index",
     name: "index",
     redirect: indexRedirect ? indexRedirect() : { name: "topic-info" },
-    component: () => import("@topics-views/inner-tabs/topic-index"),
+    component: () => import("@topics-views/index/index"),
     children,
   },
 ];

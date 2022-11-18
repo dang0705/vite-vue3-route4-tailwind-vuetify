@@ -1,5 +1,5 @@
 <template>
-  <div class="event-home tw-p-6 sm:tw-text-center">
+  <div class="topics-home tw-p-6 sm:tw-text-center">
     <v-img
       id="topic-home_header"
       :src="useGlobalImagesStore().globalImages.arrowDown"
@@ -23,17 +23,13 @@
 <script setup>
 import { useGlobalImagesStore } from "@topics-store/global-images";
 import getAllComponents from "@topics-apis/get-all-components";
-// import vuetifyDynamicChangeTheme from "@common-config/vuetify-dynamic-change-theme";
-import kebabCase2BigCamelCase from "@common-utils/kebab-case-2-big-CamelCase";
-
-// getCurrentInstance().proxy.$mappingImages({ project, device });
 
 let components = ref([]);
 const getAllComponentsData = async () => {
   // await $http.get(getAllComponents);
   components.value = [
     {
-      key: "topic-target-and-time-line",
+      key: "target-and-time-line",
       value:
         'time-line <slot name="slot-1">请前端老师处理</slot>ppp<slot name="slot-2">请前端老师处理</slot>',
     },
@@ -44,8 +40,7 @@ const getAllComponentsData = async () => {
     },
   ];
 };
-const isComponent = (name) => `ui-${name}`;
-// vuetifyDynamicChangeTheme({ theme: { primary: "#9aee85" } });
+const isComponent = (key) => `topic-${key}`;
 onMounted(async () => {
   getAllComponentsData();
 });

@@ -1,12 +1,12 @@
 {
-  "name": "vite-parsing-vue-route4-base-configuration",
+  "name": "topic-front-stage",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "app-topics:dev": "vite -- topics",
     "app-topics:prod": "vite build -- topics",
     "build & preview--topics": "vite build -- build-local -- topics && npx vite preview -- topics",
-    "preview--topics": "npx vite preview -- event"
+    "preview--topics": "npx vite preview -- topics"
   },
   "dependencies": {
     "axios": "^1.1.3",

@@ -1,8 +1,10 @@
 const breakPoint = require("../apps-common/config/breakpoint");
 const screens = {};
 const sizes = Object.keys(breakPoint);
-
-sizes.forEach(
+for (const size in breakPoint) {
+  screens[size] = `${breakPoint[size]}px`;
+}
+/*sizes.forEach(
   (size, whichSize) =>
     (screens[size] = {
       min: `${breakPoint[size]}px`,
@@ -10,17 +12,18 @@ sizes.forEach(
         ? { max: `${breakPoint[sizes[whichSize + 1]] - 1}px` }
         : {}),
     })
-);
+);*/
 
 module.exports = {
   screens,
   colors: {
+    red: "#f34d50",
     blue: "#1fb6ff",
     purple: "#7e5bef",
     pink: "#ff49db",
     orange: "#ff7849",
     green: "#13ce66",
-    yellow: "#ffc82c",
+    yellow: "#fccc00",
     "gray-dark": "#273444",
     gray: "#8492a6",
     "gray-light": "#d3dce6",
@@ -31,8 +34,9 @@ module.exports = {
   },
   extend: {
     colors: {
-      primary: "var(--event-primary)",
-      secondary: "var(--event-secondary)",
+      primary: "var(--topic-primary)",
+      secondary: "var(--topic-secondary)",
+      activated: "#fff",
     },
     spacing: {
       "8xl": "96rem",

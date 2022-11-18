@@ -1,11 +1,12 @@
 <template>
-  <v-layout :class="[appClassName, 'md:tw-text-primary']">
+  <v-layout :class="[appClassName]">
     <v-app-bar flat>
-      <template #image>
-        <v-img :src="globalImages.top" width="100" cover />
+      <template #prepend>
+        <v-img :src="globalImages.top" width="300" cover />
       </template>
     </v-app-bar>
     <v-main>
+      <v-img :src="globalImages.leaderPlanHeader" />
       <router-view />
     </v-main>
     <v-dialog v-model="showDialog">
@@ -16,15 +17,14 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const ss = sessionStorage;
-const { device, setDevice } = useDeviceStore();
-const { addRoute } = useAsyncRoutesStore();
 const showDialog = ref(false);
+const $deviceStore = useDeviceStore();
+const { device } = storeToRefs($deviceStore);
+$deviceStore.setDevice(useDisplay().name.value);
 
 let loading = ref(false);
 let errMsg = ref("");
 let globalImages = ref({});
-
-setDevice(useDisplay().name.value);
 
 const appClassName = computed(
   () => `${$appName} ${$appName}_${useTopicNameStore().topicName} ${device}`
@@ -39,8 +39,8 @@ onMounted(async () => {
   globalImages.value = useGlobalImagesStore().globalImages =
     await getCurrentInstance().proxy.$mappingImages({
       common: "common",
-      eventName: useTopicNameStore().topicName,
-      device,
+      project: topicName,
+      device: device.value,
     });
   catchStatus();
 });

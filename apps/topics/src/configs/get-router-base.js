@@ -1,2 +1,2 @@
-import { topicName } from "@topics/configs/get-topic-name";
-export const base = `/topic/${topicName}`;
+import { topicNameOrigin } from "@topics/configs/get-topic-name-origin";
+export const base = `/topic/${topicNameOrigin}`;

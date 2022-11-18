@@ -5,6 +5,6 @@ export default async (router) => {
   router.addRoute({
     path: "/test",
     name: "test",
-    component: () => import("@topics-views/inner-tabs/twenty-years/test"),
+    component: () => import("@topics-views/index/twenty-years/test"),
   });
 };

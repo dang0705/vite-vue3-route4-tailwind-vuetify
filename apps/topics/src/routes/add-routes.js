@@ -1,4 +1,3 @@
-import { currentTopicName } from "@topics/configs/topic-names";
 import { useDeviceStore } from "@topics-store/device";
 import c2k from "@common-utils/camelCase-2-kebab-case";
 const allViews = import.meta.glob("/src/views/**/**.vue");
@@ -13,10 +12,7 @@ export default ({ routes = [], root = "index", router }) =>
           title: name,
           icon: useDeviceStore().device === "PC" ? "" : icon,
         },
-        component:
-          allViews[
-            `/src/views/inner-tabs/${currentTopicName}/${c2k(path)}.vue`
-          ],
+        component: allViews[`/src/views/index/${topicName}/${c2k(path)}.vue`],
       };
       router.addRoute(root, route);
       router.options.routes

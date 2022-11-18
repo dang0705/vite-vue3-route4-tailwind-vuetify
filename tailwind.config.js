@@ -6,7 +6,7 @@ module.exports = {
   content: [`./apps/${$appName}/src/**/*.{vue,css,scss,js}`],
   darkMode: "media",
   prefix: "tw-",
-  important: true,
+  important: "#app",
   corePlugins: {
     preflight: false,
   },

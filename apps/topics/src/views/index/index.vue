@@ -1,6 +1,6 @@
 <template>
+  <ui-tabs />
   <div>
-    <ui-tabs />
     <router-view />
   </div>
 </template>

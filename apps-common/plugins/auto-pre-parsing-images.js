@@ -11,6 +11,7 @@ export default {
       imagesDirName = "images",
       customPath = "",
     } = {}) => {
+      console.log(device);
       const allImages = import.meta.glob(["/**/**.jpg", "/**/**.png"]);
       const matchingPath = (arg, path) =>
         arg ? path.includes(`/${arg}/`) : true;
@@ -22,9 +23,9 @@ export default {
               (matchingPath(project, path) && matchingPath(device, path)) ||
               matchingPath(`${device}/${common}`, path)
         ) {
-          const pathSplits = path.split(`/${imagesDirName}/`);
-          const pathPrefix = pathSplits[0].replace(/\//, "");
-          const dynamicPath = pathSplits[1];
+          // const pathSplits = path.split(`/${imagesDirName}/`);
+          // const pathPrefix = pathSplits[0].replace(/\//, "");
+          // const dynamicPath = pathSplits[1];
           const image = path.substring(path.lastIndexOf("/") + 1);
           const imageName = k2c(image.split(".")[0]);
           if (!imageOfThisProject[imageName]) {
