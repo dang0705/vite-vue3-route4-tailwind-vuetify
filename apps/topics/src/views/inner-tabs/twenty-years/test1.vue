@@ -1,9 +1,9 @@
 <template>
-  <p>test</p>
+  <p>test1</p>
 </template>
 
 <script>
 export default {
-  name: "test",
+  name: "test1",
 };
 </script>

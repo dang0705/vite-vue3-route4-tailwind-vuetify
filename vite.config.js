@@ -8,14 +8,14 @@ import deepmerge from "deepmerge";
 import { isBuildLocal } from "./vite-config/env";
 
 export default defineConfig(async ({ mode }) => {
-  let appConfigs = ()=>{};
+  let appConfigs = () => {};
   const $isDev = mode === "development";
   try {
     appConfigs = require(`./vite-config/apps/${$appName}`);
   } catch (e) {}
   const commonConfigs = {
     build: build($appName),
-    base:$isDev? "/":'topic',
+    base: $isDev ? "/" : "topic",
     css: {
       preprocessorOptions: {
         scss: {
@@ -43,6 +43,7 @@ export default defineConfig(async ({ mode }) => {
     server: {
       host: "topic.qinglipai.cn",
       port: 9999,
+      open: true,
       proxy,
     },
   };

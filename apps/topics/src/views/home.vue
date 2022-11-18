@@ -1,7 +1,7 @@
 <template>
   <div class="event-home tw-p-6 sm:tw-text-center">
     <v-img
-      id="event-home_header"
+      id="topic-home_header"
       :src="useGlobalImagesStore().globalImages.arrowDown"
     />
     <component
@@ -33,7 +33,7 @@ const getAllComponentsData = async () => {
   // await $http.get(getAllComponents);
   components.value = [
     {
-      key: "event-target-and-time-line",
+      key: "topic-target-and-time-line",
       value:
         'time-line <slot name="slot-1">请前端老师处理</slot>ppp<slot name="slot-2">请前端老师处理</slot>',
     },

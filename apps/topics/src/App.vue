@@ -13,30 +13,33 @@
     </v-dialog>
   </v-layout>
 </template>
-<script></script>
 <script setup>
 import { useDisplay } from "vuetify";
+const ss = sessionStorage;
+const { device, setDevice } = useDeviceStore();
+const { addRoute } = useAsyncRoutesStore();
 const showDialog = ref(false);
-const eventName = useEventNameStore().eventName;
-const device = useDeviceStore().device;
+
 let loading = ref(false);
 let errMsg = ref("");
+let globalImages = ref({});
+
+setDevice(useDisplay().name.value);
 
 const appClassName = computed(
-  () =>
-    `${$appName}_${useEventNameStore().eventName} ${useDeviceStore().device}`
+  () => `${$appName} ${$appName}_${useTopicNameStore().topicName} ${device}`
 );
+
 const catchStatus = () => {
   useBus.on("err", (msg) => (errMsg = msg));
   useBus.on("loading", (isLoading) => (loading = isLoading));
 };
-let globalImages = ref({});
-useDeviceStore().setDevice(useDisplay().name.value);
+
 onMounted(async () => {
   globalImages.value = useGlobalImagesStore().globalImages =
     await getCurrentInstance().proxy.$mappingImages({
       common: "common",
-      eventName,
+      eventName: useTopicNameStore().topicName,
       device,
     });
   catchStatus();

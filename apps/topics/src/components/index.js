@@ -25,8 +25,8 @@ export default [
     component: () => import("@topics-components/back-stage/ui-subscribe.vue"),
   },
   {
-    name: "UiEventTargetAndTimeLine",
+    name: "UiTopicTargetAndTimeLine",
     component: () =>
-      import("@topics-components/back-stage/ui-event-target-and-time-line.vue"),
+      import("@topics-components/back-stage/ui-topic-target-and-time-line.vue"),
   },
 ];

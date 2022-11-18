@@ -16,8 +16,8 @@ const routes = ({ indexRedirect = null } = {}) => [
   {
     path: "/index",
     name: "index",
-    redirect: indexRedirect ? indexRedirect() : { name: "event-info" },
-    component: () => import("@topics-views/inner-tabs/event-index"),
+    redirect: indexRedirect ? indexRedirect() : { name: "topic-info" },
+    component: () => import("@topics-views/inner-tabs/topic-index"),
     children,
   },
 ];

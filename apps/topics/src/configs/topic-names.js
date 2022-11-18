@@ -1,9 +1,9 @@
 import { topicName } from "@topics/configs/get-topic-name";
-
 // router base as key
 // value for coding's variable
-export const events = {
-  "20th": "twentyYears",
+
+export const topics = {
+  "20th": "twenty-years",
   qinglipai: "qinglipai",
 };
-export const currentTopicName = events[topicName];
+export const currentTopicName = topics[topicName];

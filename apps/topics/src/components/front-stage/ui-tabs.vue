@@ -1,7 +1,7 @@
 <template>
   <ul class="tw-color tw-bg tw-flex tw-items-center">
     <router-link
-      v-for="{ name } in totalTabs"
+      v-for="{ name } in currentTabs"
       :key="name"
       :to="{ name }"
       v-slot="{
@@ -15,7 +15,12 @@
     >
       <li
         @click="navigate"
-        class="tw-cursor-pointer tw-list-none tw-border tw-border-primary tw-text-primary"
+        :class="[
+          'tw-cursor-pointer',
+          'tw-list-none',
+          'tw-border',
+          'tw-border-primary',
+        ]"
       >
         {{ title }}
         <img v-if="device === 'tablet' || device === 'H5'" src="" alt="" />
@@ -26,14 +31,7 @@
 
 <script setup>
 import tabs from "@topics-routes/inner-tabs";
-let currentTabs = tabs[useEventNameStore().eventName];
+let currentTabs = tabs[useTopicNameStore().topicName];
 const device = computed(() => useDeviceStore().device);
-const props = defineProps({ routes: { type: Array, default: () => [] } });
-
-let totalTabs = ref([]);
-
-onMounted(() => {
-  console.log(currentTabs, props.routes);
-  totalTabs.value = props.routes;
-});
+const $routesStore = useAsyncRoutesStore();
 </script>

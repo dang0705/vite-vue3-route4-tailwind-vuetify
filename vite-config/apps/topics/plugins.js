@@ -3,7 +3,8 @@ module.exports = {
     imports: {
       "@topics-components/utils/compiler": [["default", "templateCompiler"]],
       "@topics-store/device": ["useDeviceStore"],
-      "@topics-store/event-name": ["useEventNameStore"],
+      "@topics-store/topic-name": ["useTopicNameStore"],
+      "@topics-store/async-routes": ["useAsyncRoutesStore"],
       "@topics-store/global-images": ["useGlobalImagesStore"],
     },
   },
