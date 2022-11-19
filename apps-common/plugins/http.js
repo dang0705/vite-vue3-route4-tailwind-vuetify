@@ -1,25 +1,25 @@
-import axios from "axios";
-import { useBus } from "@bus";
-import env from "@common-utils/get-server-env-file";
-import { isDev, baseURL, statusCodes } from "@common-config";
-import isQinglipai from "@common-utils/is-qinglipai";
+import axios from 'axios';
+import { useBus } from '@bus';
+import env from '@common-utils/get-server-env-file';
+import { isDev, baseURL, statusCodes } from '@common-config';
+import isQinglipai from '@common-utils/is-qinglipai';
 const http = axios.create({
   baseURL,
   headers: {
-    ...(isQinglipai ? {} : { ORI: "yiban" }),
-  },
+    ...(isQinglipai ? {} : { ORI: 'yiban' })
+  }
 });
 
 const httpErrorMessage = {
-  default: "操作失败",
-  response: "服务器繁忙",
-  request: "请求失败",
-  unknown: "未知错误",
-  noEnvJson: '加载 "env.json" 时出错, 请联系后端或者运维人员',
+  default: '操作失败',
+  response: '服务器繁忙',
+  request: '请求失败',
+  unknown: '未知错误',
+  noEnvJson: '加载 "env.json" 时出错, 请联系后端或者运维人员'
 };
 
 const errorHandler = ({ message, code }) =>
-  useBus.emit("on-err", message, code);
+  useBus.emit('on-err', message, code);
 
 http.interceptors.request.use(
   async (config) => {
@@ -27,10 +27,10 @@ http.interceptors.request.use(
       try {
         await env(config);
       } catch (e) {
-        useBus.emit("on-error", httpErrorMessage.noEnvJson);
+        useBus.emit('on-error', httpErrorMessage.noEnvJson);
       }
     }
-    useBus.emit("loading", true);
+    useBus.emit('loading', true);
     return config;
   },
   (error) => {
@@ -40,17 +40,20 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (response) => {
-    useBus.emit("loading", false);
+    useBus.emit('loading', false);
     const {
       data: { code, data, message },
       config,
-      status,
+      status
     } = response;
+    if (config.mock) {
+      return Promise.resolve(response.data);
+    }
     if (code && code === statusCodes.OK) {
       return Promise.resolve(data);
     } else {
       // 七牛返回没有状态码
-      if (config.url === "https://upload.qbox.me") {
+      if (config.url === 'https://upload.qbox.me') {
         return status === statusCodes.OK
           ? Promise.resolve({ data: response.data })
           : errorHandler({ code, message });
@@ -60,8 +63,8 @@ http.interceptors.response.use(
     }
   },
   (error) => {
-    errorHandler({ message: "服务器繁忙，请稍后" });
-    useBus.emit("loading", false);
+    errorHandler({ message: '服务器繁忙，请稍后' });
+    useBus.emit('loading', false);
     return Promise.reject(error);
   }
 );
@@ -69,6 +72,6 @@ http.interceptors.response.use(
 export default {
   install(app) {
     app.prototype.$http = http;
-  },
+  }
 };
 export const $http = http;

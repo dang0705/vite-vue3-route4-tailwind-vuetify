@@ -1,46 +1,41 @@
 <template>
-  <div class="topics-home tw-p-6 sm:tw-text-center">
-    <v-img
-      id="topic-home_header"
-      :src="useGlobalImagesStore().globalImages.arrowDown"
-    />
+  <div
+    class="topics-home tw-flex tw-flex-col tw-items-center tw-p-6 tw-text-center"
+  >
     <component
+      :is="isComponent(key)"
       v-for="{ key, value } in components"
       :key="key"
-      :is="isComponent(key)"
       :value="value"
     >
-      <template #info-slot-1>
-        <v-text-field />
-      </template>
-      <template #info-slot-2>
-        <v-select />
+      <template v-for="slotName in homeSlots" :key="slotName" #[slotName]>
+        <component
+          :is="homeSlots.length ? 'slots-in-home' : ''"
+          :slot-name="slotName"
+          :slots="homeSlots"
+        />
       </template>
     </component>
   </div>
 </template>
 
 <script setup>
-import { useGlobalImagesStore } from "@topics-store/global-images";
-import getAllComponents from "@topics-apis/get-all-components";
+import getAllComponents from '@topics-apis/get-all-components';
+import cf from '@common-utils/capitalize-the-first-letter';
+const homeSlots = ['target-slot-1', 'target-slot-2', 'time-line-slot-1'];
 
 let components = ref([]);
 const getAllComponentsData = async () => {
-  // await $http.get(getAllComponents);
-  components.value = [
-    {
-      key: "target-and-time-line",
-      value:
-        'time-line <slot name="slot-1">请前端老师处理</slot>ppp<slot name="slot-2">请前端老师处理</slot>',
-    },
-    {
-      key: "info",
-      value:
-        'info <slot name="slot-1">请前端老师处理</slot>ppp<slot name="slot-2">请前端老师处理</slot>',
-    },
-  ];
+  try {
+    components.value = await $http.get(
+      new URL('../../mock/data.json', import.meta.url).href,
+      {
+        mock: true
+      }
+    );
+  } catch (e) {}
 };
-const isComponent = (key) => `topic-${key}`;
+const isComponent = (key) => `topic-${cf(key)}`;
 onMounted(async () => {
   getAllComponentsData();
 });

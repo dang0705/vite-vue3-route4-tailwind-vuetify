@@ -1,9 +1,8 @@
 [
   {
-    "key": "topic-target-and-time-line",
+    "key": "targetAndTimeLine",
     "value": {
       "steps": {
-        "label": "用户参与活动流程",
         "value": "<p><span style=\"font-size: 16px;\">2022年10月30日-11月10日24点 校级官方认证账号申请</span></p><p><span style=\"color: rgb(255, 0, 0); font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><br></p><p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p><p><br></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">2022年12月</span></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">作品评审及获奖公示</span></p><p><br></p><p><span style=\"font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><span style=\"font-size: 16px;\">联合巡讲</span></p>",
         "configs": [
           {
@@ -11,7 +10,7 @@
             "color": { "bg": "#ffa347", "text": "#000" }
           },
           {
-            "content": "<p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p>",
+            "content": "<p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p>&lt;slot name=&quot;slot-1&quot;&gt;请前端老师编写&lt;/slot&gt;",
             "color": { "bg": "#ffa347", "text": "#000" }
           },
           {
@@ -24,18 +23,11 @@
           }
         ]
       },
-      "startAndEndTime": {
-        "label": "活动时间",
-        "value": ["2022-10-01", "2023-04-30"]
-      },
-      "target": {
-        "label": "青梨派活动对象",
-        "value": "<p>全国高等学校马克思主义学院青年学子</p>"
-      }
+      "targets": "<h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 活动对象 ★</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>全国高等学校马克思主义学院青年学子</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 活动时间 ★</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>2022年10月至2023年4月</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 用户参与活动流程 ★</strong></span></h3>&lt;slot name=&quot;slot-1&quot;&gt;请前端老师编写&lt;/slot&gt;"
     }
   },
   {
-    "key": "topic-operation-buttons",
+    "key": "operationButton",
     "value": [
       {
         "bg": "#ffce3c",
@@ -55,5 +47,5 @@
       }
     ]
   },
-  { "key": "topic-image-nav", "value": [] }
+  { "key": "imageNav", "value": [] }
 ]

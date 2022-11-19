@@ -1,27 +1,25 @@
-const template = document.createElement("template");
+import { escape2Html } from '@topics-components/utils/use-slots';
+
+const template = document.createElement('template');
 let slots = [];
+
 const compiler = (templateStr) => {
-  template.innerHTML = templateStr
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
+  template.innerHTML = templateStr = escape2Html(templateStr);
   class Template extends HTMLElement {
     constructor() {
       super();
-      this.attachShadow({ mode: "open" }).appendChild(
+      this.attachShadow({ mode: 'open' }).appendChild(
         template.content.cloneNode(true)
       );
     }
   }
-
   slots = (
     templateStr.match(/<slot\b[^<]*(?:(?!<\/slot>)<[^<]*)*<\/slot>/gi) || []
   ).map((slot) => ({
-    content: slot.replace(/(<\/?slot.*?>)/gi, ""),
+    content: slot.replace(/(<\/?slot.*?>)/gi, '')
   }));
-  !customElements.get("ui-template") &&
-    customElements.define("ui-template", Template);
+  !customElements.get('ui-template') &&
+    customElements.define('ui-template', Template);
   return { slots };
 };
 export default compiler;

@@ -1,10 +1,10 @@
-import vue from "@vitejs/plugin-vue";
-import polyfill from "@vitejs/plugin-legacy";
-import autoImport from "unplugin-auto-import/vite";
-import viteRestart from "vite-plugin-restart";
-import commonjsDev from "vite-plugin-commonjs";
-import deepmerge from "deepmerge";
-import vuetify from "vite-plugin-vuetify";
+import vue from '@vitejs/plugin-vue';
+import polyfill from '@vitejs/plugin-legacy';
+import autoImport from 'unplugin-auto-import/vite';
+import viteRestart from 'vite-plugin-restart';
+import commonjsDev from 'vite-plugin-commonjs';
+import deepmerge from 'deepmerge';
+import vuetify from 'vite-plugin-vuetify';
 
 export default (isDev, $appName) => {
   let appsConfig = {};
@@ -16,24 +16,24 @@ export default (isDev, $appName) => {
   return [
     vue({
       template: {
-        compilerOptions: { isCustomElement: (tag) => tag === "ui-template" },
-      },
+        compilerOptions: { isCustomElement: (tag) => /^ui-/.test(tag) }
+      }
     }),
     vuetify({
-      autoImport: true,
+      autoImport: true
     }),
     polyfill({
-      targets: ["chrome >80"],
-      additionalLegacyPolyfills: ["regenerator-runtime/runtime"],
-      corejs: true,
+      targets: ['chrome >80'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+      corejs: true
     }),
     autoImport({
       include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
       imports: [
         // presets
-        "vue",
-        "vue-router",
-        "pinia",
+        'vue',
+        'vue-router',
+        'pinia',
         // custom
         deepmerge(
           {
@@ -48,30 +48,30 @@ export default (isDev, $appName) => {
             ['default', 'axios'] // import { default as axios } from 'axios',
           ],*/
             // '@common-routes': ['useRouter', 'useRoute'],
-            "@common-mixins/components": ["UiInput"],
-            "@common-mixins/component-props": ["UiInputProps"],
+            '@common-mixins/components': ['UiInput'],
+            '@common-mixins/component-props': ['UiInputProps'],
             // "@common/store": ["defineStore"],
-            "@common-plugins/http": ["$http"],
-            "@common-plugins/bus": ["useBus"],
-            "[package-name]": [
-              "[import-names]",
+            '@common-plugins/http': ['$http'],
+            '@common-plugins/bus': ['useBus'],
+            '[package-name]': [
+              '[import-names]',
               // alias
-              ["[from]", "[alias]"],
-            ],
+              ['[from]', '[alias]']
+            ]
           },
           appsConfig.autoImport.imports
-        ),
+        )
       ],
-      vueTemplate: false,
+      vueTemplate: false
     }),
     ...(isDev ? [commonjsDev()] : []),
     viteRestart({
       reload: [
-        "vite.config.js",
-        "vite-config/**/*",
-        "postcss.config.js",
-        "tailwind.config.js",
-      ],
-    }),
+        'vite.config.js',
+        'vite-config/**/*',
+        'postcss.config.js',
+        'tailwind.config.js'
+      ]
+    })
   ];
 };

@@ -1,13 +1,19 @@
-import kebabCase2BigCamelCase from "@common-utils/kebab-case-2-big-CamelCase";
-const allSlots = import.meta.glob("/src/slots/**/**.vue");
+import kebabCase2BigCamelCase from '@common-utils/kebab-case-2-big-CamelCase';
+const allSlots = import.meta.glob('/src/slots/**/**.vue');
 const slots = [];
-
 for (const slot in allSlots) {
-  const name = kebabCase2BigCamelCase(
-    slot.substring(slot.lastIndexOf("/") + 1, slot.lastIndexOf("."))
+  const fileName = slot.substring(
+    slot.lastIndexOf('/') + 1,
+    slot.lastIndexOf('.')
   );
-  const component = allSlots[slot];
-  slots.push({ name, component });
-}
+  const name = kebabCase2BigCamelCase(fileName);
+  const component =
+    allSlots[`/src/slots/${topicName}/back-stage/${fileName}.vue`];
 
+  component
+    ? slots.push({ name, component })
+    : console.warn(
+        `You maybe need to add a slot file,the path should be "slots/${topicName}/back-stage/${fileName}.vue"`
+      );
+}
 export default slots;

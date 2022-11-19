@@ -8,7 +8,7 @@
         isActive,
         navigate,
         route: {
-          meta: { title },
+          meta: { title ,icon},
         },
       }"
       custom
@@ -29,7 +29,7 @@
         ]"
       >
         {{ title }}
-        <img v-if="device === 'tablet' || device === 'H5'" src="" alt="" />
+        <img v-if="icon" src="" alt="" />
       </li>
     </router-link>
   </ul>
