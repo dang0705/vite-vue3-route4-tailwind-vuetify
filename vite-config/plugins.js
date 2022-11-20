@@ -16,7 +16,7 @@ export default (isDev, $appName) => {
   return [
     vue({
       template: {
-        compilerOptions: { isCustomElement: (tag) => /^ui-/.test(tag) }
+        compilerOptions: { isCustomElement: (tag) => /^web-/.test(tag) }
       }
     }),
     vuetify({

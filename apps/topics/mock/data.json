@@ -1,51 +1,65 @@
-[
-  {
-    "key": "targetAndTimeLine",
-    "value": {
-      "steps": {
-        "value": "<p><span style=\"font-size: 16px;\">2022年10月30日-11月10日24点 校级官方认证账号申请</span></p><p><span style=\"color: rgb(255, 0, 0); font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><br></p><p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p><p><br></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">2022年12月</span></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">作品评审及获奖公示</span></p><p><br></p><p><span style=\"font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><span style=\"font-size: 16px;\">联合巡讲</span></p>",
-        "configs": [
-          {
-            "content": "<p><span style=\"font-size: 16px;\">2022年10月30日-11月10日24点 校级官方认证账号申请</span></p><p><span style=\"color: rgb(255, 0, 0); font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
-          },
-          {
-            "content": "<p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p>&lt;slot name=&quot;slot-1&quot;&gt;请前端老师编写&lt;/slot&gt;",
-            "color": { "bg": "#ffa347", "text": "#000" }
-          },
-          {
-            "content": "<p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">2022年12月</span></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">作品评审及获奖公示</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
-          },
-          {
-            "content": "<p><span style=\"font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><span style=\"font-size: 16px;\">联合巡讲</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
-          }
-        ]
-      },
-      "targets": "<h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 活动对象 ★</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>全国高等学校马克思主义学院青年学子</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 活动时间 ★</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>2022年10月至2023年4月</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 用户参与活动流程 ★</strong></span></h3>&lt;slot name=&quot;slot-1&quot;&gt;请前端老师编写&lt;/slot&gt;"
-    }
-  },
-  {
-    "key": "operationButton",
-    "value": [
-      {
-        "bg": "#ffce3c",
-        "name": "下载认证模板文件",
-        "styleType": 0,
-        "operationType": 0,
-        "href": "https://v3.yooc.me/%E2%80%9C%E5%8D%83%E9%A9%AC%E5%BB%BF%E8%A1%8C%E2%80%9D%E5%85%A8%E5%9B%BD%E9%AB%98%E6%A0%A1%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89%E5%AD%A6%E9%99%A2%E9%9D%92%E5%B9%B4%E5%AD%A6%E5%AD%90%E8%81%94%E5%AD%A6%E8%81%94%E8%AE%B2%E5%85%9A%E7%9A%84%E4%BA%8C%E5%8D%81%E5%A4%A7%E7%B2%BE%E7%A5%9E%E7%B3%BB%E5%88%97%E6%B4%BB%E5%8A%A8%E6%89%BF%E5%8A%9E%E5%8D%95%E4%BD%8D%E6%B3%A8%E5%86%8C%E8%A1%A8.docx",
-        "steps": ""
-      },
-      {
-        "bg": "#ffce3c",
-        "name": "查看认证流程",
-        "styleType": 0,
-        "operationType": 1,
-        "href": "",
-        "steps": "下载认证模板文档，填写内容并打印\n\n\n认证模板文档加盖承办单位签章\n\n\n关注公众号“我的青梨派”\n\n\n点击【个人中心】选择校级官方认证在线填写认证信息 ，以jpeg/jpg/png格式上传盖章认证模板照片或扫描件\n\n\n青梨派平台对账号申请进行审核\n\n\n青梨派平台通过短信或微信通知审核结果\n\n\n审核通过即成为认证账号\n\n"
+{
+  "title": "千马廿行",
+  "pageTitle": "千马廿行",
+  "bannerPC": "https://fs.qinglipai.cn/d/5000014/201156222042582978.png",
+  "bannerH5": "https://fs.qinglipai.cn/d/5000014/201116222043485982.png",
+  "bg": "#ee1717",
+  "components": [
+    {
+      "key": "targetAndTimeLine",
+      "value": {
+        "steps": {
+          "value": "<p><span style=\"font-size: 16px;\">2022年10月30日-11月10日24点 校级官方认证账号申请</span></p><p><span style=\"color: rgb(255, 0, 0); font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><br></p><p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p><p><br></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">2022年12月</span></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">作品评审及获奖公示</span></p><p><br></p><p><span style=\"font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><span style=\"font-size: 16px;\">联合巡讲</span></p>",
+          "configs": [
+            {
+              "content": "<p><span style=\"font-size: 16px;\">2022年10月30日-11月10日24点 校级官方认证账号申请</span></p><p><span style=\"color: rgb(255, 0, 0); font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p>",
+              "color": { "bg": "#ffa347", "text": "#000" }
+            },
+            {
+              "content": "<p><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p>&lt;slot name=&quot;slot-1&quot;&gt;请前端老师编写111222333&lt;/slot&gt;",
+              "color": { "bg": "#ffa347", "text": "#000" }
+            },
+            {
+              "content": "<p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">2022年12月</span></p><p><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">作品评审及获奖公示</span></p>",
+              "color": { "bg": "#ffa347", "text": "#000" }
+            },
+            {
+              "content": "<p><span style=\"font-size: 16px;\">（所有参与本次活动的单位均需申请账号认证）</span></p><p><span style=\"font-size: 16px;\">联合巡讲</span></p>",
+              "color": { "bg": "#ffa347", "text": "#000" }
+            }
+          ]
+        },
+        "targets": "<h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 活动对象 ★</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>全国高等学校马克思主义学院青年学子</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 活动时间 ★</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>2022年10月至2023年4月</strong></span></h3><h3 style=\"text-align: center;\"><span style=\"color: rgb(255, 236, 61); font-size: 19px;\"><strong>★ 用户参与活动流程 ★</strong></span></h3>&lt;slot name=&quot;slot-1&quot;&gt;请前端老师编写&lt;/slot&gt;"
       }
-    ]
-  },
-  { "key": "imageNav", "value": [] }
-]
+    },
+    {
+      "key": "operationButton",
+      "value": [
+        {
+          "bg": "#ffce3c",
+          "name": "下载认证模板文件",
+          "styleType": 0,
+          "operationType": 0,
+          "href": "https://v3.yooc.me/%E2%80%9C%E5%8D%83%E9%A9%AC%E5%BB%BF%E8%A1%8C%E2%80%9D%E5%85%A8%E5%9B%BD%E9%AB%98%E6%A0%A1%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89%E5%AD%A6%E9%99%A2%E9%9D%92%E5%B9%B4%E5%AD%A6%E5%AD%90%E8%81%94%E5%AD%A6%E8%81%94%E8%AE%B2%E5%85%9A%E7%9A%84%E4%BA%8C%E5%8D%81%E5%A4%A7%E7%B2%BE%E7%A5%9E%E7%B3%BB%E5%88%97%E6%B4%BB%E5%8A%A8%E6%89%BF%E5%8A%9E%E5%8D%95%E4%BD%8D%E6%B3%A8%E5%86%8C%E8%A1%A8.docx",
+          "steps": ""
+        },
+        {
+          "bg": "#ffce3c",
+          "name": "查看认证流程",
+          "styleType": 0,
+          "operationType": 1,
+          "href": "",
+          "steps": "下载认证模板文档，填写内容并打印\n\n\n认证模板文档加盖承办单位签章\n\n\n关注公众号“我的青梨派”\n\n\n点击【个人中心】选择校级官方认证在线填写认证信息 ，以jpeg/jpg/png格式上传盖章认证模板照片或扫描件\n\n\n青梨派平台对账号申请进行审核\n\n\n青梨派平台通过短信或微信通知审核结果\n\n\n审核通过即成为认证账号\n\n"
+        }
+      ]
+    },
+    {
+      "key": "imageNav",
+      "value": [
+        "https://fs.qinglipai.cn/d/5000014/201123222041430184.png",
+        "https://fs.qinglipai.cn/d/5000014/201124222041119224.png",
+        "https://fs.qinglipai.cn/d/5000014/201124222041343562.png"
+      ]
+    }
+  ]
+}

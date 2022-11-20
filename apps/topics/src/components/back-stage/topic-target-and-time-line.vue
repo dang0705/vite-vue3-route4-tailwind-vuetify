@@ -6,13 +6,13 @@
     <div class="tw-flex-col">
       <div v-if="$slots.top"><slot name="top" /></div>
       <target :value="value.targets">
-        <template v-for="(_, slotName) in $slots" #[slotName]>
-          <slot :name="slotName" />
+        <template v-for="(_, slotName) in $slots" #[slotName]="{ content }">
+          <slot :name="slotName" :content="content" />
         </template>
       </target>
       <time-line :value="value">
-        <template v-for="(_, slotName) in $slots" #[slotName]>
-          <slot :name="slotName" />
+        <template v-for="(_, slotName) in $slots" #[slotName]="{ content }">
+          <slot :name="slotName" :content="content" />
         </template>
       </time-line>
       <div v-if="$slots.bottom"><slot name="bottom" /></div>
@@ -22,12 +22,13 @@
     </div>
   </div>
 </template>
-
+<script>
+import backStageMixins from '@topics-components/mixins/back-stage-mixins';
+export default {
+  mixins: [backStageMixins]
+};
+</script>
 <script setup>
-import publicProps from '@topics-components/mixins/props';
 import target from '@topics-components/back-stage/children/topic-target-and-time-line/target';
 import timeLine from '@topics-components/back-stage/children/topic-target-and-time-line/time-line';
-
-const props = defineProps(publicProps);
-console.log(useSlots());
 </script>

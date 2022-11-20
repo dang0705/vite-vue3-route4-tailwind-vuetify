@@ -4,17 +4,18 @@
       v-for="{ name } in currentTabs"
       :key="name"
       :to="{ name }"
+      replace
       v-slot="{
         isActive,
         navigate,
         route: {
-          meta: { title ,icon},
-        },
+          meta: { title, icon }
+        }
       }"
       custom
     >
       <li
-        @click="navigate"
+        @click.passive="navigate"
         :class="[
           'md:tw-rounded-t-lg',
           'md:tw-w-24',
@@ -24,8 +25,8 @@
           'tw-py-2',
           'tw-cursor-pointer',
           {
-            'md:active-red-white': isActive,
-          },
+            'md:active-red-white': isActive
+          }
         ]"
       >
         {{ title }}
@@ -36,8 +37,9 @@
 </template>
 
 <script setup>
-import tabs from "@topics-routes/inner-tabs";
+import tabs from '@topics-routes/inner-tabs';
 let currentTabs = tabs[useTopicNameStore().topicName];
+console.log(currentTabs);
 const device = computed(() => useDeviceStore().device);
 const $routesStore = useAsyncRoutesStore();
 </script>

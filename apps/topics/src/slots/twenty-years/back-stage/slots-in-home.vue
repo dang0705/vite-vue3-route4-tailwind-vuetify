@@ -1,7 +1,7 @@
 <template>
-  <v-text-field v-if="slotName === 'target-slot-1'" />
-  <v-select v-if="slotName === 'target-slot-2'" />
-  <v-select v-if="slotName === 'time-line-slot-1'" />
+  <v-text-field v-if="slotName === 'target-slot-1'" :placeholder="content" />
+  <v-select v-if="slotName === 'target-slot-2'" :placeholder="content" />
+  <v-select v-if="slotName === 'time-line-slot-1'" :placeholder="content" />
 </template>
 
 <script setup>
@@ -13,6 +13,10 @@ const props = defineProps({
     }
   },
   slotName: {
+    type: String,
+    default: ''
+  },
+  content: {
     type: String,
     default: ''
   }

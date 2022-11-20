@@ -18,8 +18,8 @@ const compiler = (templateStr) => {
   ).map((slot) => ({
     content: slot.replace(/(<\/?slot.*?>)/gi, '')
   }));
-  !customElements.get('ui-template') &&
-    customElements.define('ui-template', Template);
+  !customElements.get('web-template') &&
+    customElements.define('web-template', Template);
   return { slots };
 };
 export default compiler;

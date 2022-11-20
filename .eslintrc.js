@@ -1,10 +1,13 @@
 module.exports = {
   root: true,
-  parser: 'Vue-eslint-parser',
   parserOptions: {
     parser: '@babel/eslint-parser',
-    ecmaVersion: 2022,
-    sourceType: 'module'
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: {
+      // 非 react 项目关闭 jsx 语法校验,默认为 true
+      jsx: false
+    }
   },
   env: {
     node: true,
@@ -12,7 +15,7 @@ module.exports = {
     jest: true
   },
   // required to lint *.Vue files
-  plugins: ['vue'],
+  plugins: ['vue', 'jsx'],
   // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
   // consider switching to `asyncPlugin:Vue/essential` or `asyncPlugin:Vue/recommended` for stricter rules.
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
@@ -38,6 +41,10 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'no-unused-vars': 'off',
     'no-undef': 'off',
-    'vue/no-deprecated-slot-attribute': 'off'
+    'vue/no-deprecated-slot-attribute': 'off',
+    'jsx/uses-factory': [1, { pragma: 'JSX' }],
+    'jsx/factory-in-scope': [1, { pragma: 'JSX' }],
+    'jsx/mark-used-vars': 1,
+    'jsx/no-undef': 1
   }
 };

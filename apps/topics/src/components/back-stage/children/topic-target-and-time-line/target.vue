@@ -1,13 +1,18 @@
 <template>
-  <ui-template>
-    <div v-for="(_, index) in slots" :slot="`slot-${index + 1}`" :key="index">
-      <slot :name="`target-slot-${index + 1}`" />
+  <web-template>
+    <div
+      v-for="({ content }, index) in slots"
+      :slot="`slot-${index + 1}`"
+      :key="index"
+    >
+      <slot :name="`target-slot-${index + 1}`" :content="content" />
     </div>
-  </ui-template>
+  </web-template>
 </template>
 
-<script setup>
-import publicProps from '@topics-components/mixins/props';
-const props = defineProps(publicProps);
-const { slots } = templateCompiler(props.value);
+<script>
+import backStageMixins from '@topics-components/mixins/back-stage-mixins';
+export default {
+  mixins: [backStageMixins]
+};
 </script>

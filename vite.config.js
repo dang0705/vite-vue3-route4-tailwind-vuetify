@@ -12,7 +12,9 @@ export default defineConfig(async ({ mode }) => {
   const $isDev = mode === 'development';
   try {
     appConfigs = require(`./vite-config/apps/${$appName}`);
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
   const commonConfigs = {
     build: build($appName),
     base: $isDev ? '/' : 'topic',
