@@ -1,4 +1,4 @@
-import kebabCase2BigCamelCase from '@common-utils/kebab-case-2-big-CamelCase';
+import k2Bc from '@common-utils/kebab-case-2-big-CamelCase';
 const allSlots = import.meta.glob('/src/slots/**/**.vue');
 const slots = [];
 for (const slot in allSlots) {
@@ -6,7 +6,7 @@ for (const slot in allSlots) {
     slot.lastIndexOf('/') + 1,
     slot.lastIndexOf('.')
   );
-  const name = kebabCase2BigCamelCase(fileName);
+  const name = k2Bc(fileName);
   const component =
     allSlots[`/src/slots/${topicName}/back-stage/${fileName}.vue`];
 

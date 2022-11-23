@@ -74,5 +74,6 @@ const TimeLine = defineCustomElement({
   ]
 });
 
-customElements.define('web-steps', TimeLine);
+!customElements.get('web-steps') &&
+  customElements.define('web-steps', TimeLine);
 </script>

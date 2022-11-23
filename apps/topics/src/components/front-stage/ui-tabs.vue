@@ -15,7 +15,7 @@
       custom
     >
       <li
-        @click.passive="navigate"
+        @click="navigate"
         :class="[
           'md:tw-rounded-t-lg',
           'md:tw-w-24',
@@ -38,8 +38,10 @@
 
 <script setup>
 import tabs from '@topics-routes/inner-tabs';
-let currentTabs = tabs[useTopicNameStore().topicName];
-console.log(currentTabs);
+const $router = useRouter();
+let currentTabs = [
+  $router.options.routes[0],
+  ...tabs[useTopicNameStore().topicName]
+];
 const device = computed(() => useDeviceStore().device);
-const $routesStore = useAsyncRoutesStore();
 </script>

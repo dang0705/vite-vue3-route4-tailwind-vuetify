@@ -8,24 +8,25 @@
       width="100%"
       :aspect-ratio="$device.device === 'H5' ? 2.5 : 3.2"
     />
-    <div class="tw-px-6">
+    <div class="tw-px-12">
       <component
-        v-for="{ key, value } in components"
-        class="tw-my-12"
         :is="isComponent(key)"
-        :key="key"
+        v-for="{ key, value, label } in components"
+        :key="label"
         :value="value"
+        class="tw-mx-auto tw-mt-8"
       >
         <template
           v-for="slotName in homeSlots"
           :key="slotName"
-          #[slotName]="{ content }"
+          #[slotName]="slotData"
         >
+          <!--          各组件的集中定制-->
           <component
             :is="homeSlots.length ? 'slots-in-home' : ''"
             :slot-name="slotName"
-            :content="content"
             :slots="homeSlots"
+            v-bind="slotData"
           />
         </template>
       </component>
@@ -37,7 +38,12 @@
 import cf from '@common-utils/capitalize-the-first-letter';
 import bgType from '@topics-components/utils/bg-type';
 // import jsonp from '@topics/utils/jsonp';
-const homeSlots = ['target-slot-1', 'target-slot-2', 'time-line-slot-1'];
+const homeSlots = [
+  'target-slot-1',
+  'target-slot-2',
+  'time-line-slot-1',
+  'button-slot-3'
+];
 
 let components = ref([]);
 let homePageStyle = ref({});
