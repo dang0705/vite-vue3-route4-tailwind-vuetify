@@ -25,8 +25,11 @@ export default [
     component: () => import('@topics-components/back-stage/topic-subscribe.vue')
   },
   {
-    name: 'TopicTargetAndTimeLine',
-    component: () =>
-      import('@topics-components/back-stage/topic-target-and-time-line.vue')
+    name: 'TopicTarget',
+    component: () => import('@topics-components/back-stage/topic-target')
+  },
+  {
+    name: 'TopicTimeLine',
+    component: () => import('@topics-components/back-stage/topic-time-line.vue')
   }
 ];

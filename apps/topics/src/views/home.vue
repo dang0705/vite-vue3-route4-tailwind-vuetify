@@ -10,8 +10,9 @@
     />
     <div class="tw-px-6">
       <component
-        :is="isComponent(key)"
         v-for="{ key, value } in components"
+        class="tw-my-12"
+        :is="isComponent(key)"
         :key="key"
         :value="value"
       >
@@ -35,6 +36,7 @@
 <script setup>
 import cf from '@common-utils/capitalize-the-first-letter';
 import bgType from '@topics-components/utils/bg-type';
+// import jsonp from '@topics/utils/jsonp';
 const homeSlots = ['target-slot-1', 'target-slot-2', 'time-line-slot-1'];
 
 let components = ref([]);
@@ -42,6 +44,7 @@ let homePageStyle = ref({});
 let banner = ref('');
 const $device = useDeviceStore();
 const initHomePage = async () => {
+  const isH5 = useDeviceStore().device === 'H5';
   try {
     const {
       // title,
@@ -49,14 +52,15 @@ const initHomePage = async () => {
       components: comp,
       bannerPC,
       bannerH5,
-      bg
+      bgH5,
+      bgPC
     } = await $http.get(new URL('../../mock/data.json', import.meta.url).href, {
       mock: true
     });
     document.title = pageTitle;
-    banner.value = useDeviceStore().device === 'H5' ? bannerH5 : bannerPC;
+    banner.value = isH5 ? bannerH5 : bannerPC;
     components.value = comp;
-    homePageStyle.value = bgType(bg);
+    homePageStyle.value = bgType(isH5 ? bgH5 : bgPC);
   } catch (e) {
     console.log(e);
   }
@@ -66,5 +70,9 @@ const isComponent = (key) => `topic-${cf(key)}`;
 
 onMounted(async () => {
   initHomePage();
+  /*  window.module = {};
+  window.exports = {};
+  await jsonp('http://topic.qinglipai.cn:8899/dist/low-code-components.js');
+  console.log(exports);*/
 });
 </script>

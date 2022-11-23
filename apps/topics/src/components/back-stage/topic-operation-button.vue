@@ -4,17 +4,26 @@
   >
     <li
       v-for="(
-        { bg, name, href, operationType = 0, steps = '' }, which
+        { color: { bg, text }, name, operation: { type, href, steps }, slot },
+        which
       ) in value"
       :key="which"
-      :class="`tw-basis-1/${value.length}`"
+      :class="[
+        `tw-basis-1/${value.length}`,
+        'tw-flex',
+        'tw-mx-20',
+        'tw-items-center',
+        'tw-rounded-4xl'
+      ]"
       :style="bgType(bg)"
     >
       <a
-        v-if="operationType === typeMapping.downLoad"
-        :href="href"
-        download
         v-text="bg.startsWith('http') ? '' : name"
+        class="tw-block tw-w-full tw-py-4 tw-no-underline"
+        :href="href"
+        :target="href ? '_blank' : ''"
+        :download="href"
+        :style="{ color: text }"
       />
     </li>
   </ul>
