@@ -50,7 +50,7 @@ const initTemplate = () => {
                             flex-direction:column;
                             display: flex;
                             border-radius: 6px;
-                            padding:10px'>
+                            padding:20px 10px'>
 
  ${escape2Html(content)}${
       which < configs.length - 1

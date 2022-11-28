@@ -21,8 +21,9 @@ export default [
     component: () => import('@topics-components/back-stage/topic-org.vue')
   },
   {
-    name: 'TopicSubscribe',
-    component: () => import('@topics-components/back-stage/topic-subscribe.vue')
+    name: 'TopicOfficialAccounts',
+    component: () =>
+      import('@topics-components/back-stage/topic-official-accounts.vue')
   },
   {
     name: 'TopicTarget',

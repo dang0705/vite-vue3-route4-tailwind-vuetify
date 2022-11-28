@@ -1,7 +1,7 @@
 <template>
   <web-template>
     <div
-      v-for="(content, index) in slots"
+      v-for="({ content }, index) in slots"
       :slot="`slot-${index + 1}`"
       :key="index"
     >
