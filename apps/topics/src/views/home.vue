@@ -1,20 +1,20 @@
 <template>
   <div
     class="topics-home tw-flex tw-flex-col tw-items-center tw-text-center"
-    :style="homePageStyle"
+    :style="styleParsing(homePageStyle)"
   >
     <v-img
-      :src="banner"
       width="100%"
+      :src="banner"
       :aspect-ratio="$device.device === 'H5' ? 2.5 : 3.2"
     />
-    <div class="tw-px-12">
+    <div class="tw-px-2 md:tw-px-12">
       <component
         :is="isComponent(key)"
         v-for="{ key, value, label } in components"
         :key="label"
         :value="value"
-        class="tw-mx-auto tw-mt-8"
+        :class="['tw-mx-auto', 'tw-mt-8', camelCase2KebabCase(key)]"
       >
         <template
           v-for="slotName in homeSlots"
@@ -36,18 +36,15 @@
 
 <script setup>
 import cf from '@common-utils/capitalize-the-first-letter';
-import bgType from '@topics-components/utils/bg-type';
+import camelCase2KebabCase from '@common-utils/camelCase-2-kebab-case';
+import styleParsing from '@topics-components/utils/style';
+import slotsNames from '@topics/slots/slots-names';
 // import jsonp from '@topics/utils/jsonp';
-const homeSlots = [
-  'target-slot-1',
-  'target-slot-2',
-  'time-line-slot-1',
-  'button-slot-3'
-];
 
 let components = ref([]);
 let homePageStyle = ref({});
 let banner = ref('');
+let homeSlots = ref([]);
 const $device = useDeviceStore();
 const initHomePage = async () => {
   const isH5 = useDeviceStore().device === 'H5';
@@ -66,7 +63,7 @@ const initHomePage = async () => {
     document.title = pageTitle;
     banner.value = isH5 ? bannerH5 : bannerPC;
     components.value = comp;
-    homePageStyle.value = bgType(isH5 ? bgH5 : bgPC);
+    homePageStyle.value = styleParsing(isH5 ? bgH5 : bgPC);
   } catch (e) {
     console.log(e);
   }
@@ -75,10 +72,7 @@ const initHomePage = async () => {
 const isComponent = (key) => `topic-${cf(key)}`;
 
 onMounted(async () => {
-  initHomePage();
-  /*  window.module = {};
-  window.exports = {};
-  await jsonp('http://topic.qinglipai.cn:8899/dist/low-code-components.js');
-  console.log(exports);*/
+  await initHomePage();
+  homeSlots.value = (await slotsNames()).homeSlots;
 });
 </script>

@@ -3,8 +3,18 @@
   "pageTitle": "千马廿行",
   "bannerPC": "https://fs.qinglipai.cn/d/5000014/161104222324856384.png",
   "bannerH5": "https://fs.qinglipai.cn/d/5000014/161155222323954948.png",
-  "bgPC": "#d1231a",
-  "bgH5": "#d1231a",
+  "bgPC": {
+    "backgroundImage": "",
+    "backgroundSize": "contain",
+    "backgroundColor": "#d2131a",
+    "color": "#000"
+  },
+  "bgH5": {
+    "backgroundImage": "",
+    "backgroundSize": "contain",
+    "backgroundColor": "#d2131a",
+    "color": "#000"
+  },
   "components": [
     {
       "key": "info",
@@ -24,19 +34,19 @@
         "configs": [
           {
             "content": "<p><span style=\"font-size: 16px;\">2022年10月30日起持续进行 校级官方认证账号申请 </span></p><p style=\"text-align: center;\"><span style=\"color: rgb(225, 60, 57);\">（所有参与本次活动的单位均需申请账号认证）</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
+            "color": { "bg": "#ffc467", "text": "#000" }
           },
           {
             "content": "<p style=\"text-align: center;\"><span style=\"font-size: 16px;\">2022年10月30日起，联学共建&amp;联合备课图文内容申报持续进行</span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px;\">2022年10月30日-11月30日24点，联学共建视频申报</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
+            "color": { "bg": "#ffc467", "text": "#000" }
           },
           {
             "content": "<p style=\"text-align: center;\"><span style=\"font-size: 16px;\">2022年12月 作品评审及获奖公示</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
+            "color": { "bg": "#ffc467", "text": "#000" }
           },
           {
             "content": "<p style=\"text-align: center;\"><span style=\"font-size: 16px;\">2022年12月-2023年4月 联合巡讲</span></p>",
-            "color": { "bg": "#ffa347", "text": "#000" }
+            "color": { "bg": "#ffc467", "text": "#000" }
           }
         ]
       }
@@ -46,8 +56,14 @@
       "label": "下载及弹窗按钮",
       "value": [
         {
-          "bg": "",
-          "color": { "bg": "#ffce3c", "text": "#672700" },
+          "style": {
+            "backgroundColor": "#ffce3c",
+            "color": "#672700",
+            "backgroundImage": "",
+            "backgroundSize": "contain",
+            "maxWidth": 260,
+            "height": 60
+          },
           "name": "下载认证模板文件",
           "slot": false,
           "operation": {
@@ -57,8 +73,14 @@
           }
         },
         {
-          "bg": "",
-          "color": { "bg": "#ffce3c", "text": "#672700" },
+          "style": {
+            "backgroundColor": "#ffce3c",
+            "color": "#672700",
+            "backgroundImage": "",
+            "backgroundSize": "contain",
+            "maxWidth": 260,
+            "height": 60
+          },
           "name": "查看认证流程",
           "slot": false,
           "operation": {
@@ -68,8 +90,14 @@
           }
         },
         {
-          "bg": "",
-          "color": { "bg": "#ffce3c", "text": "#692a02" },
+          "style": {
+            "backgroundColor": "#ffce3c",
+            "color": "#672700",
+            "backgroundImage": "",
+            "backgroundSize": "contain",
+            "maxWidth": 260,
+            "height": 60
+          },
           "name": "活动标识下载",
           "slot": true,
           "operation": { "type": "", "href": "", "steps": "" }
@@ -82,15 +110,15 @@
       "value": [
         {
           "href": "https://fs.qinglipai.cn/d/5000014/161145222329661455.png",
-          "name": "161145222329661455.png"
+          "clickable": true
         },
         {
           "href": "https://fs.qinglipai.cn/d/5000014/161145222329560297.png",
-          "name": "161145222329560297.png"
+          "clickable": true
         },
         {
           "href": "https://fs.qinglipai.cn/d/5000014/161145222329600808.png",
-          "name": "161145222329600808.png"
+          "clickable": false
         }
       ]
     },

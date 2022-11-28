@@ -25,9 +25,9 @@ let loading = ref(false);
 let errMsg = ref('');
 let globalImages = ref({});
 
-const appClassName = computed(
-  () => `${$appName} ${$appName}_${useTopicNameStore().topicName} ${device}`
-);
+const appClassName = `${$appName} ${$appName}_${
+  useTopicNameStore().topicName
+} ${device.value}`;
 
 const catchStatus = () => {
   useBus.on('err', (msg) => (errMsg = msg));

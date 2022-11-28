@@ -1,4 +1,5 @@
 import k2Bc from '@common-utils/kebab-case-2-big-CamelCase';
+
 const allSlots = import.meta.glob('/src/slots/**/**.vue');
 const slots = [];
 for (const slot in allSlots) {
@@ -12,7 +13,8 @@ for (const slot in allSlots) {
 
   component
     ? slots.push({ name, component })
-    : console.warn(
+    : isDev &&
+      console.warn(
         `You maybe need to add a slot file,the path should be "slots/${topicName}/back-stage/${fileName}.vue"`
       );
 }

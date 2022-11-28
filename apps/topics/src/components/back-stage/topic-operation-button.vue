@@ -7,7 +7,7 @@
         v-for="(
           {
             image = '',
-            color: { bg, text } = {},
+            style = {},
             name = '',
             operation: { type, href, steps } = {},
             slot
@@ -16,7 +16,8 @@
         ) in value"
         :key="which"
         :class="[
-          'tw-basis-1',
+          // 'tw-basis-1',
+          'tw-flex-shrink-0',
           'tw-mt-6',
           'lg:tw-mt-0',
           'tw-w-4/5',
@@ -28,29 +29,26 @@
           'tw-cursor-pointer'
         ]"
         :style="{
-          ...bgType(bg),
-          flexBasis:
-            $device.device === 'PC'
-              ? `calc(${(1 / value.length) * 100}%)`
-              : '100%'
+          ...styleParsing(style)
         }"
+        @click.passive="handleButtonClick(type, steps)"
       >
-        <a
+        <component
           v-if="!slot"
+          :is="href ? 'a' : 'div'"
           :target="href ? '_blank' : ''"
           :download="!!href"
-          :style="{ color: text }"
           :href="href || 'javascript:;'"
-          class="tw-block tw-no-underline"
-          @click.passive="handleButtonClick(type, steps)"
+          style="color: inherit"
+          class="tw-flex-shrink-0 tw-no-underline"
         >
-          {{ bg.startsWith('http') ? '' : name }}
+          {{ name }}
           <img v-if="image" :src="image" width="100%" alt="" />
-        </a>
+        </component>
         <slot
           v-else
           :name="`button-slot-${which + 1}`"
-          :style="{ image, color: { bg, text } }"
+          :style="{ image, ...style }"
           :content="name"
         />
       </li>
@@ -76,7 +74,7 @@ export default {
 };
 </script>
 <script setup>
-import bgType from '@topics-components/utils/bg-type';
+import styleParsing from '@topics-components/utils/style';
 const $device = useDeviceStore();
 const dialog = ref(false);
 const progress = ref([]);
@@ -91,46 +89,50 @@ const handleButtonClick = (type, steps) => {
 <style>
 #operate-button li > * {
   width: 100%;
-  padding: 12px 0;
-  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 <style scoped>
 :deep(.v-toolbar-title) {
   margin-left: 0;
-}
-:deep(.v-toolbar-title__placeholder) {
-  text-align: center;
+  &__placeholder {
+    text-align: center;
+  }
 }
 :deep(.v-list) {
   max-width: 90%;
   margin: 0 auto;
-}
-:deep(.v-list-item) {
-  min-height: unset !important;
-  display: block !important;
-  border-radius: 8px;
-  padding: 10px 0;
-  border: 3px solid #fcb700;
-  background-color: #fdfdc9;
-  position: relative;
-}
-:deep(.v-list-item:not(:first-child)) {
-  margin-top: 40px;
-}
-:deep(.v-list-item:not(:last-child)::after) {
-  content: '';
-  position: absolute;
-  width: 47px;
-  height: 16px;
-  left: calc(50% - (47px / 2));
-  bottom: -32px;
-  background: url('/src/assets/images/common/arrow-down.png') no-repeat center /
-    contain;
-}
-:deep(.v-list-item-subtitle) {
-  line-height: 1.2 !important;
-  font-size: 16px;
-  text-align: center;
+  .v-list-item-subtitle {
+    line-height: 1.2 !important;
+    font-size: 16px;
+    text-align: center;
+  }
+  .v-list-item {
+    min-height: unset !important;
+    display: block !important;
+    border-radius: 8px;
+    padding: 10px 0;
+    border: 3px solid #fcb700;
+    background-color: #fdfdc9;
+    position: relative;
+    &:not(:first-child) {
+      margin-top: 40px;
+    }
+    &:not(:last-child) {
+      &::after {
+        content: '';
+        position: absolute;
+        width: 47px;
+        height: 16px;
+        left: calc(50% - (47px / 2));
+        bottom: -32px;
+        background: url('/src/assets/images/common/arrow-down.png') no-repeat
+          center / contain;
+      }
+    }
+  }
 }
 </style>

@@ -47,6 +47,7 @@ export default (isDev, $appName) => {
             // default imports
             ['default', 'axios'] // import { default as axios } from 'axios',
           ],*/
+            '@common-config': ['isDev'],
             // '@common-routes': ['useRouter', 'useRoute'],
             '@common-mixins/components': ['UiInput'],
             '@common-mixins/component-props': ['UiInputProps'],

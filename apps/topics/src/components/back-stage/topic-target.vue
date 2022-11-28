@@ -5,7 +5,9 @@
       :slot="`slot-${index + 1}`"
       :key="index"
     >
-      <slot :name="`target-slot-${index + 1}`" :content="content" />
+      <slot :name="`target-slot-${index + 1}`" :content="content">{{
+        content
+      }}</slot>
     </div>
   </web-template>
 </template>

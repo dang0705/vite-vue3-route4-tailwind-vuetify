@@ -3,8 +3,7 @@
     class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row xl:tw-w-4/5"
   >
     <v-img
-      v-for="({ href, name }, which) in value"
-      :key="name"
+      v-for="({ href, clickable }, which) in value"
       :src="href"
       :style="{
         flexBasis:
@@ -13,7 +12,7 @@
             : '60%'
       }"
       class="tw-my-4 tw-w-full tw-cursor-pointer md:tw-mx-4 lg:tw-my-0"
-      @click="handleNav(which)"
+      @click="handleNav(which, clickable)"
     />
   </div>
 </template>
@@ -27,5 +26,6 @@ export default {
 <script setup>
 const $route = useRouter();
 const $device = useDeviceStore();
-const handleNav = (type) => $route.push({ name: 'index', params: { type } });
+const handleNav = (type, clickable) =>
+  clickable && $route.push({ name: 'index', params: { type } });
 </script>
