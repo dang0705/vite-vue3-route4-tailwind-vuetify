@@ -3,8 +3,8 @@ import { base } from '@topics/configs/get-router-base';
 import initRouter from '@common-routes';
 import beforeEach from '@topics-routes/middlewares/before-each';
 import afterEach from '@topics-routes/middlewares/after-each';
+import redirect from '@topics-routes/redirect';
 const children = innerTabs[topicName];
-
 const routes = ({ indexRedirect = null } = {}) => [
   {
     path: '/home',
@@ -18,7 +18,12 @@ const routes = ({ indexRedirect = null } = {}) => [
   {
     path: '/index/:type',
     name: 'index',
-    redirect: indexRedirect ? indexRedirect() : { name: 'topic-info' },
+    props: ({ params: { type } }) => ({
+      type
+    }),
+    redirect: indexRedirect
+      ? indexRedirect()
+      : ({ params }) => ({ name: redirect[topicName], params }),
     component: () => import('@topics-views/index/index'),
     children
   }

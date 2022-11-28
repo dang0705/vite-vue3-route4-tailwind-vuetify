@@ -1,10 +1,10 @@
-export const useTopicNameStore = defineStore("topic-name", {
+export const useTopicNameStore = defineStore('topic-name', {
   state: () => ({
-    topicName: "",
+    topicName: ''
   }),
   actions: {
     setEventName(name) {
       !this.topicName && (this.topicName = name);
-    },
-  },
+    }
+  }
 });
