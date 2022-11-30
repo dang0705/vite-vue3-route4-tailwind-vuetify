@@ -24,7 +24,7 @@
     {
       "key": "target",
       "label": "活动对象",
-      "value": "<h3><span style=\"color: rgb(255, 236, 61);\"><strong>★ 活动对象 ★</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>全国高等学校马克思主义学院青年学子</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>★ 活动时间 ★</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>2022年10月至2023年4月</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>★ 用户参与活动流程 ★</strong></span></h3>"
+      "value": "<h3><span style=\"color: rgb(255, 236, 61);\"><strong>★ 活动对象 ★</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>全国高等学校马克思主义学院青年学子</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>★ 活动时间 ★</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>2022年10月至2023年4月</strong></span></h3><h3><span style=\"color: rgb(255, 236, 61);\"><strong>★ 用户参与活动流程 ★</strong></span></h3>&lt;slot name='slot-1'&gt;前端老师处理&lt;/slot&gt;"
     },
     {
       "key": "timeLine",

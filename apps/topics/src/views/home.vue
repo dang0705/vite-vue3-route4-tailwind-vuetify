@@ -23,7 +23,7 @@
         >
           <!--          各组件的集中定制-->
           <component
-            :is="homeSlots.length ? 'slots-in-home' : ''"
+            :is="homeSlots.length ? 'slots-home' : ''"
             :slot-name="slotName"
             :slots="homeSlots"
             v-bind="slotData"

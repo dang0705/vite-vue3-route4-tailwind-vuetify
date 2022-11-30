@@ -17,9 +17,9 @@ export const useAsyncRoutesStore = defineStore('async-routes', {
     routes: []
   }),
   actions: {
-    async getRoutes(params) {
+    async getIndexRoutes(params) {
       console.log(params);
-      await $http.get('/20th/topic/rank/index');
+      await $http.get('/20th/topic/rank/index', { params });
       this.routes = mokAsyncRoutes;
     }
   }
