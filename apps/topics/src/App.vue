@@ -19,15 +19,10 @@ const ss = sessionStorage;
 const showDialog = ref(false);
 const $deviceStore = useDeviceStore();
 const { device } = storeToRefs($deviceStore);
-$deviceStore.setDevice(useDisplay().name.value);
-
 let loading = ref(false);
 let errMsg = ref('');
 let globalImages = ref({});
-
-const appClassName = `${$appName} ${$appName}_${
-  useTopicNameStore().topicName
-} ${device.value}`;
+let appClassName = ref([]);
 
 const catchStatus = () => {
   useBus.on('err', (msg) => (errMsg = msg));
@@ -35,6 +30,11 @@ const catchStatus = () => {
 };
 
 onMounted(async () => {
+  $deviceStore.setDevice(useDisplay().name.value);
+  appClassName.value = `${$appName} ${$appName}_${
+    useTopicNameStore().topicName
+  } ${device.value}`;
+
   globalImages.value = useGlobalImagesStore().globalImages =
     await getCurrentInstance().proxy.$mappingImages({
       common: 'common',

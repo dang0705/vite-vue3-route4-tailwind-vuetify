@@ -47,7 +47,7 @@ let banner = ref('');
 let homeSlots = ref([]);
 const $device = useDeviceStore();
 const initHomePage = async () => {
-  const isH5 = useDeviceStore().device === 'H5';
+  const isH5 = $device.device === 'H5';
   try {
     const {
       // title,

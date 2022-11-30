@@ -1,6 +1,6 @@
 const pxSuffix = ['width', 'height', 'maxWidth', 'maxHeight', 'borderRadius'];
-const styles = {};
 const addSuffix = (style) => {
+  const styles = {};
   for (let styleKey in style) {
     styles[styleKey] =
       style[styleKey] + (pxSuffix.includes(styleKey) ? 'px' : '');
