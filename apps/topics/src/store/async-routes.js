@@ -2,11 +2,11 @@ const mockAsyncRoutes = {
   0: [
     {
       path: 'test',
-      name: '测试'
+      name: '作品列表'
     },
     {
       path: 'test1',
-      name: '测试1'
+      name: '活动报名'
     },
     {
       path: 'test2',
@@ -16,11 +16,11 @@ const mockAsyncRoutes = {
   1: [
     {
       path: 'test',
-      name: '测试'
+      name: '活动申报'
     },
     {
       path: 'test1',
-      name: '测试1'
+      name: '视频申报'
     }
   ]
 };
