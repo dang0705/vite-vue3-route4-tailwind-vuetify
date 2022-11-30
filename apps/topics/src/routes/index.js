@@ -4,12 +4,19 @@ import initRouter from '@common-routes';
 import beforeEach from '@topics-routes/middlewares/before-each';
 import afterEach from '@topics-routes/middlewares/after-each';
 import redirect from '@topics-routes/redirect';
+
 const children = innerTabs[topicName];
 const routes = ({ indexRedirect = null } = {}) => [
   {
     path: '/home',
     alias: '/',
     name: 'home',
+    beforeEnter: (to, from) => {
+      // const isFromIndex = from.matched?.[0]?.name === 'index';
+      // isFromIndex && console.log('from-index');
+      const $asyncRoutes = useAsyncRoutesStore();
+      const { routes } = storeToRefs($asyncRoutes);
+    },
     component: () => import('@topics-views/home'),
     meta: {
       title: '首页'

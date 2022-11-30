@@ -9,8 +9,7 @@ export default function ({
   routes = [],
   beforeEach = null,
   afterEach = null,
-  notFound = null,
-  getAsyncRoutes = null
+  notFound = null
 } = {}) {
   const router = createRouter({
     history:
@@ -19,5 +18,6 @@ export default function ({
   });
   beforeEach && router.beforeEach(beforeEach.bind(arguments, router));
   afterEach && router.afterEach(afterEach.bind(arguments, router));
+  window.$router = router;
   return router;
 }

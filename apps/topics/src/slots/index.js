@@ -15,7 +15,7 @@ for (const slot in allSlots) {
     ? slots.push({ name, component })
     : isDev &&
       console.warn(
-        `You maybe need to add a slot file,the path should be "slots/${topicName}/back-stage/${fileName}.vue"`
+        `You maybe need to add a slot file,the path should be "slots/${topicName}/back-stage/[slots-home|slots-topic-XXX].vue"`
       );
 }
 export default slots;

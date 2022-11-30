@@ -21,20 +21,18 @@ const $deviceStore = useDeviceStore();
 const { device } = storeToRefs($deviceStore);
 $deviceStore.setDevice(useDisplay().name.value);
 
-let loading = ref(false);
-let errMsg = ref('');
-let globalImages = ref({});
-
-const appClassName = `${$appName} ${$appName}_${
-  useTopicNameStore().topicName
-} ${device.value}`;
+const loading = ref(false);
+const errMsg = ref('');
+const globalImages = ref({});
+const appClassName = ref('');
 
 const catchStatus = () => {
-  useBus.on('err', (msg) => (errMsg = msg));
-  useBus.on('loading', (isLoading) => (loading = isLoading));
+  useBus.on('err', (msg) => (errMsg.value = msg));
+  useBus.on('loading', (isLoading) => (loading.value = isLoading));
 };
 
 onMounted(async () => {
+  appClassName.value = `${$appName} ${$appName}_${topicName} ${device.value}`;
   globalImages.value = useGlobalImagesStore().globalImages =
     await getCurrentInstance().proxy.$mappingImages({
       common: 'common',
