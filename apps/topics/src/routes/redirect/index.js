@@ -1,4 +1,4 @@
 // topicName : routerName
 export default {
-  'twenty-years': 'topic-test'
+  'twenty-years': 'topic-info'
 };

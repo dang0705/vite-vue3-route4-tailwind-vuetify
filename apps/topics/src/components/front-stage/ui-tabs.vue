@@ -2,9 +2,6 @@
   <ul class="tw-color tw-bg tw-flex tw-items-center">
     <router-link
       v-for="{ name } in currentTabs"
-      :key="name"
-      :to="{ name }"
-      replace
       v-slot="{
         isActive,
         navigate,
@@ -12,10 +9,12 @@
           meta: { title, icon }
         }
       }"
+      :key="name"
+      :to="{ name }"
+      replace
       custom
     >
       <li
-        @click="navigate"
         :class="[
           'md:tw-rounded-t-lg',
           'md:tw-w-24',
@@ -28,6 +27,7 @@
             'md:active-red-white': isActive
           }
         ]"
+        @click="navigate"
       >
         {{ title }}
         <img v-if="icon" src="" alt="" />
@@ -37,11 +37,11 @@
 </template>
 
 <script setup>
-import tabs from '@topics-routes/inner-tabs';
 const $router = useRouter();
+const { routes } = $router.options;
 let currentTabs = [
-  $router.options.routes[0],
-  ...tabs[useTopicNameStore().topicName]
+  routes[0],
+  ...routes.find(({ name }) => name === 'index').children
 ];
 const device = computed(() => useDeviceStore().device);
 </script>

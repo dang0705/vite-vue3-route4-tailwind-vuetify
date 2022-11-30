@@ -11,12 +11,6 @@ const routes = ({ indexRedirect = null } = {}) => [
     path: '/home',
     alias: '/',
     name: 'home',
-    beforeEnter: (to, from) => {
-      // const isFromIndex = from.matched?.[0]?.name === 'index';
-      // isFromIndex && console.log('from-index');
-      const $asyncRoutes = useAsyncRoutesStore();
-      const { routes } = storeToRefs($asyncRoutes);
-    },
     component: () => import('@topics-views/home'),
     meta: {
       title: '首页'
