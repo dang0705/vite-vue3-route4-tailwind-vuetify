@@ -37,11 +37,17 @@
 </template>
 
 <script setup>
-const $router = useRouter();
-const { routes } = $router.options;
+import matchIsPreviewRoute from '@topics-components/utils/match-is-preview-route';
+const {
+  options: { routes }
+} = useRouter();
+
+const matchIsPreview = (name, target) => name === matchIsPreviewRoute(target);
+
 let currentTabs = [
-  routes[0],
-  ...routes.find(({ name }) => name === 'index').children
+  routes.find(({ name }) => matchIsPreview(name, 'home')),
+  ...routes.find(({ name }) => matchIsPreview(name, 'index')).children
 ];
+
 const device = computed(() => useDeviceStore().device);
 </script>

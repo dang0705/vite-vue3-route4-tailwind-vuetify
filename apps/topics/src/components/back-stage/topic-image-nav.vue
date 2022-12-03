@@ -4,6 +4,7 @@
   >
     <v-img
       v-for="({ href, clickable }, which) in value"
+      :key="which"
       :src="href"
       :style="{
         flexBasis:
@@ -24,8 +25,15 @@ export default {
 };
 </script>
 <script setup>
-const $route = useRouter();
+import matchIsPreviewRoute from '@topics-components/utils/match-is-preview-route';
+const $router = useRouter();
+const $route = useRoute();
 const $device = useDeviceStore();
-const handleNav = (type, clickable) =>
-  clickable && $route.push({ name: 'index', params: { type } });
+const handleNav = (type, clickable) => {
+  clickable &&
+    $router.push({
+      name: matchIsPreviewRoute('index', $route),
+      params: { type }
+    });
+};
 </script>

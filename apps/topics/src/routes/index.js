@@ -6,27 +6,41 @@ import afterEach from '@topics-routes/middlewares/after-each';
 import redirect from '@topics-routes/redirect';
 
 const children = innerTabs[topicName];
+
+const homeRoute = {
+  component: () => import('@topics-views/home.vue'),
+  meta: {
+    title: '首页'
+  }
+};
+const indexRoute = {
+  props: ({ params: { type } }) => ({
+    type
+  }),
+  component: () => import('@topics-views/index/index.vue'),
+  children: []
+};
 const routes = ({ indexRedirect = null } = {}) => [
   {
     path: '/home',
     alias: '/',
     name: 'home',
-    component: () => import('@topics-views/home'),
-    meta: {
-      title: '首页'
-    }
+    ...homeRoute
   },
   {
     path: '/index/:type',
     name: 'index',
-    props: ({ params: { type } }) => ({
-      type
-    }),
-    redirect: indexRedirect
-      ? indexRedirect()
-      : ({ params }) => ({ name: redirect[topicName], params }),
-    component: () => import('@topics-views/index/index'),
-    children
+    ...indexRoute
+  },
+  {
+    path: '/preview-home',
+    name: 'preview-home',
+    ...homeRoute
+  },
+  {
+    path: '/preview-index/:type',
+    name: 'preview-index',
+    ...indexRoute
   }
 ];
 
