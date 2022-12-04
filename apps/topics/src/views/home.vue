@@ -40,11 +40,13 @@ import camelCase2KebabCase from '@common-utils/camelCase-2-kebab-case';
 import styleParsing from '@topics-components/utils/style';
 import slotsNames from '@topics/slots/slots-names';
 // import jsonp from '@topics/utils/jsonp';
-
-let components = ref([]);
-let homePageStyle = ref({});
-let banner = ref('');
-let homeSlots = ref([]);
+const components = ref([]);
+const homePageStyles = ref({});
+const homePageStyle = ref({});
+const banners = ref({});
+const banner = ref('');
+const bg = ref({});
+const homeSlots = ref([]);
 const $device = useDeviceStore();
 const initHomePage = async () => {
   const isH5 = $device.device === 'H5';
@@ -60,14 +62,24 @@ const initHomePage = async () => {
     } = await $http.get(new URL('../../mock/data.json', import.meta.url).href, {
       mock: true
     });
-    document.title = pageTitle;
-    banner.value = isH5 ? bannerH5 : bannerPC;
+    document.title = pageTitle || '青梨派';
     components.value = comp;
+    banners.value = { bannerH5, bannerPC };
+    banner.value = isH5 ? bannerH5 : bannerPC;
+    homePageStyles.value = { bgH5, bgPC };
     homePageStyle.value = styleParsing(isH5 ? bgH5 : bgPC);
   } catch (e) {
     console.log(e);
   }
 };
+watch(
+  () => $device.device,
+  (device) => {
+    banner.value = banners.value[`banner${device}`] || banners.value.bannerPC;
+    homePageStyle.value =
+      homePageStyles.value[`bg${device}`] || homePageStyles.value.bgPC;
+  }
+);
 
 const isComponent = (key) => `topic-${cf(key)}`;
 

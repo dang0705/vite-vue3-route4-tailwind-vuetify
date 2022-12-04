@@ -5,14 +5,13 @@ export default {
   install(app) {
     const isVue3 = !!app.config?.globalProperties;
     const mappingImages = async ({
-      common = "",
-      device = "",
-      project = "",
-      imagesDirName = "images",
-      customPath = "",
+      common = '',
+      device = '',
+      project = '',
+      imagesDirName = 'images',
+      customPath = ''
     } = {}) => {
-      console.log(device);
-      const allImages = import.meta.glob(["/**/**.jpg", "/**/**.png"]);
+      const allImages = import.meta.glob(['/**/**.jpg', '/**/**.png']);
       const matchingPath = (arg, path) =>
         arg ? path.includes(`/${arg}/`) : true;
       for (const path of Object.keys(allImages)) {
@@ -26,8 +25,8 @@ export default {
           // const pathSplits = path.split(`/${imagesDirName}/`);
           // const pathPrefix = pathSplits[0].replace(/\//, "");
           // const dynamicPath = pathSplits[1];
-          const image = path.substring(path.lastIndexOf("/") + 1);
-          const imageName = k2c(image.split(".")[0]);
+          const image = path.substring(path.lastIndexOf('/') + 1);
+          const imageName = k2c(image.split('.')[0]);
           if (!imageOfThisProject[imageName]) {
             const { default: image } = await allImages[path]();
             imageOfThisProject[imageName] = image;
@@ -55,5 +54,5 @@ export default {
     isVue3
       ? (app.config.globalProperties.$mappingImages = mappingImages)
       : (app.prototype.$mappingImages = mappingImages);
-  },
+  }
 };

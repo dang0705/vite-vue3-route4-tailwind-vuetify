@@ -25,15 +25,14 @@ export default {
 };
 </script>
 <script setup>
-import matchIsPreviewRoute from '@topics-components/utils/match-is-preview-route';
+import matchIsPreviewRoute from '@topics/utils/match-is-preview-route';
 const $router = useRouter();
 const $route = useRoute();
 const $device = useDeviceStore();
-const handleNav = (type, clickable) => {
+const handleNav = (type, clickable) =>
   clickable &&
-    $router.push({
-      name: matchIsPreviewRoute('index', $route),
-      params: { type }
-    });
-};
+  $router.push({
+    name: matchIsPreviewRoute('index', $route),
+    params: { type }
+  });
 </script>
