@@ -1,9 +1,7 @@
 const events = {
   loaded({ device }) {
-    console.log(window.$vuetify.display.name.value);
     const $device = useDeviceStore();
-    $device.setDevice(device);
-    console.log($device.device);
+    // $device.setDevice(device);
   }
 };
 export default () => {
