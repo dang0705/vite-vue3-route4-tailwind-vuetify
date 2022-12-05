@@ -4,6 +4,8 @@ const mockAsyncRoutes = {
       path: 'test',
       name: '作品列表'
     },
+    { path: 'info', name: '活动介绍' },
+
     {
       path: 'test1',
       name: '活动报名'
@@ -14,6 +16,7 @@ const mockAsyncRoutes = {
     }
   ],
   1: [
+    { path: 'info', name: '活动介绍' },
     {
       path: 'test',
       name: '活动申报'

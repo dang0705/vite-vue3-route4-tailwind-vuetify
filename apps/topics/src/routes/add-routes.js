@@ -10,10 +10,10 @@ export default ({ routes = [], root = 'index', router }) => {
   const { routes: routers } = router.options;
   const currentRoot = routers.find(({ name }) => name === root);
   // 每次切换动态路由前，清空原始路由，并赋予基本的静态路由。
-  currentRoot.children = [...basicRoute];
+  currentRoot.children = [];
 
   routes.forEach(({ name, path, icon = '' }) => {
-    router.removeRoute(`topic-${path}`);
+    router.hasRoute(`topic-${path}`) && router.removeRoute(`topic-${path}`);
     if (!router.hasRoute(`topic-${path}`)) {
       const route = {
         path: root === 'index' ? `topic-${path}` : path,

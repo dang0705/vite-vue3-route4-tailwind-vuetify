@@ -9,7 +9,7 @@ export default function ({
   routes = [],
   beforeEach = null,
   afterEach = null,
-  notFound = null
+  notFound = () => import('@common/views/not-found.vue')
 } = {}) {
   const router = createRouter({
     history:

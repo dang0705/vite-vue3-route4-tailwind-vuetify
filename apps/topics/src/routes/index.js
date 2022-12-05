@@ -22,9 +22,9 @@ const routes = ({ indexRedirect = null } = {}) => [
     props: ({ params: { type } }) => ({
       type
     }),
-    redirect: indexRedirect
+    /*    redirect: indexRedirect
       ? indexRedirect()
-      : ({ params }) => ({ name: redirect[topicName], params }),
+      : ({ params }) => ({ name: redirect[topicName], params }),*/
     component: () => import('@topics-views/index/index'),
     children
   }
