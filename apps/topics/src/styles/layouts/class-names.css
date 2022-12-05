@@ -1,7 +1,0 @@
-@layer utilities {
-  .active-red-white {
-    @apply tw-bg-red !important;
-    @apply tw-text-activated;
-    @apply tw-font-bold;
-  }
-}
