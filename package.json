@@ -19,7 +19,7 @@
     "vue": "^3.2.25",
     "vue-awesome-swiper": "4",
     "vue-router": "^4.1.6",
-    "vuetify": "^3.0.1",
+    "vuetify": "^3.0.3",
     "weixin-js-sdk": "^1.6.0",
     "whatwg-fetch": "^3.6.2"
   },

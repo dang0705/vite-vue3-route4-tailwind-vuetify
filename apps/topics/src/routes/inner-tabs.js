@@ -4,7 +4,7 @@ const defaultTabs = ({ topicInfo = '活动介绍' } = {}) => [
   {
     path: 'topic-info',
     name: 'topic-info',
-    component: () => import('@topics-views/index/twenty-years/info.vue'),
+    component: () => import('@topics-views/index/info.vue'),
     meta: {
       title: topicInfo
     }
