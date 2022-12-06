@@ -1,34 +1,34 @@
 import addRoutes from '@topics-routes/add-routes';
 import { useIsPreviewStore } from '@topics-store/is-preview';
-import preview from '@topics/preview';
 let hasAsyncRouteBeenAdded = false; // whether the async routes has been loaded, this is very important
 export default async function () {
   const $previewStore = useIsPreviewStore();
-  $previewStore.isPreview = self !== top;
-
-  $previewStore.isPreview && preview();
-
   const [router, to, from, next] = arguments;
   const { path, name, params, fullPath, matched } = to;
   const $asyncRoutes = useAsyncRoutesStore();
   const { routes } = storeToRefs($asyncRoutes);
+  $previewStore.isPreview = self !== top || /^preview/.test(name);
 
+  const { default: formattedRoute } = await import(
+    '@topics/utils/formatted-route'
+  );
   const isEnterIndexRoute =
-    matched?.[0]?.name === 'index' || fullPath.includes('index');
+    matched?.[0]?.name === formattedRoute('index') ||
+    fullPath.includes(formattedRoute('index'));
 
   // 返回首页时可切换分类路由
-  to.name?.includes('home') && (hasAsyncRouteBeenAdded = false);
-  const isPreviewIndex = fullPath.match(/\/preview/)?.length;
-  if (isEnterIndexRoute) {
-    const type = params.type || fullPath.split('/')[2];
-    await $asyncRoutes.getIndexRoutes(type);
+  name === formattedRoute('home') && (hasAsyncRouteBeenAdded = false);
 
-    // 动态路由的创建和手动触发重定向
+  const type = params.type || fullPath.split('/')[2];
+
+  if (isEnterIndexRoute && !routes.value[type]?.length) {
+    // 处理动态路由加载和触发逻辑
+    await $asyncRoutes.getIndexRoutes(type);
     if (!hasAsyncRouteBeenAdded && routes.value[type]?.length) {
       addRoutes({
         routes: routes.value[type],
         router,
-        root: isPreviewIndex ? 'preview-index' : 'index'
+        root: formattedRoute('index')
       });
       hasAsyncRouteBeenAdded = true;
       // 官方文档推荐的手动触发路由方式
@@ -38,7 +38,15 @@ export default async function () {
     }
   } else {
     // 常规的业务逻辑处理
-
-    next();
+    if ($previewStore.isPreview) {
+      const { default: listenPreview } = await import('@topics/preview');
+      listenPreview();
+    }
+    if (matched?.[0]?.name === formattedRoute('index')) {
+      name !== formattedRoute('index') && $asyncRoutes.getAsyncRouteData(name);
+      next();
+    } else {
+      next();
+    }
   }
 }

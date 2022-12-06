@@ -37,14 +37,14 @@
 </template>
 
 <script setup>
-import matchIsPreviewRoute from '@topics/utils/match-is-preview-route';
+import formattedRoute from '@topics/utils/formatted-route';
 const {
   options: { routes }
 } = useRouter();
 
 let currentTabs = [
-  routes.find(({ name }) => name === matchIsPreviewRoute('home')),
-  ...routes.find(({ name }) => name === matchIsPreviewRoute('index')).children
+  routes.find(({ name }) => name === formattedRoute('home')),
+  ...routes.find(({ name }) => name === formattedRoute('index')).children
 ];
 
 const device = computed(() => useDeviceStore().device);

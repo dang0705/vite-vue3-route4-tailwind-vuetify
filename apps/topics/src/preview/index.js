@@ -1,11 +1,11 @@
+import { useAsyncRoutesStore } from '@topics-store/async-routes';
+
 const events = {
-  loaded({ device }) {
-    const $device = useDeviceStore();
-    // $device.setDevice(device);
+  getAsyncRouteData({ routeName, value }) {
+    useAsyncRoutesStore().getAsyncRouteData(routeName, value);
   }
 };
-export default () => {
-  window.addEventListener('message', ({ data: { event, data } }) => {
+export default () =>
+  (window.onmessage = ({ data: { event, data } }) => {
     events[event] && events[event](data);
   });
-};

@@ -15,34 +15,30 @@
 </template>
 <script setup>
 import { useDisplay } from 'vuetify';
-import { useIsPreviewStore } from '@topics-store/is-preview';
 import debounce from '@common-utils/debounce';
-const $previewStore = useIsPreviewStore();
-
 const $deviceStore = useDeviceStore();
 
 const $vuetifyDisplay = useDisplay();
 const { proxy } = getCurrentInstance();
 const { device, threshold } = storeToRefs($deviceStore);
 
-const ss = sessionStorage;
 const showDialog = ref(false);
-
 const loading = ref(false);
 const errMsg = ref('');
 const globalImages = ref({});
+const appClassName = computed(
+  () =>
+    `${$appName} ${$appName}_${topicName} ${device.value} ${useRoute().name}`
+);
 
 const catchStatus = () => {
   useBus.on('err', (msg) => (errMsg.value = msg));
   useBus.on('loading', (isLoading) => (loading.value = isLoading));
 };
+catchStatus();
 
 const onResize = () => $deviceStore.setDevice($vuetifyDisplay.name.value);
 
-const appClassName = computed(
-  () =>
-    `${$appName} ${$appName}_${topicName} ${device.value} ${useRoute().name}`
-);
 onMounted(async () => {
   globalImages.value = useGlobalImagesStore().globalImages =
     await proxy.$mappingImages({
@@ -50,6 +46,5 @@ onMounted(async () => {
       project: topicName,
       device: device.value
     });
-  catchStatus();
 });
 </script>

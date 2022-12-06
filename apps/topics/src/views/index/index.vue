@@ -14,13 +14,15 @@
 
 <script setup>
 import UiTabs from '@topics-components/front-stage/ui-tabs';
-const routeName = 'index';
+import formattedRoute from '@topics/utils/formatted-route';
 
+const routeName = 'index';
 const redirect = () =>
   $router.push({
-    name: $router.options.routes.find(({ name }) => name === routeName)
-      .children[0].name
+    name: $router.options.routes.find(
+      ({ name }) => name === formattedRoute(routeName)
+    ).children[0].name
   });
 
-onMounted(() => useRoute().name === routeName && redirect());
+onMounted(() => useRoute().name === formattedRoute(routeName) && redirect());
 </script>

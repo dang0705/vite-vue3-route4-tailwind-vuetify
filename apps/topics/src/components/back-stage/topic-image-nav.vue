@@ -25,7 +25,7 @@ export default {
 };
 </script>
 <script setup>
-import matchIsPreviewRoute from '@topics/utils/match-is-preview-route';
+import matchIsPreviewRoute from '@topics/utils/formatted-route';
 const $router = useRouter();
 const $route = useRoute();
 const $device = useDeviceStore();
