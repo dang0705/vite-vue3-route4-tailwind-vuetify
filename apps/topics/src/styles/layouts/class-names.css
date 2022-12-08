@@ -1,7 +1,10 @@
 @layer utilities {
-  .active-red-white {
+  .tabs-active-md {
     @apply tw-bg-red !important;
     @apply tw-text-activated;
     @apply tw-font-bold;
+  }
+  .tabs-active-sm {
+    background: #fdcc2e40;
   }
 }

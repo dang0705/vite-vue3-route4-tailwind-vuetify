@@ -74,7 +74,6 @@ const initHomePage = async () => {
 watch(
   () => $device.device,
   (device) => {
-    console.log(device);
     currentBanner.value =
       banners.value[`banner${device}`] || banners.value.bannerPC;
     currentHomePageStyle.value =

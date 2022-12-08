@@ -34,8 +34,8 @@
         @click.passive="handleButtonClick(type, steps)"
       >
         <component
-          v-if="!slot"
           :is="href ? 'a' : 'div'"
+          v-if="!slot"
           :target="href ? '_blank' : ''"
           :download="!!href"
           :href="href || 'javascript:;'"

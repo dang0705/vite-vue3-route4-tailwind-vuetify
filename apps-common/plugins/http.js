@@ -18,8 +18,7 @@ const httpErrorMessage = {
   noEnvJson: '加载 "env.json" 时出错, 请联系后端或者运维人员'
 };
 
-const errorHandler = ({ message, code }) =>
-  useBus.emit('on-err', message, code);
+const errorHandler = ({ msg, code }) => useBus.emit('err', msg, code);
 
 http.interceptors.request.use(
   async (config) => {
@@ -63,7 +62,7 @@ http.interceptors.response.use(
     }
   },
   (error) => {
-    errorHandler({ message: '服务器繁忙，请稍后' });
+    errorHandler({ msg: '服务器繁忙，请稍后' });
     useBus.emit('loading', false);
     return Promise.reject(error);
   }

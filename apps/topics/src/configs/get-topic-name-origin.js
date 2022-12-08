@@ -1,1 +1,1 @@
-export const topicNameOrigin = location.pathname.split("/")[2];
+export const topicId = location.pathname.split('/')[2];

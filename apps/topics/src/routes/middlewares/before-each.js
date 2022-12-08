@@ -2,12 +2,14 @@ import addRoutes from '@topics-routes/add-routes';
 import { useIsPreviewStore } from '@topics-store/is-preview';
 let hasAsyncRouteBeenAdded = false; // whether the async routes has been loaded, this is very important
 export default async function () {
-  const $previewStore = useIsPreviewStore();
   const [router, to, from, next] = arguments;
   const { path, name, params, fullPath, matched } = to;
   const $asyncRoutes = useAsyncRoutesStore();
   const { routes } = storeToRefs($asyncRoutes);
-  $previewStore.isPreview = self !== top || /^preview/.test(name);
+  const $previewStore = useIsPreviewStore();
+  $previewStore.isPreview === null &&
+    ($previewStore.isPreview =
+      self !== top || /^preview/.test(name) || /preview/.test(fullPath));
 
   const { default: formattedRoute } = await import(
     '@topics/utils/formatted-route'
@@ -20,7 +22,6 @@ export default async function () {
   name === formattedRoute('home') && (hasAsyncRouteBeenAdded = false);
 
   const type = params.type || fullPath.split('/')[2];
-
   if (isEnterIndexRoute && !routes.value[type]?.length) {
     // 处理动态路由加载和触发逻辑
     await $asyncRoutes.getIndexRoutes(type);
@@ -38,6 +39,7 @@ export default async function () {
     }
   } else {
     // 常规的业务逻辑处理
+
     if ($previewStore.isPreview) {
       const { default: listenPreview } = await import('@topics/preview');
       listenPreview();

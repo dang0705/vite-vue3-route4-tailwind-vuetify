@@ -1,2 +1,2 @@
-export default ({ type = "light", theme }) =>
-  (useVuetify().theme.themes[type] = theme);
+export default ({ type = 'light', theme }) =>
+  ($vuetify.theme.themes[type] = theme);

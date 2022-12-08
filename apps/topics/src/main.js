@@ -22,7 +22,15 @@ slots.forEach(({ name, component }) =>
   app.component(name, defineAsyncComponent(component))
 );
 
+import '@topics/styles/scss/vendors/_index.scss';
 import '@topics/styles/index.css';
 import images from '@common-plugins/auto-pre-parsing-images';
 
-app.use(router).use(images).use(createPinia()).use(vuetify({})).mount('#app');
+import themes from '@topics-configs/vuetify-theme';
+
+app
+  .use(router)
+  .use(images)
+  .use(createPinia())
+  .use(vuetify({ theme: { defaultTheme: 'themes', themes: { themes } } }))
+  .mount('#app');
