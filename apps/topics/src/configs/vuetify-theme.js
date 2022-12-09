@@ -3,7 +3,7 @@ export default {
   colors: {
     background: '#FFFFFF',
     surface: '#FFFFFF',
-    primary: '#e72475',
+    primary: '#1eaa39',
     'primary-darken-1': '#c0aaf6',
     secondary: '#03DAC6',
     'secondary-darken-1': '#018786',
@@ -13,7 +13,7 @@ export default {
     warning: '#FB8C00'
   },
   variables: {
-    'border-color': '#e72475',
-    'theme-on-code': '#e72475'
+    'border-color': '#1eaa39',
+    'theme-on-code': '#1eaa39'
   }
 };

@@ -25,6 +25,7 @@
           'md:tw-bg-yellow',
           'md:tw-text-base',
           'md:tw-h-11',
+          'lg:tw-cursor-pointer',
           'tw-flex',
           'tw-flex-col',
           'tw-justify-center',

@@ -24,7 +24,7 @@ const redirect = () =>
   $router.replace({
     name: $router.options.routes.find(
       ({ name }) => name === formattedRoute(routeName)
-    ).children[0].name
+    ).children[0]?.name
   });
 
 onMounted(() => useRoute().name === formattedRoute(routeName) && redirect());

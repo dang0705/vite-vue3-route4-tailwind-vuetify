@@ -31,7 +31,10 @@ export default {
 </script>
 <script setup>
 import { defineCustomElement } from 'vue';
-import { escape2Html, getSlots } from '@topics-components/utils/use-slots';
+import {
+  escape2Html,
+  compileAndFormatSlots
+} from '@topics-components/utils/html-compilers';
 
 let template = '<ul style="margin: 0;padding: 0;">';
 
@@ -54,12 +57,15 @@ const initTemplate = () => {
 
  ${escape2Html(content)}${
       which < configs.length - 1
-        ? '<i style="position:absolute;bottom:-11px;border-top:12px;border-top-color:inherit;border-top-style:solid;border-left:10px solid transparent;border-right:10px solid transparent;width:0;height:0;"></i>'
+        ? '<i style="position:absolute;bottom:-11px;' +
+          'border-top:12px;border-top-color:inherit;' +
+          'border-top-style:solid;border-left:10px solid transparent;' +
+          'border-right:10px solid transparent;width:0;height:0;"></i>'
         : ''
     }</li>`;
   });
   template += '</ul>';
-  return getSlots(escape2Html(template));
+  return compileAndFormatSlots(template);
 };
 const slots = initTemplate();
 

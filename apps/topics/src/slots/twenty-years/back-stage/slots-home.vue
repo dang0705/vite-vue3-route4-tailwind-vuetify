@@ -1,9 +1,5 @@
 <template>
-  <v-select
-    v-if="slotName === 'target-slot-1'"
-    color="primary"
-    :placeholder="content"
-  />
+  <v-text-field v-if="slotName === 'target-slot-1'" :placeholder="content" />
   <v-select v-if="slotName === 'target-slot-2'" :placeholder="content" />
   <v-select v-if="slotName === 'time-line-slot-1'" :placeholder="content" />
   <div

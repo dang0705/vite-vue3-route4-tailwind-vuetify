@@ -1,9 +1,9 @@
-import { escape2Html } from '@topics-components/utils/use-slots';
+import { escape2Html } from '@topics-components/utils/html-compilers';
 
 const template = document.createElement('template');
 let slots = [];
 
-const compiler = (templateStr) => {
+const createWebComponent = (templateStr) => {
   template.innerHTML = templateStr = escape2Html(templateStr);
   class Template extends HTMLElement {
     constructor() {
@@ -22,4 +22,4 @@ const compiler = (templateStr) => {
     customElements.define('web-template', Template);
   return { slots };
 };
-export default compiler;
+export default createWebComponent;

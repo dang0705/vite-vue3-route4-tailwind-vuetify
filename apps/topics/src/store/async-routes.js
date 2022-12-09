@@ -35,8 +35,12 @@ export const useAsyncRoutesStore = defineStore('async-routes', {
   actions: {
     async getIndexRoutes(type) {
       if (!this.routes[type]?.length) {
-        await $http.get('/20th/topic/rank/index', { params: { type } });
-        this.routes[type] = mockAsyncRoutes[type];
+        try {
+          await $http.get('/20th/topic/rank/index', { params: { type } });
+          this.routes[type] = mockAsyncRoutes[type];
+        } catch (e) {
+          console.log(e);
+        }
       }
     },
     async getAsyncRouteData(routeName) {

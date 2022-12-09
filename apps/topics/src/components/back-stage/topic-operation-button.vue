@@ -74,7 +74,7 @@ export default {
 };
 </script>
 <script setup>
-import styleParsing from '@topics-components/utils/style';
+import styleParsing from '@topics-components/utils/compile-styles-from-backend';
 const $device = useDeviceStore();
 const dialog = ref(false);
 const progress = ref([]);

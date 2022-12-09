@@ -5,9 +5,17 @@
     <a
       v-for="({ href, clickable }, which) in value"
       :key="which"
+      :class="[
+        'tw-my-4',
+        'tw-w-full',
+        'md:tw-mx-4',
+        'lg:tw-my-0',
+        {
+          'lg:tw-cursor-not-allowed': !clickable
+        }
+      ]"
       href="javascript:;"
-      class="tw-my-4 tw-w-full tw-cursor-pointer md:tw-mx-4 lg:tw-my-0"
-      @click="handleNav(which, clickable)"
+      @click.passive="handleNav(which, clickable)"
     >
       <v-img
         :src="href"

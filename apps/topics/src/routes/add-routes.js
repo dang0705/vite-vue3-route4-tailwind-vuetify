@@ -1,4 +1,3 @@
-import { useDeviceStore } from '@topics-store/device';
 import c2k from '@common-utils/camelCase-2-kebab-case';
 const allViews = import.meta.glob('/src/views/**/**.vue');
 

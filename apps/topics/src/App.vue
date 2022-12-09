@@ -1,35 +1,36 @@
 <template>
   <v-app :class="[appClassName]" v-resize="debounce(onResize, 100)">
-    <v-app-bar flat>
+    <v-app-bar flat :density="styleDependOnDevice.appBarDensity">
       <template #prepend>
-        <v-img :src="globalImages.top" width="300" cover />
+        <v-img
+          :src="globalImages.top"
+          :width="styleDependOnDevice.logoWidth"
+          cover
+        />
       </template>
     </v-app-bar>
-    <v-main v-if="topicIdOrName">
+    <v-main scrollable tag="div">
       <router-view />
     </v-main>
     <v-overlay
       v-model="showAlert"
-      :scrim="false"
       width="100%"
       height="100%"
-      z-index="999"
-      contained
       scroll-strategy="block"
+      close-on-content-click
     >
       <v-alert
-        v-model="showAlert"
-        prominent
+        style="background-color: #fff"
+        closable
+        elevation="12"
         type="error"
-        varaint="text"
         rounded
         position="fixed"
         width="100%"
         max-width="500px"
-        closable
-        location="center center"
+        location="center"
         border="start"
-        variant="tonal"
+        variant="text"
       >
         <v-alert-title>系统错误</v-alert-title>
         {{ errMsg }}
@@ -40,7 +41,10 @@
 <script setup>
 const showAlert = ref(false);
 const errMsg = ref('');
-const topicIdOrName = topicName;
+import { useDisplay, useTheme } from 'vuetify';
+import debounce from '@common-utils/debounce';
+import { useIsPreviewStore } from '@topics-store/is-preview';
+
 const catchStatus = () => {
   useBus.on('err', (msg) => {
     showAlert.value = true;
@@ -50,35 +54,24 @@ const catchStatus = () => {
 };
 catchStatus();
 
-const checkTopicId = async () => {
-  if (!topicName) {
-    showAlert.value = true;
-    errMsg.value =
-      'There is no topic id or topic name in url path,check the url path first,please';
-  }
-};
-checkTopicId();
-import { useDisplay } from 'vuetify';
-import debounce from '@common-utils/debounce';
-import { useIsPreviewStore } from '@topics-store/is-preview';
 const $deviceStore = useDeviceStore();
-
 const $vuetifyDisplay = useDisplay();
 const { proxy } = getCurrentInstance();
 const { device, threshold } = storeToRefs($deviceStore);
-
 const loading = ref(false);
 const globalImages = ref({});
+const styleDependOnDevice = computed(() => ({
+  appBarDensity: device.value === 'H5' ? 'compact' : 'default',
+  logoWidth: device.value === 'H5' ? 200 : 300
+}));
 const appClassName = computed(
   () =>
     `${$appName} ${$appName}_${topicName} ${device.value} ${useRoute().name} ${
       useIsPreviewStore().isPreview ? 'preview' : ''
     }`
 );
-
 const onResize = () => $deviceStore.setDevice($vuetifyDisplay.name.value);
-// console.log($vuetifyTheme, theme);
-// vuetifyDynamicChangeTheme({ theme: vuetifyTheme });
+// console.log(useTheme().global);
 onMounted(async () => {
   globalImages.value = useGlobalImagesStore().globalImages =
     await proxy.$mappingImages({
@@ -88,10 +81,3 @@ onMounted(async () => {
     });
 });
 </script>
-<style>
-.preview {
-  a {
-    //pointer-events: none;
-  }
-}
-</style>

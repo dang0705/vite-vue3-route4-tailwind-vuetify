@@ -37,7 +37,7 @@
 <script setup>
 import cf from '@common-utils/capitalize-the-first-letter';
 import camelCase2KebabCase from '@common-utils/camelCase-2-kebab-case';
-import styleParsing from '@topics-components/utils/style';
+import styleParsing from '@topics-components/utils/compile-styles-from-backend';
 import slotsNames from '@topics/slots/slots-names';
 import { de } from 'vuetify/locale';
 // import jsonp from '@topics/utils/jsonp';

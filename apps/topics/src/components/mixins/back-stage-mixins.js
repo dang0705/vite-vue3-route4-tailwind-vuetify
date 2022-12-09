@@ -7,7 +7,7 @@ export default {
   data: () => ({ slots: [] }),
   created() {
     if (dataType(this.value) === 'String') {
-      const { slots } = templateCompiler(this.value);
+      const { slots } = createWebComponent(this.value);
       this.slots = slots;
     }
   }

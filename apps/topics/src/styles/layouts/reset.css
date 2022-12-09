@@ -10,8 +10,10 @@
     user-select: none;
   }*/
   html,
+  #app,
   body {
     height: 100%;
+    overflow: hidden;
   }
   a {
     text-decoration: none;

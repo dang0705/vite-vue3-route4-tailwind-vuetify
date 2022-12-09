@@ -4,7 +4,7 @@ import autoImport from 'unplugin-auto-import/vite';
 import viteRestart from 'vite-plugin-restart';
 import commonjsDev from 'vite-plugin-commonjs';
 import deepmerge from 'deepmerge';
-import vuetify from 'vite-plugin-vuetify';
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 
 export default (isDev, $appName) => {
   let appsConfig = {};
@@ -16,49 +16,34 @@ export default (isDev, $appName) => {
   return [
     vue({
       template: {
+        transformAssetUrls,
         compilerOptions: { isCustomElement: (tag) => /^web-/.test(tag) }
       }
     }),
     vuetify({
-      autoImport: true
+      autoImport: true,
+      styles: {
+        configFile: '../../apps-common/styles/global/_vuetify-configs.scss'
+      }
     }),
     polyfill({
-      targets: ['chrome >80'],
+      targets: ['defaults', 'ie >7'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
       corejs: true
     }),
     autoImport({
       include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
       imports: [
-        // presets
         'vue',
         'vue-router',
         'pinia',
-        // custom
         deepmerge(
           {
-            /*            '@vueuse/core': [
-          // named imports
-          'useMouse', // import { useMouse } from '@vueuse/core',
-          // alias
-          ['useFetch', 'useMyFetch'] // import { useFetch as useMyFetch } from '@vueuse/core',
-        ],*/
-            /*        axios: [
-            // default imports
-            ['default', 'axios'] // import { default as axios } from 'axios',
-          ],*/
             '@common-config': ['isDev'],
-            // '@common-routes': ['useRouter', 'useRoute'],
             '@common-mixins/components': ['UiInput'],
             '@common-mixins/component-props': ['UiInputProps'],
-            // "@common/store": ["defineStore"],
             '@common-plugins/http': ['$http'],
-            '@common-plugins/bus': ['useBus'],
-            '[package-name]': [
-              '[import-names]',
-              // alias
-              ['[from]', '[alias]']
-            ]
+            '@common-plugins/bus': ['useBus']
           },
           appsConfig.autoImport.imports
         )
