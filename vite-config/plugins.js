@@ -5,11 +5,14 @@ import viteRestart from 'vite-plugin-restart';
 import commonjsDev from 'vite-plugin-commonjs';
 import deepmerge from 'deepmerge';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default (isDev, $appName) => {
   let appsConfig = {};
+  let injectScript = '';
   try {
     appsConfig = require(`./vite-config/apps/${$appName}/plugins.js`);
+    injectScript = require(`./vite-config/apps/${$appName}/inject.js`);
   } catch (e) {
     console.log(e);
   }
@@ -20,6 +23,12 @@ export default (isDev, $appName) => {
         compilerOptions: { isCustomElement: (tag) => /^web-/.test(tag) }
       }
     }),
+    createHtmlPlugin({
+      minify: !isDev,
+      inject: {
+        data: { title: '青梨派', injectScript: isDev ? '' : injectScript }
+      }
+    }),
     vuetify({
       autoImport: true,
       styles: {
@@ -27,8 +36,9 @@ export default (isDev, $appName) => {
       }
     }),
     polyfill({
-      targets: ['defaults', 'ie >7'],
+      targets: ['defaults', 'ie 11'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+      polyfills: true,
       corejs: true
     }),
     autoImport({

@@ -32,5 +32,9 @@ export default [
   {
     name: 'TopicTimeLine',
     component: () => import('@topics-components/back-stage/topic-time-line.vue')
+  },
+  {
+    name: 'UiComponents',
+    component: () => import('@topics-components/front-stage/ui-components.vue')
   }
 ];

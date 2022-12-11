@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="tw-color tw-bg-white tw-fixed tw-bottom-0 tw-flex tw-w-full tw-items-center tw-shadow md:tw-static md:tw-shadow-none lg:tw-w-fit"
+    class="tw-color tw-bg-white tw-fixed tw-bottom-0 tw-left-0 tw-flex tw-w-full tw-items-center tw-shadow md:tw-static md:tw-shadow-none lg:tw-w-fit"
   >
     <router-link
       v-for="{ name } in currentTabs"

@@ -1,7 +1,7 @@
 <template>
   <div id="operate-button">
     <ul
-      class="tw-flex tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row"
+      class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-justify-around"
     >
       <li
         v-for="(
@@ -16,20 +16,20 @@
         ) in value"
         :key="which"
         :class="[
-          // 'tw-basis-1',
-          'tw-flex-shrink-0',
           'tw-mt-6',
           'lg:tw-mt-0',
           'tw-w-4/5',
-          'md:tw-w-2/4',
           'tw-flex',
-          'tw-mx-10',
           'tw-items-center',
           'tw-rounded-4xl',
           'tw-cursor-pointer'
         ]"
         :style="{
-          ...styleParsing(style)
+          ...styleParsing(style),
+          flexBasis:
+            $device.device === 'PC'
+              ? (1 / value.length) * 100 - 6 + '%'
+              : 'unset'
         }"
         @click.passive="handleButtonClick(type, steps)"
       >

@@ -2,14 +2,18 @@ import addRoutes from '@topics-routes/add-routes';
 import { useIsPreviewStore } from '@topics-store/is-preview';
 let hasAsyncRouteBeenAdded = false; // whether the async routes has been loaded, this is very important
 export default async function () {
+  const $asyncRoutes = useAsyncRoutesStore();
+  const $previewStore = useIsPreviewStore();
+  const { routes, currentRoutes, indexType } = storeToRefs($asyncRoutes);
+  const { isPreview } = storeToRefs($previewStore);
+
   const [router, to, from, next] = arguments;
   const { path, name, params, fullPath, matched } = to;
-  const $asyncRoutes = useAsyncRoutesStore();
-  const { routes } = storeToRefs($asyncRoutes);
-  const $previewStore = useIsPreviewStore();
-  $previewStore.isPreview === null &&
-    ($previewStore.isPreview =
-      self !== top || /^preview/.test(name) || /preview/.test(fullPath));
+
+  isPreview.value === null &&
+    (isPreview.value = isDev
+      ? self !== top || /^preview/.test(name) || /preview/.test(fullPath)
+      : self !== top);
 
   const { default: formattedRoute } = await import(
     '@topics/utils/formatted-route'
@@ -22,12 +26,14 @@ export default async function () {
   name === formattedRoute('home') && (hasAsyncRouteBeenAdded = false);
 
   const type = params.type || fullPath.split('/')[2];
-  if (isEnterIndexRoute && !routes.value[type]?.length) {
+  indexType.value = type;
+
+  if (isEnterIndexRoute && !currentRoutes?.value) {
     // 处理动态路由加载和触发逻辑
     await $asyncRoutes.getIndexRoutes(type);
-    if (!hasAsyncRouteBeenAdded && routes.value[type]?.length) {
+    if (!hasAsyncRouteBeenAdded) {
       addRoutes({
-        routes: routes.value[type],
+        routes: currentRoutes?.value,
         router,
         root: formattedRoute('index')
       });
@@ -39,13 +45,13 @@ export default async function () {
     }
   } else {
     // 常规的业务逻辑处理
-
-    if ($previewStore.isPreview) {
-      const { default: listenPreview } = await import('@topics/preview');
-      listenPreview();
+    if (isPreview.value) {
+      const { default: subscribeParentEvent } = await import('@topics/preview');
+      subscribeParentEvent();
     }
     if (matched?.[0]?.name === formattedRoute('index')) {
-      name !== formattedRoute('index') && $asyncRoutes.getAsyncRouteData(name);
+      name !== formattedRoute('index') &&
+        (await $asyncRoutes.getAsyncRouteData(name));
       next();
     } else {
       next();

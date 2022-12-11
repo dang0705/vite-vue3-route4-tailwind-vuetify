@@ -1,5 +1,6 @@
 import getFileExt from '../apps-common/utils/get-file-ext';
-import commonjsProd from '@rollup/plugin-commonjs'
+import commonjsProd from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy';
 import { isBuildLocal } from './env';
 /*const {
   list, // array of required modules
@@ -36,6 +37,17 @@ export default (appName) => ({
         }
       }
     },
-    plugins:[commonjsProd()]
+    plugins: [
+      commonjsProd(),
+      copy({
+        targets: [
+          {
+            src: `./apps/${appName}/inject.js`,
+            dest: `./dist/${appName}`
+          }
+        ],
+        hook: 'writeBundle'
+      })
+    ]
   }
 });

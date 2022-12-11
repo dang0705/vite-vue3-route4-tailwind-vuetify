@@ -1,4 +1,4 @@
-import { topicId } from '@topics/configs/get-topic-name-origin';
+import { topicId } from '@topics-configs/get-topic-id';
 
 export const topics = {
   '20th': 'twenty-years',

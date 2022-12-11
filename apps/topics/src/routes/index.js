@@ -3,8 +3,12 @@ import initRouter from '@common-routes';
 import beforeEach from '@topics-routes/middlewares/before-each';
 import afterEach from '@topics-routes/middlewares/after-each';
 import previewListener from '@topics-routes/middlewares/preview-listener';
+const customHomePages = import.meta.glob('/src/custom-extends/**/home.vue');
+
 const homeRoute = {
-  component: () => import('@topics-views/home.vue'),
+  component:
+    customHomePages[`/src/custom-extends/${topicName}/views/home.vue`] ||
+    (() => import('@topics/static-views/home.vue')),
   meta: {
     title: '首页'
   },
@@ -14,14 +18,14 @@ const indexRoute = {
   props: ({ params: { type } }) => ({
     type
   }),
-  component: () => import('@topics-views/index/index.vue'),
+  component: () => import('@topics/static-views/index/index.vue'),
   children: []
 };
 const routes = [
   {
     path: '/home',
-    alias: '/',
     name: 'home',
+    alias: '/',
     ...homeRoute
   },
   {

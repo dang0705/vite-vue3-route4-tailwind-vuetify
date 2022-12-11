@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row xl:tw-w-4/5"
+    class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-justify-between"
   >
     <a
       v-for="({ href, clickable }, which) in value"
@@ -8,24 +8,21 @@
       :class="[
         'tw-my-4',
         'tw-w-full',
-        'md:tw-mx-4',
         'lg:tw-my-0',
         {
           'lg:tw-cursor-not-allowed': !clickable
         }
       ]"
       href="javascript:;"
+      :style="{
+        flexBasis:
+          $device.device !== 'H5'
+            ? `calc(${(1 / (value.length + 0.1)) * 100}%)`
+            : '60%'
+      }"
       @click.passive="handleNav(which, clickable)"
     >
-      <v-img
-        :src="href"
-        :style="{
-          flexBasis:
-            $device.device !== 'H5'
-              ? `calc(${(1 / (value.length + 0.1)) * 100}%)`
-              : '60%'
-        }"
-      />
+      <v-img :src="href" />
     </a>
   </div>
 </template>

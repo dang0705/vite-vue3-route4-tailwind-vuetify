@@ -5,6 +5,8 @@ let slots = [];
 
 const createWebComponent = (templateStr) => {
   template.innerHTML = templateStr = escape2Html(templateStr);
+  template.innerHTML += '<style>*{margin: 0;padding: 0;}</style>';
+
   class Template extends HTMLElement {
     constructor() {
       super();

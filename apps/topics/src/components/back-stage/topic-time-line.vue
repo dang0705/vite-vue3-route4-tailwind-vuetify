@@ -3,7 +3,7 @@
     <div v-if="$slots.left">
       <slot name="left" />
     </div>
-    <div class="tw-flex-col">
+    <div class="tw-w-full tw-max-w-3xl tw-flex-col">
       <div v-if="$slots.top"><slot name="top" /></div>
       <web-steps>
         <div
