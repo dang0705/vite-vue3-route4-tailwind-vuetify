@@ -1,0 +1,1 @@
+System.register(["./async-module-6a75a392-legacy.js","./async-module-e77dc765-legacy.js","./async-module-c5a7bb54-legacy.js"],(function(e){"use strict";var n,c,t;return{setters:[function(e,n){},function(e){n=e._},function(e){c=e.Z,t=e.a4}],execute:function(){e("default",n({},[["render",function(e,n){return c(),t("p",null,"活动介绍")}]]))}}}));

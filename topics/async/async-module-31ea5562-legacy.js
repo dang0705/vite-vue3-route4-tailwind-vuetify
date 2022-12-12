@@ -1,0 +1,1 @@
+System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/banner-d8940ea7.png")}}}));

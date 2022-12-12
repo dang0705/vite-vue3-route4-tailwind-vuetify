@@ -1,0 +1,1 @@
+import"./async-module-134258d5.js";import{_ as o}from"./async-module-5169b6e6.js";import{Z as t,a4 as e,a5 as n}from"./async-module-dbbfdeee.js";const s={},c={class:"page-not-found"},a=n("p",null,"404 Not Found",-1),r=[a];function _(d,i){return t(),e("div",c,r)}const m=o(s,[["render",_]]);export{m as default};

@@ -1,0 +1,1 @@
+System.register([],(function(t){"use strict";return{execute:function(t,e){t("default","/topic/assets/leader-plan-bottom-c61cc56c.png")}}}));

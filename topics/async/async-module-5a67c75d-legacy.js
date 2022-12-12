@@ -1,0 +1,1 @@
+System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/excellent-work-selection-bg-ced5b1fd.jpg")}}}));

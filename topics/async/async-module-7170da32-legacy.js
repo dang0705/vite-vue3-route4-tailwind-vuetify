@@ -1,0 +1,1 @@
+System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/m-2-banner-9be46af2.jpg")}}}));

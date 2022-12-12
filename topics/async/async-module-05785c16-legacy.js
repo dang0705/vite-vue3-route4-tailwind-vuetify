@@ -1,0 +1,1 @@
+System.register(["./async-module-e77dc765-legacy.js"],(function(e){"use strict";var t;return{setters:[function(e){t=e._}],execute:function(e,n){e("default",t({},[["render",function(e,t){return null}]]))}}}));

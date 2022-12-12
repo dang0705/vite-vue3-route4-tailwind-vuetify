@@ -1,0 +1,1 @@
+System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/internet-culture-festival-bg-0d04f88e.jpg")}}}));

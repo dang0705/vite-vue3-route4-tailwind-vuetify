@@ -1,0 +1,1 @@
+System.register([],(function(t){"use strict";return{execute:function(t,e){t("default","/topic/assets/m-1-5768a77f.jpg")}}}));

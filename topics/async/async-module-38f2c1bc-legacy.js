@@ -1,0 +1,1 @@
+System.register([],(function(t){"use strict";return{execute:function(t,e){t("default","/topic/assets/public-class-8999b73f.jpg")}}}));

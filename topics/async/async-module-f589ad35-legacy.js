@@ -1,0 +1,1 @@
+System.register([],(function(t){"use strict";return{execute:function(t,e){t("default","/topic/assets/micro-film-b5dcc057.jpg")}}}));
