@@ -44,6 +44,8 @@ const errMsg = ref('');
 import { useDisplay, useTheme } from 'vuetify';
 import debounce from '@common-utils/debounce';
 import { useIsPreviewStore } from '@topics-store/is-preview';
+const $previewStore = useIsPreviewStore();
+const { isPreview } = storeToRefs($previewStore);
 
 const catchStatus = () => {
   useBus.on('err', (msg) => {
@@ -53,7 +55,6 @@ const catchStatus = () => {
   useBus.on('loading', (isLoading) => (loading.value = isLoading));
 };
 catchStatus();
-
 const $deviceStore = useDeviceStore();
 const $vuetifyDisplay = useDisplay();
 const { proxy } = getCurrentInstance();
@@ -67,7 +68,7 @@ const styleDependOnDevice = computed(() => ({
 const appClassName = computed(
   () =>
     `${$appName} ${$appName}_${topicName} ${device.value} ${useRoute().name} ${
-      useIsPreviewStore().isPreview ? 'preview' : ''
+      isPreview.value ? 'preview' : ''
     }`
 );
 const onResize = () => $deviceStore.setDevice($vuetifyDisplay.name.value);
@@ -79,5 +80,10 @@ onMounted(async () => {
       project: topicName,
       device: device.value
     });
+  if (isPreview.value) {
+    const { default: subscribeParentEvent } = await import('@topics/preview');
+    subscribeParentEvent();
+    useBus.on('updatePreview', async () => location.reload());
+  }
 });
 </script>

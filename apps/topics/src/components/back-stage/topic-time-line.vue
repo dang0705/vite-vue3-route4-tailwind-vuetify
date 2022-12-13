@@ -41,11 +41,11 @@ let template = '<ul style="margin: 0;padding: 0;">';
 const initTemplate = () => {
   const { configs } = getCurrentInstance().proxy.value;
 
-  configs.forEach(({ color: { bg, text }, content }, which) => {
+  configs.forEach(({ style: { backgroundColor, color }, content }, which) => {
     template += `<li class='steps'
-                     style='background-color: ${bg};
-                            color: ${text};
-                            border-color:${bg};
+                     style='background-color: ${backgroundColor};
+                            color: ${color};
+                            border-color:${backgroundColor};
                             list-style:none;
                             position:relative;
                             justify-content:center;

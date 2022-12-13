@@ -1,11 +1,11 @@
-import { useAsyncRoutesStore } from '@topics-store/async-routes';
+import { useIsPreviewStore } from '@topics-store/is-preview';
 
 const events = {
-  getAsyncRouteData({ routeName, value }) {
-    useAsyncRoutesStore().getAsyncRouteData(routeName, value);
+  updatePreviewData() {
+    useIsPreviewStore().updatePreviewData();
   }
 };
-export default () =>
-  (window.onmessage = ({ data: { event, data } }) => {
+export default () => {
+  window.onmessage = ({ data: { event, data } }) =>
     events[event] && events[event](data);
-  });
+};

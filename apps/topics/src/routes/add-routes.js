@@ -9,12 +9,12 @@ export default ({ routes = [], root = 'index', router }) => {
   // 每次切换动态路由前，清空原始路由，并赋予基本的静态路由。
   currentRoot.children = [];
   routes.forEach(({ name, path, icon = '', meta = {} }) => {
-    router.hasRoute(path) && router.removeRoute(path);
+    const routePath = root.includes('preview') ? `preview-${path}` : path;
+    router.hasRoute(routePath) && router.removeRoute(routePath);
     if (!router.hasRoute(path)) {
-      const routeBasic = root.includes('preview') ? `preview-${path}` : path;
       const route = {
-        path: `${root ? '' : '/'}${routeBasic}`,
-        name: routeBasic,
+        path: `${root ? '' : '/'}${routePath}`,
+        name: routePath,
         meta: {
           title: name,
           icon: useDeviceStore().device === 'PC' ? '' : icon,
@@ -22,7 +22,7 @@ export default ({ routes = [], root = 'index', router }) => {
         },
         component:
           customExtendsSfc[
-            `/src/custom-extends/${topicName}/views/index/${c2k(path)}.vue`
+            `/src/custom-extends/${topicName}/views/${root}/${c2k(path)}.vue`
           ] ||
           (() => import('@topics/static-views/index/index-children-static.vue'))
       };

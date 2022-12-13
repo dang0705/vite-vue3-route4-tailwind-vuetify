@@ -27,11 +27,11 @@ const mockAsyncRoutes = {
     }
   ]
 };
+import getHomeComponents from '@topics-apis/get-home-components';
 export const useAsyncRoutesStore = defineStore('async-routes', {
   state: () => ({
     routes: {},
-    indexType: '0',
-    routesData: {}
+    indexType: '0'
   }),
   getters: {
     currentRoutes: ({ routes, indexType }) => routes[indexType]
@@ -50,15 +50,6 @@ export const useAsyncRoutesStore = defineStore('async-routes', {
           console.log(e);
         }
       }
-    },
-    async getAsyncRouteData(routeName) {
-      console.log(routeName);
-      await $http.get(
-        new URL('../../mock/data.json', import.meta.url).href,
-        { mock: true }
-        // { params: { type } }
-      );
-      this.routesData = { value: `<p>远程数据${Math.random()}</p>` };
     }
   }
 });

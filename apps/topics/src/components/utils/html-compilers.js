@@ -1,4 +1,4 @@
-const arrEntities = { lt: '<', gt: '>', nbsp: ' ', amp: '&', quot: '"' };
+const arrEntities = { lt: '<', gt: '>', /*nbsp: ' ',*/ amp: '&', quot: '"' };
 
 /**
  * @解析富文本中手动输入的html字符串
@@ -6,7 +6,8 @@ const arrEntities = { lt: '<', gt: '>', nbsp: ' ', amp: '&', quot: '"' };
  * @returns String
  */
 export const escape2Html = (htmlTemplate) =>
-  htmlTemplate.replace(/&(lt|gt|nbsp|amp|quot);/gi, (_, t) => arrEntities[t]);
+  // htmlTemplate.replace(/&(lt|gt|nbsp|amp|quot);/gi, (_, t) => arrEntities[t]);
+  htmlTemplate.replace(/&(lt|gt|amp|quot);/gi, (_, t) => arrEntities[t]);
 
 /**
  * @获取已解析模板中的插槽slot数量

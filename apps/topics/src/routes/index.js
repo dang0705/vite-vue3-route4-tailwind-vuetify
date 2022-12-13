@@ -22,28 +22,32 @@ const indexRoute = {
   children: []
 };
 const routes = [
-  {
-    path: '/home',
-    name: 'home',
-    alias: '/',
-    ...homeRoute
-  },
-  {
-    path: '/preview-home',
-    name: 'preview-home',
-    ...homeRoute
-  },
-  {
-    path: '/index/:type',
-    name: 'index',
-    ...indexRoute
-  },
-  {
-    path: '/preview-index/:type',
-    name: 'preview-index',
-    beforeEnter: previewListener,
-    ...indexRoute
-  },
+  ...(self !== top || isDev
+    ? [
+        {
+          path: '/',
+          name: 'preview-home',
+          ...homeRoute
+        },
+        {
+          path: '/preview-index/:type',
+          name: 'preview-index',
+          beforeEnter: previewListener,
+          ...indexRoute
+        }
+      ]
+    : [
+        {
+          path: '/',
+          name: 'home',
+          ...homeRoute
+        },
+        {
+          path: '/index/:type',
+          name: 'index',
+          ...indexRoute
+        }
+      ]),
   {
     name: 'not-found',
     path: '/:pathMatch(.*)*',

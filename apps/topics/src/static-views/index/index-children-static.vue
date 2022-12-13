@@ -1,8 +1,8 @@
 <template>
-  <div v-html="routesData.value" />
+  <div v-html="pageData.value" />
 </template>
 
 <script setup>
-const $asyncRoute = useAsyncRoutesStore();
-const { routesData } = storeToRefs($asyncRoute);
+const $previewStore = useIsPreviewStore();
+const { pageData } = storeToRefs($previewStore);
 </script>

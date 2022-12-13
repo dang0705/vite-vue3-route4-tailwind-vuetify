@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { useBus } from '@bus';
 import env from '@common-utils/get-server-env-file';
+import { useBus } from '@bus';
+import { topicId } from '@topics-configs/get-topic-id';
 import { isDev, baseURL, statusCodes } from '@common-config';
+import { useIsPreviewStore } from '@topics-store/is-preview';
 import isQinglipai from '@common-utils/is-qinglipai';
+import { storeToRefs } from 'pinia';
 const http = axios.create({
   baseURL,
   headers: {
@@ -29,6 +32,19 @@ http.interceptors.request.use(
         useBus.emit('on-error', httpErrorMessage.noEnvJson);
       }
     }
+    const $previewStore = useIsPreviewStore();
+    const { isPreview } = storeToRefs($previewStore);
+    config.method === 'post'
+      ? (config.data = {
+          ...config.data,
+          topicId,
+          publish: isPreview.value ? 0 : 1
+        })
+      : (config.params = {
+          ...config.params,
+          topicId,
+          publish: isPreview.value ? 0 : 1
+        });
     useBus.emit('loading', true);
     return config;
   },

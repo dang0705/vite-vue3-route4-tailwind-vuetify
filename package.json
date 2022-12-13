@@ -6,7 +6,8 @@
     "app-topics:dev": "vite -- topics",
     "app-topics:prod": "vite build -- topics",
     "build & preview--topics": "vite build -- build-local -- topics && npx vite preview -- topics",
-    "preview--topics": "npx vite preview -- topics"
+    "preview--topics": "npx vite preview -- topics",
+    "topics-deploy": "deploys/topics.sh"
   },
   "dependencies": {
     "axios": "^1.1.3",
