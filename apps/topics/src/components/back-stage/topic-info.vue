@@ -1,17 +1,20 @@
 <template>
-  <div v-if="value">
-    <web-template>
-      <div
-        v-for="({ content }, index) in slots"
-        :slot="`slot-${index + 1}`"
-        :key="index"
-      >
-        <slot :name="`info-slot-${index + 1}`" :content="content">{{
-          content
-        }}</slot>
-      </div>
-    </web-template>
-  </div>
+  <web-template>
+    <div
+      v-for="({ content }, index) in slots"
+      :slot="`slot-${index + 1}`"
+      :key="index"
+    >
+      <slot :name="`info-slot-${index + 1}`" :content="content">
+        <v-btn>
+          info-slot-{{ index + 1 }}
+          <v-tooltip activator="parent" location="start">{{
+            content
+          }}</v-tooltip>
+        </v-btn>
+      </slot>
+    </div>
+  </web-template>
 </template>
 
 <script>

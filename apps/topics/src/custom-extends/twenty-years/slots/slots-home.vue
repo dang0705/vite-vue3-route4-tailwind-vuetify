@@ -13,28 +13,12 @@
     v-text="content"
   />
 </template>
-
+<script>
+import homeSlotsMixins from '@topics/custom-extends/mixins/home-slots-mixins';
+export default {
+  mixins: [homeSlotsMixins]
+};
+</script>
 <script setup>
-const props = defineProps({
-  slots: {
-    type: Array,
-    default: () => {
-      [];
-    }
-  },
-  slotName: {
-    type: String,
-    default: ''
-  },
-  content: {
-    type: String,
-    default: ''
-  },
-  style: {
-    type: Object,
-    default: () => ({})
-  }
-});
-
 const handleClick = () => alert('slot 触发');
 </script>

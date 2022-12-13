@@ -5,9 +5,14 @@
       :slot="`slot-${index + 1}`"
       :key="index"
     >
-      <slot :name="`org-slot-${index + 1}`" :content="content">{{
-        content
-      }}</slot>
+      <slot :name="`org-slot-${index + 1}`" :content="content">
+        <v-btn>
+          org-slot-{{ index + 1 }}
+          <v-tooltip activator="parent" location="start">{{
+            content
+          }}</v-tooltip>
+        </v-btn>
+      </slot>
     </div>
   </web-template>
 </template>

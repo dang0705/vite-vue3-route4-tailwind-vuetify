@@ -22,10 +22,20 @@ const indexRoute = {
   children: []
 };
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    ...homeRoute
+  },
+  {
+    path: '/index/:type',
+    name: 'index',
+    ...indexRoute
+  },
   ...(self !== top || isDev
     ? [
         {
-          path: '/',
+          path: '/preview-home',
           name: 'preview-home',
           ...homeRoute
         },
@@ -36,18 +46,7 @@ const routes = [
           ...indexRoute
         }
       ]
-    : [
-        {
-          path: '/',
-          name: 'home',
-          ...homeRoute
-        },
-        {
-          path: '/index/:type',
-          name: 'index',
-          ...indexRoute
-        }
-      ]),
+    : []),
   {
     name: 'not-found',
     path: '/:pathMatch(.*)*',

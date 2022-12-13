@@ -1,7 +1,7 @@
 <template>
   <div
     class="topics-home tw-flex tw-flex-col tw-items-center tw-text-center"
-    :style="styleParsing(pageStyles)"
+    :style="compileStyle(pageStyles)"
   >
     <v-img
       width="100%"
@@ -19,12 +19,10 @@
 </template>
 
 <script setup>
-import styleParsing from '@topics-components/utils/compile-styles-from-backend';
+import compileStyle from '@topics-components/utils/compile-styles-from-backend';
 import { getSlotsName } from '@topics/configs/slots';
-import { storeToRefs } from 'pinia';
 import getHomeComponents from '@topics-apis/get-home-components';
 import UiComponents from '@topics-components/front-stage/ui-components.vue';
-// import jsonp from '@topics/utils/jsonp';
 const components = ref([]);
 const banners = ref({});
 const homePageStyles = ref({});
@@ -32,7 +30,6 @@ const homeSlots = ref([]);
 const $device = useDeviceStore();
 const $previewStore = useIsPreviewStore();
 const { device } = storeToRefs($device);
-const { ctx } = getCurrentInstance();
 const initHomePage = async () => {
   try {
     const {

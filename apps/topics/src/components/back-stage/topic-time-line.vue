@@ -12,7 +12,12 @@
           :key="whichSlot"
         >
           <slot :name="`time-line-slot-${whichSlot + 1}`" :content="content">
-            {{ content }}
+            <v-btn>
+              time-line-slot-{{ index + 1 }}
+              <v-tooltip activator="parent" location="start">{{
+                content
+              }}</v-tooltip>
+            </v-btn>
           </slot>
         </div>
       </web-steps>
