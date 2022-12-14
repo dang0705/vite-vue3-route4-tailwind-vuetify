@@ -1,6 +1,5 @@
 import addRoutes from '@topics-routes/add-routes';
-import formattedRoute from '@topics/utils/formatted-route';
-import { useIsPreviewStore } from '@topics-store/is-preview';
+import switchWhetherIsPreview from '@topics-configs/switch-whether-is-preview';
 
 let hasAsyncRouteBeenAdded = false; // 异步动态路由是否已加载标志，防止无限挂载
 export default async function () {
@@ -10,19 +9,15 @@ export default async function () {
   const $asyncRoutes = useAsyncRoutesStore();
   const $previewStore = useIsPreviewStore();
   const { currentRoutes, indexType } = storeToRefs($asyncRoutes);
-  const { isPreview } = storeToRefs($previewStore);
 
-  isPreview.value === null &&
-    (isPreview.value = isDev
-      ? self !== top || /^preview/.test(name) || /preview/.test(fullPath)
-      : self !== top);
+  $previewStore.isPreview === null &&
+    ($previewStore.isPreview = isDev ? switchWhetherIsPreview : self !== top);
 
   const isEnterIndexRoute =
-    matched?.[0]?.name === formattedRoute('index') ||
-    fullPath.includes(formattedRoute('index'));
+    matched?.[0]?.name === 'index' || fullPath.includes('index');
 
   // 返回首页时重置挂载异步路由状态
-  name === formattedRoute('home') && (hasAsyncRouteBeenAdded = false);
+  name === 'home' && (hasAsyncRouteBeenAdded = false);
 
   const type = params.type || fullPath.split('/')[2];
   indexType.value = type;
@@ -34,14 +29,15 @@ export default async function () {
       addRoutes({
         routes: currentRoutes?.value,
         router,
-        root: formattedRoute('index')
+        root: 'index'
       });
       hasAsyncRouteBeenAdded = true;
       // 官方文档推荐的手动触发路由方式
       return fullPath;
     } else {
-      if (name !== formattedRoute('index')) {
-        await $previewStore.updatePreviewData(name);
+      // 内页动态路由数据获取
+      if (name !== 'index') {
+        console.log(name);
         next();
       } else {
         next();

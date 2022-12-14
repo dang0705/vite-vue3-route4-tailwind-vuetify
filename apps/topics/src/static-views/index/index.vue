@@ -1,9 +1,14 @@
 <template>
   <div
-    class="tw-mx-auto tw-h-[calc(100%_-_3.5rem)] tw-w-full md:tw-h-fit lg:tw-w-4/5"
+    class="tw-mx-auto tw-h-[calc(100%_-_3.5rem)] lg:tw-h-full"
+    :style="compileStyle(bg)"
   >
-    <v-img width="100%" :aspect-ratio="$device.device === 'H5' ? 2.5 : 3.2" />
-    <v-container class="tw-px-8 tw-py-0">
+    <v-img
+      width="100%"
+      :src="banner"
+      :aspect-ratio="device === 'H5' ? 2.5 : 3.2"
+    />
+    <v-container class="tw-px-8 tw-py-0 lg:tw-w-4/5">
       <ui-tabs class="tw-mx-auto lg:tw-w-11/12" />
       <router-view v-slot="{ Component, route }">
         <transition name="fade" mode="out-in">
@@ -19,18 +24,23 @@
 </template>
 
 <script setup>
+import compileStyle from '@topics-components/utils/compile-styles-from-backend';
 import UiTabs from '@topics-components/front-stage/ui-tabs';
-import formattedRoute from '@topics/utils/formatted-route';
 
 const $device = useDeviceStore();
-
+const $asyncRoutesStore = useAsyncRoutesStore();
+const { device } = storeToRefs($device);
+const { currentIndexStyle } = storeToRefs($asyncRoutesStore);
+const banner = computed(
+  () => currentIndexStyle.value?.[`banner${device.value}`]
+);
+const bg = computed(() => currentIndexStyle.value?.[`bg${device.value}`]);
 const routeName = 'index';
 const redirect = () =>
   $router.replace({
-    name: $router.options.routes.find(
-      ({ name }) => name === formattedRoute(routeName)
-    ).children[0]?.name
+    name: $router.options.routes.find(({ name }) => name === routeName)
+      .children[0]?.name
   });
 
-onMounted(() => useRoute().name === formattedRoute(routeName) && redirect());
+onMounted(() => useRoute().name === routeName && redirect());
 </script>

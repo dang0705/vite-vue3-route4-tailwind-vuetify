@@ -31,21 +31,25 @@ import getHomeComponents from '@topics-apis/get-home-components';
 export const useAsyncRoutesStore = defineStore('async-routes', {
   state: () => ({
     routes: {},
+    indexStyles: {},
     indexType: '0'
   }),
   getters: {
-    currentRoutes: ({ routes, indexType }) => routes[indexType]
+    currentRoutes: ({ routes, indexType }) => routes[indexType],
+    currentIndexStyle: ({ indexStyles, indexType }) => indexStyles[indexType]
   },
   actions: {
     async getIndexRoutes(type) {
       if (!this.currentRoutes?.length) {
         try {
-          await $http.get(
-            new URL('../../mock/data.json', import.meta.url).href,
-            { mock: true }
-            // { params: { type } }
+          const { default: api } = await import(
+            '@topics/apis/get-index-style-and-routes'
           );
-          this.routes[type] = mockAsyncRoutes[type];
+          const { pages, style } = await $http.get(api, {
+            params: { type: this.indexType }
+          });
+          this.routes[type] = pages;
+          this.indexStyles[type] = style;
         } catch (e) {
           console.log(e);
         }

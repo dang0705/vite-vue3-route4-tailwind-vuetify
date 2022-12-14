@@ -1,4 +1,5 @@
-const arrEntities = { lt: '<', gt: '>', /*nbsp: ' ',*/ amp: '&', quot: '"' };
+// const arrEntities = { lt: '<', gt: '>', nbsp: ' ', amp: '&', quot: '"' };
+const arrEntities = { lt: '<', gt: '>', amp: '&', quot: '"' };
 
 /**
  * @解析富文本中手动输入的html字符串

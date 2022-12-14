@@ -32,21 +32,6 @@ const routes = [
     name: 'index',
     ...indexRoute
   },
-  ...(self !== top || isDev
-    ? [
-        {
-          path: '/preview-home',
-          name: 'preview-home',
-          ...homeRoute
-        },
-        {
-          path: '/preview-index/:type',
-          name: 'preview-index',
-          beforeEnter: previewListener,
-          ...indexRoute
-        }
-      ]
-    : []),
   {
     name: 'not-found',
     path: '/:pathMatch(.*)*',

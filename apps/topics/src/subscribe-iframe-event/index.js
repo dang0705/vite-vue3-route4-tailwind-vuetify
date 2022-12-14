@@ -1,5 +1,3 @@
-import { useIsPreviewStore } from '@topics-store/is-preview';
-
 const events = {
   updatePreviewData() {
     useIsPreviewStore().updatePreviewData();

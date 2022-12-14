@@ -1,14 +1,18 @@
 <template>
   <div
-    class="topics-home tw-flex tw-flex-col tw-items-center tw-text-center"
+    class="topics-home tw-flex tw-h-fit tw-min-h-full tw-flex-col tw-items-center"
     :style="compileStyle(pageStyles)"
   >
     <v-img
       width="100%"
+      class="tw-flex-none"
       :src="banner"
-      :aspect-ratio="$device.device === 'H5' ? 2.5 : 3.2"
+      :aspect-ratio="device === 'H5' ? 2.5 : 3.2"
     />
-    <div class="tw-w-full tw-px-6 tw-py-8 md:tw-px-12 lg:tw-px-24 xl:tw-px-48">
+    <div
+      v-if="components.length"
+      class="tw-w-full tw-px-6 tw-py-8 md:tw-px-12 lg:tw-px-24 xl:tw-px-48"
+    >
       <ui-components
         :components="components"
         :slots="homeSlots"
@@ -30,6 +34,7 @@ const homeSlots = ref([]);
 const $device = useDeviceStore();
 const $previewStore = useIsPreviewStore();
 const { device } = storeToRefs($device);
+const { isPreview } = storeToRefs($previewStore);
 const initHomePage = async () => {
   try {
     const {

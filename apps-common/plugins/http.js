@@ -3,7 +3,7 @@ import env from '@common-utils/get-server-env-file';
 import { useBus } from '@bus';
 import { topicId } from '@topics-configs/get-topic-id';
 import { isDev, baseURL, statusCodes } from '@common-config';
-import { useIsPreviewStore } from '@topics-store/is-preview';
+import { useIsPreviewStore } from '@topics-store/preview-store';
 import isQinglipai from '@common-utils/is-qinglipai';
 import { storeToRefs } from 'pinia';
 const http = axios.create({

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="value.length" class="tw-items-center">
     <div>
       微信扫二维码关注
       <span

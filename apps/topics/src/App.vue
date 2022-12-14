@@ -43,7 +43,6 @@ const showAlert = ref(false);
 const errMsg = ref('');
 import { useDisplay, useTheme } from 'vuetify';
 import debounce from '@common-utils/debounce';
-import { useIsPreviewStore } from '@topics-store/is-preview';
 const $previewStore = useIsPreviewStore();
 const { isPreview } = storeToRefs($previewStore);
 
@@ -81,7 +80,9 @@ onMounted(async () => {
       device: device.value
     });
   if (isPreview.value) {
-    const { default: subscribeParentEvent } = await import('@topics/preview');
+    const { default: subscribeParentEvent } = await import(
+      '@topics/subscribe-iframe-event'
+    );
     subscribeParentEvent();
     useBus.on('updatePreview', async () => location.reload());
   }

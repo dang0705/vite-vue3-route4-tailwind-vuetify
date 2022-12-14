@@ -1,5 +1,5 @@
 <template>
-  <div class="topic-target-and-line tw-flex tw-justify-center">
+  <div class="topic-target-and-line tw-flex tw-items-center tw-justify-center">
     <div v-if="$slots.left">
       <slot name="left" />
     </div>

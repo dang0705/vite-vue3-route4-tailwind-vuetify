@@ -8,7 +8,6 @@
       'tw-mx-auto',
       'tw-flex',
       'tw-flex-col',
-      'tw-items-center',
       'tw-mb-8',
       camelCase2KebabCase(key)
     ]"

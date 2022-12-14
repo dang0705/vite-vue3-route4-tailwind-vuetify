@@ -16,9 +16,7 @@
       href="javascript:;"
       :style="{
         flexBasis:
-          $device.device !== 'H5'
-            ? `calc(${(1 / (value.length + 0.1)) * 100}%)`
-            : '60%'
+          device !== 'H5' ? `calc(${(1 / (value.length + 0.1)) * 100}%)` : '60%'
       }"
       @click.passive="handleNav(which, clickable)"
     >
@@ -34,14 +32,12 @@ export default {
 };
 </script>
 <script setup>
-import matchIsPreviewRoute from '@topics/utils/formatted-route';
-const $router = useRouter();
-const $route = useRoute();
 const $device = useDeviceStore();
+const { device } = storeToRefs($device);
 const handleNav = (type, clickable) =>
   clickable &&
   $router.push({
-    name: matchIsPreviewRoute('index', $route),
+    name: 'index',
     params: { type }
   });
 </script>

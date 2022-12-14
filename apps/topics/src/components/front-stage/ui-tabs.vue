@@ -21,7 +21,6 @@
           'md:tw-rounded-t-lg',
           'md:tw-w-24',
           'md:tw-mx-2',
-          'md:tw-text-center',
           'md:tw-bg-yellow',
           'md:tw-text-base',
           'md:tw-h-11',
@@ -29,6 +28,7 @@
           'tw-flex',
           'tw-flex-col',
           'tw-justify-center',
+          'tw-items-center',
           'tw-h-14',
           'tw-flex-1',
           'md:tw-flex-none',
@@ -42,23 +42,27 @@
         ]"
         @click="navigate"
       >
+        <img
+          v-if="icon && device === 'H5'"
+          :src="icon"
+          alt=""
+          style="width: 20px; height: 20px"
+        />
         {{ title }}
-        <img v-if="icon" src="" alt="" />
       </li>
     </router-link>
   </ul>
 </template>
 
 <script setup>
-import formattedRoute from '@topics/utils/formatted-route';
+const $deviceStore = useDeviceStore();
+const { device } = storeToRefs($deviceStore);
 const {
   options: { routes }
 } = useRouter();
 
 let currentTabs = [
-  routes.find(({ name }) => name === formattedRoute('home')),
-  ...routes.find(({ name }) => name === formattedRoute('index')).children
+  routes.find(({ name }) => name === 'home'),
+  ...routes.find(({ name }) => name === 'index').children
 ];
-
-const device = computed(() => useDeviceStore().device);
 </script>
