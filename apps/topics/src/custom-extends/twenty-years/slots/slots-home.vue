@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    v-if="slotName === 'target-slot-1'"
+    v-if="slotName === 'info-slot-1'"
     class="tw-w-48"
     :placeholder="content"
   />
