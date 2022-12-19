@@ -19,7 +19,11 @@ for (const slot in allSlots) {
 }
 
 const allSlotsNames = import.meta.glob('/src/custom-extends/**/slots/index.js');
-export const getSlotsName = () =>
-  allSlotsNames[`/src/custom-extends/${topicName}/slots/index.js`]();
+
+const currentTopicSlots =
+  allSlotsNames[`/src/custom-extends/${topicName}/slots/index.js`];
+export const getSlotsName = currentTopicSlots
+  ? () => currentTopicSlots()
+  : () => {};
 
 export default slots;

@@ -3,6 +3,8 @@
     :is="isComponent(key)"
     v-for="{ key, value } in components"
     :key="key"
+    :slots="slots"
+    :component-key="camelCase2KebabCase(key)"
     :value="value"
     :class="[
       'tw-mx-auto',
@@ -28,12 +30,11 @@
 import camelCase2KebabCase from '@common-utils/camelCase-2-kebab-case';
 
 defineProps({
-  components: {
-    type: Array,
-    default: () => []
-  },
-  slotsName: { type: String, default: '' },
-  slots: { type: Array, default: () => [] }
+  components: ARRAY(),
+  slotsName: STRING(),
+  slots: ARRAY(),
+  backendSlots: ARRAY(),
+  frontendSlots: ARRAY()
 });
 const isComponent = (key) => `topic-${key}`;
 </script>

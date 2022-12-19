@@ -32,7 +32,7 @@ import themes from '@topics-configs/vuetify-theme';
 if (!topicId) {
   document.getElementById('app').innerHTML =
     '<h3 class="tw-flex tw-p-4 tw-justify-center tw-items-center tw-w-full tw-h-full tw-indent-10">' +
-    '无法正确识别专题，请检查本次链接是否带上了专题ID，链接格式为：www.XXX.com/topic/12</h3>';
+    '无法正确识别专题，请检查地址栏的链接是否带上了专题ID，有效链接举例：https://qinglipai.cn/topic/专题ID</h3>';
 } else {
   app
     .use(router)

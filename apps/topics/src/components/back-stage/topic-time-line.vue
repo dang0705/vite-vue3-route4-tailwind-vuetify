@@ -1,35 +1,37 @@
 <template>
   <div class="topic-target-and-line tw-flex tw-items-center tw-justify-center">
-    <div v-if="$slots.left">
-      <slot name="left" />
+    <div v-if="$slots[slotName({ dir: 'left' })]">
+      <slot :name="[slotName({ dir: 'left' })]" />
     </div>
     <div class="tw-w-full tw-max-w-3xl tw-flex-col">
-      <div v-if="$slots.top"><slot name="top" /></div>
+      <div v-if="$slots[[slotName({ dir: 'top' })]]">
+        <slot :name="[slotName({ dir: 'top' })]" />
+      </div>
       <web-steps>
         <div
-          v-for="({ content }, whichSlot) in slots"
-          :slot="`slot-${whichSlot + 1}`"
-          :key="whichSlot"
+          v-for="({ content }, index) in slots"
+          :slot="`slot-${index + 1}`"
+          :key="index"
         >
-          <slot :name="`time-line-slot-${whichSlot + 1}`" :content="content">
-            <v-btn>
-              time-line-slot-{{ index + 1 }}
-              <v-tooltip activator="parent" location="start">{{
-                content
-              }}</v-tooltip>
-            </v-btn>
+          <slot :name="slotName({ index })" :content="content">
+            <ui-slot-default-content
+              :name="slotName({ index })"
+              :content="content"
+            />
           </slot>
         </div>
       </web-steps>
-      <div v-if="$slots.bottom"><slot name="bottom" /></div>
+      <div v-if="$slots[[slotName({ dir: 'bottom' })]]">
+        <slot :name="[slotName({ dir: 'bottom' })]" />
+      </div>
     </div>
-    <div v-if="$slots.right">
-      <slot name="right" />
+    <div v-if="$slots[[slotName({ dir: 'right' })]]">
+      <slot :name="[slotName({ dir: 'right' })]" />
     </div>
   </div>
 </template>
 <script>
-import backStageMixins from '@topics-components/mixins/back-stage-mixins';
+import backStageMixins from '@topics-components/mixins/back-stage-comp-mixins';
 export default {
   mixins: [backStageMixins]
 };

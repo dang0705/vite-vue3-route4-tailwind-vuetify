@@ -1,6 +1,6 @@
 <template>
-  <div v-if="value.length" class="tw-items-center">
-    <div>
+  <ui-layout v-if="value.length" :slot-name="slotName">
+    <div class="tw-items-center tw-text-center">
       微信扫二维码关注
       <span
         class="title"
@@ -8,26 +8,31 @@
         style="font-weight: bold; font-size: 18px"
       />
       ，获取最新活动信息！
-    </div>
-    <div
-      class="tw-mt-6 tw-flex tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-items-start"
-    >
-      <ul
-        class="tw-flex tw-w-fit tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row"
+      <div
+        class="tw-mt-6 tw-flex tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-items-start"
       >
-        <li v-for="({ href }, which) in value" :key="which" class="tw-">
-          <v-img :src="href" aspect-ratio="1" cover width="120" />
-        </li>
-      </ul>
-      <div class="tw-ml-0 tw-list-item tw-list-none lg:tw-ml-8">
-        <v-img :src="globalImages.logo" width="140" aspect-ratio="0.72" />
+        <ul
+          class="tw-flex tw-w-fit tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row"
+        >
+          <li v-for="({ href }, which) in value" :key="which" class="tw-">
+            <v-img :src="href" aspect-ratio="1" cover width="120" />
+          </li>
+        </ul>
+        <div class="tw-ml-0 tw-list-item tw-list-none lg:tw-ml-8">
+          <v-img :src="globalImages.logo" width="140" aspect-ratio="0.72" />
+        </div>
       </div>
     </div>
-  </div>
+  </ui-layout>
 </template>
-<script></script>
+<script>
+import backStageMixins from '@topics-components/mixins/back-stage-comp-mixins';
+export default {
+  mixins: [backStageMixins]
+};
+</script>
 <script setup>
-const { value } = useAttrs();
+const { value } = getCurrentInstance().proxy;
 const { globalImages } = storeToRefs(useGlobalImagesStore());
 const accounts = computed(() =>
   value.reduce(
@@ -36,7 +41,6 @@ const accounts = computed(() =>
   )
 );
 </script>
-
 <style scoped>
 :deep(ul) {
   border: 2px solid #1eaa39;

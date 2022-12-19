@@ -53,7 +53,14 @@ export default (isDev, $appName) => {
             '@common-mixins/components': ['UiInput'],
             '@common-mixins/component-props': ['UiInputProps'],
             '@common-plugins/http': ['$http'],
-            '@common-plugins/bus': ['useBus']
+            '@common-plugins/bus': ['useBus'],
+            '@common-utils/vue-prop-type-and-default': [
+              'OBJECT',
+              'ARRAY',
+              'STRING',
+              'NUMBER',
+              'FUNCTION'
+            ]
           },
           appsConfig.autoImport.imports
         )

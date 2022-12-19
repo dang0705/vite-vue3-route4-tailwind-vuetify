@@ -1,74 +1,84 @@
 <template>
-  <div id="operate-button">
-    <ul
-      class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-justify-around"
-    >
-      <li
-        v-for="(
-          {
-            image = '',
-            style = {},
-            name = '',
-            operation: { type, href, steps } = {},
-            slot
-          },
-          which
-        ) in value"
-        :key="which"
-        :class="[
-          'tw-mt-6',
-          'lg:tw-mt-0',
-          'tw-w-4/5',
-          'tw-flex',
-          'tw-items-center',
-          'tw-rounded-4xl',
-          'tw-cursor-pointer'
-        ]"
-        :style="{
-          ...styleParsing(style),
-          flexBasis:
-            $device.device === 'PC'
-              ? (1 / value.length) * 100 - 6 + '%'
-              : 'unset'
-        }"
-        @click.passive="handleButtonClick(type, steps)"
+  <ui-layout :slot-name="slotName">
+    <div id="operate-button">
+      <ul
+        class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-justify-around"
       >
-        <component
-          :is="href ? 'a' : 'div'"
-          v-if="!slot"
-          :target="href ? '_blank' : ''"
-          :download="!!href"
-          :href="href || 'javascript:;'"
-          style="color: inherit"
-          class="tw-flex-shrink-0 tw-no-underline"
+        <li
+          v-for="(
+            {
+              image = '',
+              style = {},
+              name = '',
+              operation: { type, href, steps } = {},
+              slot
+            },
+            index
+          ) in value"
+          :key="index"
+          :class="[
+            'tw-mt-6',
+            'lg:tw-mt-0',
+            'tw-w-4/5',
+            'tw-flex',
+            'tw-items-center',
+            'tw-rounded-4xl',
+            'tw-cursor-pointer'
+          ]"
+          :style="{
+            ...styleParsing(style),
+            flexBasis:
+              $device.device === 'PC'
+                ? (1 / value.length) * 100 - 6 + '%'
+                : 'unset'
+          }"
+          @click.passive="handleButtonClick(type, steps)"
         >
-          {{ name }}
-          <img v-if="image" :src="image" width="100%" alt="" />
-        </component>
-        <slot
-          v-else
-          :name="`button-slot-${which + 1}`"
-          :style="{ image, ...style }"
-          :content="name"
-        />
-      </li>
-    </ul>
-    <v-dialog v-model="dialog" :max-width="400">
-      <v-card>
-        <v-toolbar color="primary" title="青梨派校级官方认证流程" />
-        <v-list lines="three">
-          <v-list-item v-for="item in progress" :key="item" :subtitle="item" />
-        </v-list>
-        <v-card-actions>
-          <v-btn color="primary" block @click="dialog = false"> 知道了 </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+          <component
+            :is="href ? 'a' : 'div'"
+            v-if="!slot"
+            :target="href ? '_blank' : ''"
+            :download="!!href"
+            :href="href || 'javascript:;'"
+            style="color: inherit"
+            class="tw-flex-shrink-0 tw-no-underline"
+          >
+            {{ name }}
+            <img v-if="image" :src="image" width="100%" alt="" />
+          </component>
+          <slot
+            v-else
+            :name="slotName({ index })"
+            :style="{ image, ...style }"
+            :content="name"
+          >
+            <ui-slot-default-content :name="slotName({ index })" />
+          </slot>
+        </li>
+      </ul>
+      <v-dialog v-model="dialog" :max-width="400">
+        <v-card>
+          <v-toolbar color="primary" title="青梨派校级官方认证流程" />
+          <v-list lines="three">
+            <v-list-item
+              v-for="item in progress"
+              :key="item"
+              :subtitle="item"
+            />
+          </v-list>
+          <v-card-actions>
+            <v-btn color="primary" block @click="dialog = false">
+              知道了
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+  </ui-layout>
 </template>
 
 <script>
-import backStageMixins from '@topics-components/mixins/back-stage-mixins';
+import backStageMixins from '@topics-components/mixins/back-stage-comp-mixins';
 export default {
   mixins: [backStageMixins]
 };

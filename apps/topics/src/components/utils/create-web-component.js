@@ -5,7 +5,8 @@ let slots = [];
 
 const createWebComponent = (templateStr) => {
   template.innerHTML = templateStr = escape2Html(templateStr);
-  template.innerHTML += '<style>*{margin: 0;padding: 0;}</style>';
+  template.innerHTML +=
+    '<style>*{margin: 0;padding: 0;} img{max-width: 100%;height: auto}</style>';
 
   class Template extends HTMLElement {
     constructor() {
