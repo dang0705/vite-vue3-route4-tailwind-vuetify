@@ -1,4 +1,1 @@
-export const homeSlots = [
-  /*'info-slot-1'*/
-  'info-slot-left'
-];
+export const homeSlots = ['info-slot-left', 'info-slot-right'];

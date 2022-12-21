@@ -1,8 +1,11 @@
 <template>
-  <div v-html="pageData.value" />
+  <ui-components
+    v-if="!indexComponents.slot"
+    :components="indexComponents.components"
+  />
 </template>
 
 <script setup>
-const $previewStore = useIsPreviewStore();
-const { pageData } = storeToRefs($previewStore);
+import UiComponents from '@topics-components/front-stage/ui-components.vue';
+const { indexComponents } = storeToRefs(useAsyncRoutesStore());
 </script>

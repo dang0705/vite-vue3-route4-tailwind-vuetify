@@ -4,10 +4,9 @@ module.exports = {
       '@topics-components/utils/create-web-component': [
         ['default', 'createWebComponent']
       ],
-      '@topics-store/device': ['useDeviceStore'],
-      '@topics-store/topic-name': ['useTopicNameStore'],
-      '@topics-store/async-routes': ['useAsyncRoutesStore'],
-      '@topics-store/global-images': ['useGlobalImagesStore'],
+      '@topics-store/device-store': ['useDeviceStore'],
+      '@topics-store/async-routes-store': ['useAsyncRoutesStore'],
+      '@topics-store/global-images-store': ['useGlobalImagesStore'],
       '@topics-store/preview-store': ['useIsPreviewStore'],
       '@topics-configs/topic-names': ['topicName']
     }

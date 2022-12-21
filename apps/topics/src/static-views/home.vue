@@ -31,13 +31,9 @@ import UiComponents from '@topics-components/front-stage/ui-components.vue';
 const components = ref([]);
 const banners = ref({});
 const homePageStyles = ref({});
-const $device = useDeviceStore();
-const $previewStore = useIsPreviewStore();
-const $slotsStore = useSlotsStore();
 const homeSlots = ref([]);
-const { device } = storeToRefs($device);
-const { isPreview } = storeToRefs($previewStore);
-const { homeBackendSlots } = storeToRefs($slotsStore);
+const { device } = storeToRefs(useDeviceStore());
+const { homeBackendSlots } = storeToRefs(useSlotsStore());
 const initHomePage = async () => {
   try {
     const {

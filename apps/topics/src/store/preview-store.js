@@ -1,4 +1,4 @@
-export const useIsPreviewStore = defineStore('preview-store', {
+export const useIsPreviewStore = defineStore('preview', {
   state: () => ({
     isPreview: null,
     pageData: {}

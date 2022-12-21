@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 import { domain } from '@common-utils/api-domain';
-// import isAbsoluteUrlPath from '@quick/utils/regular/usage/is-absolute-url-path';
 const timestamp = new Date().getTime();
 const requestFile = `/env.json?t=${timestamp}`;
 let domains = {};
@@ -11,6 +10,7 @@ const setUrl = (config) =>
     : (domains[domain] || '') + config.baseURL + config.url);
 
 export default (config) =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (res, rej) => {
     if (domains[domain]) {
       setUrl(config);

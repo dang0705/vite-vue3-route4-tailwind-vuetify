@@ -4,15 +4,9 @@
     v-for="{ key, value } in components"
     :key="key"
     :slots="slots"
-    :component-key="camelCase2KebabCase(key)"
+    :component-key="c2k(key)"
     :value="value"
-    :class="[
-      'tw-mx-auto',
-      'tw-flex',
-      'tw-flex-col',
-      'tw-mb-8',
-      camelCase2KebabCase(key)
-    ]"
+    :class="['tw-mx-auto', 'tw-flex', 'tw-flex-col', 'tw-mb-8', c2k(key)]"
   >
     <template v-for="slotName in slots" :key="slotName" #[slotName]="slotData">
       <!--          所有专题各组件的集中定制-->
@@ -27,7 +21,7 @@
 </template>
 
 <script setup>
-import camelCase2KebabCase from '@common-utils/camelCase-2-kebab-case';
+import c2k from '@common-utils/camelCase-2-kebab-case';
 
 defineProps({
   components: ARRAY(),

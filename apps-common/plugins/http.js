@@ -6,6 +6,8 @@ import { isDev, baseURL, statusCodes } from '@common-config';
 import { useIsPreviewStore } from '@topics-store/preview-store';
 import isQinglipai from '@common-utils/is-qinglipai';
 import { storeToRefs } from 'pinia';
+
+let gotEnv = false;
 const http = axios.create({
   baseURL,
   headers: {
@@ -25,11 +27,13 @@ const errorHandler = ({ msg, code }) => useBus.emit('err', msg, code);
 
 http.interceptors.request.use(
   async (config) => {
-    if (!isDev) {
+    if (!isDev && !gotEnv) {
       try {
         await env(config);
       } catch (e) {
         useBus.emit('on-error', httpErrorMessage.noEnvJson);
+      } finally {
+        gotEnv = true;
       }
     }
     const $previewStore = useIsPreviewStore();

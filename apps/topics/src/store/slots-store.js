@@ -1,4 +1,4 @@
-export const useSlotsStore = defineStore('slots-store', {
+export const useSlotsStore = defineStore('slots', {
   state: () => ({
     slots: {
       home: [],

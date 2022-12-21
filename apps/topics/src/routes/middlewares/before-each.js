@@ -37,7 +37,7 @@ export default async function () {
     } else {
       // 内页动态路由数据获取
       if (name !== 'index') {
-        console.log(name);
+        await $asyncRoutes.getIndexRouteConfiguration(type, name);
         next();
       } else {
         next();

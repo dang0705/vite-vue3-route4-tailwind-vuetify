@@ -1,6 +1,6 @@
 <template>
   <v-app :class="[appClassName]" v-resize="debounce(onResize, 100)">
-    <v-app-bar flat :density="styleDependOnDevice.appBarDensity">
+    <v-app-bar flat :density="styleDependOnDevice.appBarDensity" ref="app-bar">
       <template #prepend>
         <v-img
           :src="globalImages.top"
@@ -9,7 +9,7 @@
         />
       </template>
     </v-app-bar>
-    <v-main scrollable tag="div">
+    <v-main scrollable tag="div" class="main">
       <router-view />
     </v-main>
     <v-overlay
