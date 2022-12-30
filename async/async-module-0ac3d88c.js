@@ -1,0 +1,1 @@
+const n=["width","height","maxWidth","maxHeight","borderRadius"],r=e=>{const o={};for(let t in e)o[t]=e[t]+(n.includes(t)?"px":""),t==="backgroundImage"&&e[t]&&(o[t]=`url(${e[t]})`);return o},a=e=>({...r(e),backgroundRepeat:"no-repeat",backgroundPosition:"left top"});export{a as s};

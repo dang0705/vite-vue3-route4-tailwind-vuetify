@@ -1,1 +1,0 @@
-System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/m-1-banner-d56d3059.jpg")}}}));

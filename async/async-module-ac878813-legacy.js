@@ -1,0 +1,1 @@
+System.register([],(function(t){"use strict";return{execute:function(t,e){t("h",{props:{slots:{type:Array,default:function(){return[]}},slotName:{type:String,default:""},content:{type:String,default:""},style:{type:Object,default:function(){return{}}}}})}}}));

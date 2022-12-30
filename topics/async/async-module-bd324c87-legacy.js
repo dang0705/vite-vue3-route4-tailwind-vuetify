@@ -1,1 +1,0 @@
-System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/leader-plan-bg-6f7ae622.png")}}}));

@@ -1,1 +1,0 @@
-System.register([],(function(e){"use strict";return{execute:function(e,t){e("default","/topic/assets/banner-2-6455ef2e.png")}}}));

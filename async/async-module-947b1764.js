@@ -1,0 +1,1 @@
+import"./async-module-67e99e1b.js";import{_ as t}from"./async-module-5169b6e6.js";import{Z as e,a4 as o}from"./async-module-41637851.js";const r={name:"test2"};function s(n,a,c,p,_,m){return e(),o("p",null,"test2")}const u=t(r,[["render",s]]);export{u as default};

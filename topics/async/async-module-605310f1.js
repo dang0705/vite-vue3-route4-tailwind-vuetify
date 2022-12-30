@@ -1,1 +1,0 @@
-const s=["width","height","maxWidth","maxHeight","borderRadius"],i=t=>{const o={};for(let e in t)o[e]=t[e]+(s.includes(e)?"px":"");return o},n=t=>({...i(t),backgroundRepeat:"no-repeat",backgroundPosition:"left top"});export{n as s};

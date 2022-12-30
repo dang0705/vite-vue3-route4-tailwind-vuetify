@@ -1,1 +1,0 @@
-System.register([],(function(t){"use strict";return{execute:function(t,e){t("default","/topic/assets/check-auth-82ac20c3.png")}}}));

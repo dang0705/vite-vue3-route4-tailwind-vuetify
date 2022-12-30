@@ -1,1 +1,0 @@
-System.register([],(function(t){"use strict";return{execute:function(t,e){t("default","/topic/assets/m-2-95090da7.png")}}}));

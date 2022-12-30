@@ -1,0 +1,1 @@
+import{d as t}from"./async-module-a32d81cd.js";const d=t("slots",{state:()=>({slots:{home:[],index:[]}}),getters:{homeBackendSlots:({slots:s})=>s.home},actions:{addSlot(s,o){this.slots[o==="home"?o:"index"].push(s)}}});export{d as u};

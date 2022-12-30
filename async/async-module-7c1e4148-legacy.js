@@ -1,0 +1,1 @@
+System.register(["./async-module-b01d7f75-legacy.js"],(function(t){"use strict";var e;return{setters:[function(t){e=t.d}],execute:function(t,s){t("u",e("slots",{state:function(){return{slots:{home:[],index:[]}}},getters:{homeBackendSlots:function(t){return t.slots.home}},actions:{addSlot:function(t,e){this.slots["home"===e?e:"index"].push(t)}}}))}}}));
