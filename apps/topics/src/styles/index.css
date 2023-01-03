@@ -1,4 +1,5 @@
 @import '@common/styles/vendors/taiwind.css';
 @import 'layouts/index.css';
+@import 'global/index.css';
 @import 'home.css';
 @import 'components/index.css';

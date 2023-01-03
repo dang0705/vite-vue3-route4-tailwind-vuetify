@@ -2,7 +2,6 @@ import { base } from '@topics/configs/get-router-base';
 import initRouter from '@common-routes';
 import beforeEach from '@topics-routes/middlewares/before-each';
 import afterEach from '@topics-routes/middlewares/after-each';
-import previewListener from '@topics-routes/middlewares/preview-listener';
 const customHomePages = import.meta.glob('/src/custom-extends/**/home.vue');
 
 const homeRoute = {

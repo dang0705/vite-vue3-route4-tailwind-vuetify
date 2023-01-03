@@ -1,34 +1,41 @@
 <template>
-  <div class="topic-target-and-line tw-flex tw-items-center tw-justify-center">
-    <div v-if="$slots[slotName({ dir: 'left' })]">
-      <slot :name="[slotName({ dir: 'left' })]" />
-    </div>
-    <div class="tw-w-full tw-max-w-3xl tw-flex-col">
-      <div v-if="$slots[[slotName({ dir: 'top' })]]">
-        <slot :name="[slotName({ dir: 'top' })]" />
+  <ui-layout :slot-name="slotName" :slots="slots" :slot-suffix="slotSuffix">
+    <template v-for="(_, name) in $slots" #[name]="slotData" :key="name">
+      <slot :name="name" v-bind="slotData" />
+    </template>
+    <div
+      class="topic-target-and-line tw-flex tw-items-center tw-justify-center"
+    >
+      <div v-if="$slots[slotName({ dir: 'left' })]">
+        <slot :name="[slotName({ dir: 'left' })]" />
       </div>
-      <web-steps>
-        <div
-          v-for="({ content }, index) in slots"
-          :slot="`slot-${index + 1}`"
-          :key="index"
-        >
-          <slot :name="slotName({ index })" :content="content">
-            <ui-slot-default-content
-              :name="slotName({ index })"
-              :content="content"
-            />
-          </slot>
+      <div class="tw-w-full tw-max-w-3xl tw-flex-col">
+        <div v-if="$slots[[slotName({ dir: 'top' })]]">
+          <slot :name="[slotName({ dir: 'top' })]" />
         </div>
-      </web-steps>
-      <div v-if="$slots[[slotName({ dir: 'bottom' })]]">
-        <slot :name="[slotName({ dir: 'bottom' })]" />
+        <web-steps>
+          <div
+            v-for="({ content }, index) in slots"
+            :slot="`slot-${index + 1}`"
+            :key="index"
+          >
+            <slot :name="slotName({ index })" :content="content">
+              <ui-slot-default-content
+                :name="slotName({ index })"
+                :content="content"
+              />
+            </slot>
+          </div>
+        </web-steps>
+        <div v-if="$slots[[slotName({ dir: 'bottom' })]]">
+          <slot :name="[slotName({ dir: 'bottom' })]" />
+        </div>
+      </div>
+      <div v-if="$slots[[slotName({ dir: 'right' })]]">
+        <slot :name="[slotName({ dir: 'right' })]" />
       </div>
     </div>
-    <div v-if="$slots[[slotName({ dir: 'right' })]]">
-      <slot :name="[slotName({ dir: 'right' })]" />
-    </div>
-  </div>
+  </ui-layout>
 </template>
 <script>
 import backStageMixins from '@topics-components/mixins/back-stage-comp-mixins';

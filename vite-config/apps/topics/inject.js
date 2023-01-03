@@ -1,1 +1,1 @@
-module.exports = '<script src="./inject.js"></script>';
+module.exports = (base) => `<script src="/${base}/inject.js"></script>`;

@@ -1,13 +1,26 @@
 <template>
   <div
-    class="topic-layout tw-relative tw-flex tw-w-full !tw-flex-row tw-items-center tw-justify-center"
+    class="topic-layout tw-relative tw-flex tw-w-full tw-items-center tw-justify-center lg:tw-flex-row"
   >
     <!--    左插槽-->
-    <slot v-if="hasDirSlot('left')" :name="leftSlot" class="left">
+    <slot
+      v-if="hasDirSlot('left')"
+      :name="leftSlot"
+      class="topic-layout-slot topic-layout-slot_left tw-w-full lg:tw-w-fit"
+    >
       <ui-slot-default-content :name="leftSlot" />
     </slot>
 
-    <div class="tw-flex tw-w-full tw-flex-col tw-justify-center">
+    <div
+      :class="[
+        'topic-backend-component',
+        'tw-flex',
+        'tw-flex-col',
+        'tw-justify-center',
+        'tw-w-full',
+        { '!tw-w-fit': fit }
+      ]"
+    >
       <!--    上插槽-->
       <slot v-if="hasDirSlot('top')" :name="topSlot">
         <ui-slot-default-content :name="topSlot" />
@@ -21,7 +34,11 @@
     </div>
 
     <!--    右插槽-->
-    <slot v-if="hasDirSlot('right')" :name="rightSlot" class="right">
+    <slot
+      v-if="hasDirSlot('right')"
+      :name="rightSlot"
+      class="topic-layout-slot topic-layout-slot_right tw-w-full lg:tw-w-fit"
+    >
       <ui-slot-default-content :name="rightSlot" />
     </slot>
   </div>
@@ -31,7 +48,8 @@
 import UiSlotDefaultContent from '@topics-components/front-stage/ui-slot-default-content.vue';
 const props = defineProps({
   slotName: FUNCTION(),
-  slots: ARRAY()
+  slots: ARRAY(),
+  fit: BOOLEAN()
 });
 const leftSlot = props.slotName({ dir: 'left' });
 const topSlot = props.slotName({ dir: 'top' });

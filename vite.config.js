@@ -7,6 +7,7 @@ import build from './vite-config/build';
 import deepmerge from 'deepmerge';
 import { isBuildLocal } from './vite-config/env';
 
+const base = 'topic';
 export default defineConfig(async ({ mode }) => {
   let appConfigs = () => {};
   const $isDev = mode === 'development';
@@ -17,7 +18,7 @@ export default defineConfig(async ({ mode }) => {
   }
   const commonConfigs = {
     build: build($appName),
-    base: $isDev ? '/' : 'topic',
+    base: $isDev ? '/' : base,
     css: {
       preprocessorOptions: {
         scss: {
@@ -33,7 +34,7 @@ export default defineConfig(async ({ mode }) => {
       $isDev,
       isBuildLocal
     },
-    plugins: plugins($isDev, $appName),
+    plugins: plugins($isDev, $appName, base),
     preview: {
       port: 8686
     },

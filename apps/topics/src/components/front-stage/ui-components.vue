@@ -11,7 +11,7 @@
     <template v-for="slotName in slots" :key="slotName" #[slotName]="slotData">
       <!--          所有专题各组件的集中定制-->
       <component
-        :is="slots.length ? slotsName : ''"
+        :is="slots?.length ? slotsName : ''"
         :slot-name="slotName"
         :slots="slots"
         v-bind="slotData"

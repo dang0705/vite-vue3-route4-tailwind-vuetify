@@ -1,6 +1,6 @@
 <template>
-  <v-select v-if="slotName === 'info-slot-left'" :class="$attrs.class" />
-  <v-text-field v-if="slotName === 'info-slot-right'" :class="$attrs.class" />
+  <v-select v-if="slotName === 'target-slot-left'" :class="$attrs.class" />
+  <v-text-field v-if="slotName === 'target-slot-right'" :class="$attrs.class" />
 </template>
 
 <script>

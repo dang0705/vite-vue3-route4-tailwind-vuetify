@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="tw-color tw-bg-white md:tw-bg-trans tw-fixed tw-bottom-0 tw-left-0 tw-flex tw-w-full tw-items-center tw-shadow md:tw-static md:tw-shadow-none lg:tw-w-fit"
+    class="tw-color tw-fixed tw-bottom-0 tw-left-0 tw-flex tw-w-full tw-items-center tw-bg-white tw-shadow md:tw-static md:tw-bg-trans md:tw-shadow-none lg:tw-w-fit"
   >
     <router-link
       v-for="{ name } in currentTabs"
@@ -43,8 +43,8 @@
         @click="navigate"
       >
         <img
-          v-if="icon && device === 'H5'"
-          :src="icon"
+          v-if="device === 'H5'"
+          :src="name === 'home' ? globalImages.home : icon"
           alt=""
           style="width: 20px; height: 20px"
         />
@@ -56,6 +56,7 @@
 
 <script setup>
 const $deviceStore = useDeviceStore();
+const { globalImages } = storeToRefs(useGlobalImagesStore());
 const { device } = storeToRefs($deviceStore);
 const {
   options: { routes }

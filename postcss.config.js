@@ -7,6 +7,17 @@ module.exports = {
     },
     'tailwindcss/nesting': {},
     tailwindcss: {},
-    ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
+    ...(process.env.NODE_ENV === 'production'
+      ? {
+          cssnano: {
+            preset: [
+              'default',
+              {
+                mergeLonghand: false /*fix the bugs*/
+              }
+            ]
+          }
+        }
+      : {})
   }
 };

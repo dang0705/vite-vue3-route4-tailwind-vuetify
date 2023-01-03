@@ -7,7 +7,7 @@ import deepmerge from 'deepmerge';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
-export default (isDev, $appName) => {
+export default (isDev, $appName, base) => {
   let appsConfig = {};
   let injectScript = '';
   try {
@@ -26,7 +26,7 @@ export default (isDev, $appName) => {
     createHtmlPlugin({
       minify: !isDev,
       inject: {
-        data: { title: '青梨派', injectScript: isDev ? '' : injectScript }
+        data: { title: '青梨派', injectScript: isDev ? '' : injectScript(base) }
       }
     }),
     vuetify({
@@ -55,6 +55,7 @@ export default (isDev, $appName) => {
             '@common-plugins/http': ['$http'],
             '@common-plugins/bus': ['useBus'],
             '@common-utils/vue-prop-type-and-default': [
+              'BOOLEAN',
               'OBJECT',
               'ARRAY',
               'STRING',

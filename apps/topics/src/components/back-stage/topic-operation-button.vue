@@ -19,18 +19,20 @@
           :class="[
             'tw-mt-6',
             'lg:tw-mt-0',
-            'tw-w-4/5',
+            'tw-w-full',
             'tw-flex',
             'tw-items-center',
             'tw-rounded-4xl',
-            'tw-cursor-pointer'
+            'tw-cursor-pointer',
+            'tw-max-w-xs',
+            'md:tw-max-w-sm',
+            {
+              'tw-mx-3':
+                $device.device === 'PC' && index && index < value.length - 1
+            }
           ]"
           :style="{
-            ...styleParsing(style),
-            flexBasis:
-              $device.device === 'PC'
-                ? (1 / value.length) * 100 - 6 + '%'
-                : 'unset'
+            ...styleParsing(style)
           }"
           @click.passive="handleButtonClick(type, steps)"
         >

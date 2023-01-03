@@ -7,11 +7,7 @@ export default async function () {
   const { name, params, fullPath, matched } = to;
 
   const $asyncRoutes = useAsyncRoutesStore();
-  const $previewStore = useIsPreviewStore();
   const { currentRoutes, indexType } = storeToRefs($asyncRoutes);
-
-  $previewStore.isPreview === null &&
-    ($previewStore.isPreview = isDev ? switchWhetherIsPreview : self !== top);
 
   const isEnterIndexRoute =
     matched?.[0]?.name === 'index' || fullPath.includes('index');
@@ -45,7 +41,6 @@ export default async function () {
     }
   } else {
     // 常规的业务逻辑处理
-
     next();
   }
 }

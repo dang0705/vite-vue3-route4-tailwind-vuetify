@@ -10,7 +10,7 @@
       :aspect-ratio="device === 'H5' ? 2.5 : 3.2"
     />
     <div
-      v-if="components.length"
+      v-if="components?.length"
       class="tw-w-full tw-px-6 tw-py-8 md:tw-px-12 lg:tw-px-24 xl:tw-px-32"
     >
       <ui-components

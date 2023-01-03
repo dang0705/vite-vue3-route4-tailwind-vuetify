@@ -1,5 +1,8 @@
 <template>
-  <ui-layout :slot-name="slotName">
+  <ui-layout :slot-name="slotName" :slots="slots" :slot-suffix="slotSuffix" fit>
+    <template v-for="(_, name) in $slots" #[name]="slotData" :key="name">
+      <slot :name="name" v-bind="slotData" />
+    </template>
     <web-template>
       <div
         v-for="({ content }, index) in slots"
