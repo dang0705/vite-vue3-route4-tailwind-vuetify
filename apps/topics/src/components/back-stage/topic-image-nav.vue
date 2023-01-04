@@ -1,7 +1,7 @@
 <template>
   <ui-layout>
     <div
-      class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row lg:tw-justify-between"
+      class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row"
     >
       <a
         v-for="({ href, clickable }, which) in value"
@@ -15,15 +15,9 @@
           }
         ]"
         href="javascript:;"
-        :style="{
-          flexBasis:
-            device !== 'H5'
-              ? `calc(${(1 / (value.length + 0.1)) * 100}%)`
-              : '60%'
-        }"
         @click.passive="handleNav(which, clickable)"
       >
-        <v-img :src="href" />
+        <v-img :src="href" max-height="240" />
       </a>
     </div>
   </ui-layout>

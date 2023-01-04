@@ -14,7 +14,7 @@
         <ul
           class="tw-flex tw-w-fit tw-flex-col tw-items-center tw-justify-center lg:tw-flex-row"
         >
-          <li v-for="({ href }, which) in value" :key="which" class="tw-">
+          <li v-for="({ href }, which) in value" :key="which">
             <v-img :src="href" aspect-ratio="1" cover width="120" />
           </li>
         </ul>
