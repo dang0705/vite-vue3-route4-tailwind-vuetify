@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
+    requireConfigFile: false, // 不强制要求babel.config
     parser: '@babel/eslint-parser',
     ecmaVersion: 'latest',
     sourceType: 'module',

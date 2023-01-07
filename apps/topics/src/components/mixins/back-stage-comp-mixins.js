@@ -9,6 +9,7 @@ export default {
     componentKey: STRING()
   },
   components: { UiSlotDefaultContent, UiLayout },
+
   data() {
     const { name } = this.$route;
     return {

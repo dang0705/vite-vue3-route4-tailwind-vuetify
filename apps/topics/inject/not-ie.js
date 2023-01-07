@@ -1,5 +1,4 @@
-var isIE =
-  typeof navigator !== 'undefined' &&
+var isIE = typeof navigator !== 'undefined' &&
   (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
 isIE &&
   document.write(
