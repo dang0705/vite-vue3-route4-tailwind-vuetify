@@ -17,7 +17,7 @@ export default (appName) => ({
   emptyOutDir: true,
   rollupOptions: {
     output: {
-      compact: true,
+      // compact: true,
       assetFileNames: ({ name }) => {
         const ext = getFileExt(name);
         let path = ext === 'css' ? ext : 'assets';
@@ -42,8 +42,16 @@ export default (appName) => ({
       copy({
         targets: [
           {
-            src: `./apps/${appName}/inject.js`,
-            dest: `./dist/${appName}`
+            src: `./apps/${appName}/inject/not-ie.js`,
+            dest: `./dist/${appName}/async/inject`
+          },
+          {
+            src: `./apps/${appName}/inject/webcomponents-loader.js`,
+            dest: `./dist/${appName}/async/inject`
+          },
+          {
+            src: `./apps/${appName}/inject/bundles/**/*`,
+            dest: `./dist/${appName}/async/inject/bundles`
           }
         ],
         hook: 'writeBundle'

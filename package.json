@@ -12,11 +12,11 @@
   ],
   "scripts": {
     "app-topics:dev": "vite -- topics",
-    "app-topics:prod": "terser ./apps/topics/inject/not-ie.js ./apps/topics/inject/webcomponents-loader.js -c -m --ecma5 && vite build -- topics",
-    "build & preview--topics": "terser ./apps/topics/inject/not-ie.js ./apps/topics/inject/webcomponents-loader.js -c -m -o ./apps/topics/inject/inject.min.js --ecma5 && vite build -- topics && npx vite preview -- topics",
-    "build-local & preview--topics": "terser ./apps/topics/inject/not-ie.js ./apps/topics/inject/webcomponents-loader.js -c -m --ecma5 && vite build -- build-local -- topics && npx vite preview -- topics",
+    "app-topics:prod": "vite build -- topics",
+    "build & preview--topics": "vite build -- topics && npx vite preview -- topics",
+    "build-local & preview--topics": "vite build -- build-local -- topics && npx vite preview -- topics",
     "preview--topics": "npx vite preview -- topics",
-    "topics-deploy": "node ./scripts/deploy.mjs"
+    "topics-deploy": "node ./scripts/publish.mjs"
   },
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^2.7.0",
@@ -63,6 +63,7 @@
     "prettier-plugin-tailwindcss": "^0.1.13",
     "rollup-plugin-copy": "^3.4.0",
     "sass": "^1.56.1",
+    "shelljs": "^0.8.5",
     "tailwindcss": "^3.2.4",
     "terser": "^5.16.1",
     "vite": "^4.0.4",
