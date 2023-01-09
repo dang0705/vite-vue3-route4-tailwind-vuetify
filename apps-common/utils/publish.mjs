@@ -7,7 +7,7 @@ const getCurrentBranch = () =>
   execa('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
 const getCurrentSourceCodeHash = (currentSourceBranch) =>
   execa('git', ['rev-parse', '--short', currentSourceBranch]);
-const publish = async ({ release, master, repo }) => {
+const publish = async ({ release, master, repo, npmScript, customScript }) => {
   const { stdout: currentSourceBranch } = await getCurrentBranch();
 
   if (master && master !== currentSourceBranch) {
@@ -32,11 +32,12 @@ const publish = async ({ release, master, repo }) => {
     `origin/${release}`
   ]);
   execaSync('rm', ['-rf', `build/${release}/*`]);
-  const { stdout: bundleStatus } = await execa('npm', [
-    'run',
-    'app-topics:prod'
-  ]);
-  console.log(bundleStatus);
+  if (customScript) {
+    await customScript();
+  } else {
+    const { stdout: bundleStatus } = await execa('npm', ['run', npmScript]);
+    console.log(bundleStatus);
+  }
 
   execaSync('cp', ['-rf', 'dist/topics/*', `build/${release}`]);
 
@@ -62,9 +63,15 @@ const publish = async ({ release, master, repo }) => {
 
   spinner.succeed('代码推送成功');
 };
-export default function ({ release = 'release', master = 'master', repo }) {
+export default function ({
+  release = 'release',
+  master = 'master',
+  repo,
+  npmScript,
+  customScript = () => {}
+}) {
   if (typeof release === 'string') {
-    publish({ release, master, repo });
+    publish({ release, master, repo, npmScript, customScript });
     return;
   }
   const branches = [];
@@ -83,7 +90,13 @@ export default function ({ release = 'release', master = 'master', repo }) {
   r1.question('请选择一个构建分支（序号）：\t', async (answer) => {
     selectedBuildBranch = release[answer];
     console.log('您选择了：', release[answer] + '分支');
-    await publish({ release: release[answer], master, repo });
+    await publish({
+      release: release[answer],
+      master,
+      repo,
+      npmScript,
+      customScript
+    });
     r1.close();
   });
 }
