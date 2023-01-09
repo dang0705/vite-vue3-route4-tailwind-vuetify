@@ -7,6 +7,7 @@ const getCurrentBranch = () =>
   execa('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
 const getCurrentSourceCodeHash = (currentSourceBranch) =>
   execa('git', ['rev-parse', '--short', currentSourceBranch]);
+
 const publish = async ({
   release,
   master,
@@ -16,14 +17,17 @@ const publish = async ({
   debug
 }) => {
   const { stdout: currentSourceBranch } = await getCurrentBranch();
-
+  const cleanWorktree = () => {
+    execaSync('git', ['worktree', 'remove', '-f', release]);
+    execaSync('git', ['worktree', 'prune']);
+  };
   if (master && master !== currentSourceBranch) {
     execaSync('echo', [`请切换到 ${master} 分支进行打包。`]);
     execaSync('exit', [1]);
     return;
   }
 
-  const spinner = ora('开始打包部署...').start();
+  const spinner = ora(`${debug ? '开始调试...' : '开始打包部署...'}`).start();
 
   execaSync('rm', ['-rf', 'build']);
   execaSync('git', ['worktree', 'prune']);
@@ -39,8 +43,6 @@ const publish = async ({
     `origin/${release}`
   ]);
 
-  execaSync('rm', ['-rf', `build/${release}/*`]);
-
   if (customScript) {
     await customScript();
   } else {
@@ -54,6 +56,7 @@ const publish = async ({
 
   if (debug) {
     spinner.succeed('调试完成');
+    cleanWorktree();
     return;
   }
 
@@ -74,7 +77,7 @@ const publish = async ({
   ['push', '-f', '--set-upstream', 'origin', release]);
 
   console.log(publishStatus);
-
+  cleanWorktree();
   spinner.succeed('代码推送成功');
 };
 export default function ({
@@ -83,7 +86,7 @@ export default function ({
   debug = false,
   repo,
   npmScript,
-  customScript = () => {}
+  customScript = null
 }) {
   console.log(arguments);
   if (typeof release === 'string') {

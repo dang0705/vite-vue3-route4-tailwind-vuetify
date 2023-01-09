@@ -11,12 +11,17 @@
     "not dead"
   ],
   "scripts": {
-    "app-topics:dev": "vite -- topics",
-    "app-topics:prod": "vite build -- topics",
-    "build & preview--topics": "vite build -- topics && npx vite preview -- topics",
-    "build-local & preview--topics": "vite build -- build-local -- topics && npx vite preview -- topics",
-    "preview--topics": "npx vite preview -- topics",
-    "topics-deploy": "node ./scripts/publish.mjs"
+    "app-topic-front-stage:dev": "vite -- topic-front-stage",
+    "app-topic-front-stage:prod": "vite build -- topic-front-stage",
+    "build & preview--topic-front-stage": "vite build -- topic-front-stage && npx vite preview -- topic-front-stage",
+    "build-local & preview--topic-front-stage": "vite build -- build-local -- topic-front-stage && npx vite preview -- topic-front-stage",
+    "preview--topic-front-stage": "npx vite preview -- topic-front-stage",
+    "app-topic-back-stage:dev": "vite -- topic-back-stage",
+    "app-topic-back-stage:prod": "vite build -- topic-back-stage",
+    "build & preview--topic-back-stage": "vite build -- topic-back-stage && npx vite preview -- topic-back-stage",
+    "build-local & preview--topic-back-stage": "vite build -- build-local -- topic-back-stage && npx vite preview -- topic-back-stage",
+    "preview--topic-back-stage": "npx vite preview -- topic-back-stage",
+    "publish": "node ./scripts/publish.mjs"
   },
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^2.7.0",
