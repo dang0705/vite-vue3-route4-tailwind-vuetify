@@ -13,6 +13,7 @@ const publish = async ({ release, master, repo }) => {
   if (master && master !== currentSourceBranch) {
     execaSync('echo', [`请切换到 ${master} 分支进行打包。`]);
     execaSync('exit', [1]);
+    return;
   }
 
   const spinner = ora('开始打包部署...').start();
@@ -78,10 +79,11 @@ export default function ({ release = 'release', master = 'master', repo }) {
   let selectedBuildBranch = '';
 
   console.log('所有的构建分支：\n' + branches.join('\n'));
+
   r1.question('请选择一个构建分支（序号）：\t', async (answer) => {
     selectedBuildBranch = release[answer];
     console.log('您选择了：', release[answer] + '分支');
-    await publish(arguments);
+    await publish({ release: release[answer], master, repo });
     r1.close();
   });
 }
