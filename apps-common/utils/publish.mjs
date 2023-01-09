@@ -7,7 +7,14 @@ const getCurrentBranch = () =>
   execa('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
 const getCurrentSourceCodeHash = (currentSourceBranch) =>
   execa('git', ['rev-parse', '--short', currentSourceBranch]);
-const publish = async ({ release, master, repo, npmScript, customScript }) => {
+const publish = async ({
+  release,
+  master,
+  repo,
+  npmScript,
+  customScript,
+  debug
+}) => {
   const { stdout: currentSourceBranch } = await getCurrentBranch();
 
   if (master && master !== currentSourceBranch) {
@@ -22,7 +29,7 @@ const publish = async ({ release, master, repo, npmScript, customScript }) => {
   execaSync('git', ['worktree', 'prune']);
   execaSync('mkdir', ['build']);
   execaSync('git', ['clone', '--bare', repo, 'build/.bare']);
-  execaSync('echo', ['"gitdir: ./.bare" > build/.git']);
+  // execaSync('echo', ['"gitdir: ./.bare" > build/.git']);
   execaSync('git', [
     'worktree',
     'add',
@@ -31,7 +38,9 @@ const publish = async ({ release, master, repo, npmScript, customScript }) => {
     `build/${release}`,
     `origin/${release}`
   ]);
+
   execaSync('rm', ['-rf', `build/${release}/*`]);
+
   if (customScript) {
     await customScript();
   } else {
@@ -42,6 +51,11 @@ const publish = async ({ release, master, repo, npmScript, customScript }) => {
   execaSync('cp', ['-rf', 'dist/topics/*', `build/${release}`]);
 
   chdir(`build/${release}`);
+
+  if (debug) {
+    spinner.succeed('调试完成');
+    return;
+  }
 
   const { stdout: currentTargetBranch } = await getCurrentBranch();
 
@@ -66,36 +80,36 @@ const publish = async ({ release, master, repo, npmScript, customScript }) => {
 export default function ({
   release = 'release',
   master = 'master',
+  debug = false,
   repo,
   npmScript,
   customScript = () => {}
 }) {
+  console.log(arguments);
   if (typeof release === 'string') {
-    publish({ release, master, repo, npmScript, customScript });
+    publish({ release, master, repo, npmScript, customScript, debug });
     return;
   }
   const branches = [];
   for (const index in release) {
-    branches.push(`${index}.${release[index]}`);
+    branches.push(`${index}.${release[index].branch}`);
   }
 
   let r1 = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
-  let selectedBuildBranch = '';
-
   console.log('所有的构建分支：\n' + branches.join('\n'));
 
   r1.question('请选择一个构建分支（序号）：\t', async (answer) => {
-    selectedBuildBranch = release[answer];
     console.log('您选择了：', release[answer] + '分支');
     await publish({
-      release: release[answer],
+      release: release[answer].branch,
       master,
       repo,
-      npmScript,
-      customScript
+      npmScript: release[answer].npmScript,
+      customScript,
+      debug
     });
     r1.close();
   });
