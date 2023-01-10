@@ -19,7 +19,13 @@ module.exports = {
   plugins: ['vue', 'jsx'],
   // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
   // consider switching to `asyncPlugin:Vue/essential` or `asyncPlugin:Vue/recommended` for stricter rules.
-  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
+  extends: [
+    'plugin:vue/vue3-recommended',
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    'prettier',
+    'plugin:vuetify/base'
+  ],
   // add your custom rules here
   rules: {
     // allow debugger during development

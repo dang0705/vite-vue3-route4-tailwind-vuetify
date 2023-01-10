@@ -1,7 +1,11 @@
 import { execaSync, execa } from 'execa';
-import { chdir } from 'node:process';
+import { chdir, cwd } from 'node:process';
 import readline from 'node:readline';
+import { stat } from 'node:fs/promises';
+import path from 'node:path';
 import ora from 'ora';
+
+const __dirName = path.resolve();
 
 const getCurrentBranch = () =>
   execa('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
@@ -29,19 +33,27 @@ const publish = async ({
 
   const spinner = ora(`${debug ? '开始调试...' : '开始打包部署...'}`).start();
 
-  execaSync('rm', ['-rf', 'build']);
   execaSync('git', ['worktree', 'prune']);
-  execaSync('mkdir', ['build']);
-  execaSync('git', ['clone', '--bare', repo, 'build/.bare']);
+
+  try {
+    await stat(path.join(__dirName, 'build'));
+    chdir(`build/${release}`);
+    execaSync('rm', ['-rf', '*']);
+    chdir(__dirName);
+  } catch (e) {
+    console.log(e);
+    execaSync('mkdir', ['build']);
+    execaSync('git', [
+      'worktree',
+      'add',
+      '-B',
+      release,
+      `build/${release}`,
+      `origin/${release}`
+    ]);
+  }
+  // execaSync('git', ['clone', '--bare', repo, 'build/.bare']);
   // execaSync('echo', ['"gitdir: ./.bare" > build/.git']);
-  execaSync('git', [
-    'worktree',
-    'add',
-    '-B',
-    release,
-    `build/${release}`,
-    `origin/${release}`
-  ]);
 
   if (customScript) {
     await customScript();
@@ -50,13 +62,12 @@ const publish = async ({
     console.log(bundleStatus);
   }
 
-  execaSync('cp', ['-rf', 'dist/topics/*', `build/${release}`]);
+  execaSync('cp', ['-rf', 'dist/topic-front-stage/*', `build/${release}`]);
 
   chdir(`build/${release}`);
 
   if (debug) {
     spinner.succeed('调试完成');
-    cleanWorktree();
     return;
   }
 
@@ -77,7 +88,6 @@ const publish = async ({
   ['push', '-f', '--set-upstream', 'origin', release]);
 
   console.log(publishStatus);
-  cleanWorktree();
   spinner.succeed('代码推送成功');
 };
 export default function ({

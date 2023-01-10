@@ -1,3 +1,5 @@
-<template>$END$</template>
+<template>
+  <detail-view></detail-view>
+</template>
 
-<script setup></script>
+<script></script>
