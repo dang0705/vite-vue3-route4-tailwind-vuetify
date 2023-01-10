@@ -4,6 +4,7 @@ import readline from 'node:readline';
 import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import ora from 'ora';
+import chalk from 'chalk';
 
 const __dirName = path.resolve();
 
@@ -11,6 +12,10 @@ const getCurrentBranch = () =>
   execa('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
 const getCurrentSourceCodeHash = (currentSourceBranch) =>
   execa('git', ['rev-parse', '--short', currentSourceBranch]);
+
+let spinner = ora('');
+
+const printErr = (stderr) => chalk.red(stderr);
 
 const publish = async ({
   release,
@@ -20,30 +25,34 @@ const publish = async ({
   customScript,
   debug
 }) => {
-  const { stdout: currentSourceBranch } = await getCurrentBranch();
   const cleanWorktree = () => {
-    execaSync('git', ['worktree', 'remove', '-f', release]);
-    execaSync('git', ['worktree', 'prune']);
+    try {
+      execaSync('git', ['worktree', 'remove', release]);
+      execaSync('git', ['worktree', 'prune']);
+    } catch (e) {}
   };
+  process.on('uncaughtException', (err) => {
+    cleanWorktree();
+    spinner.fail(`${debug ? '调试' : '打包部署'}未成功，具体信息如下：\n`);
+    console.log(err);
+    execaSync('exit', [1]);
+  });
+  const { stdout: currentSourceBranch } = await getCurrentBranch();
+
   if (master && master !== currentSourceBranch) {
     execaSync('echo', [`请切换到 ${master} 分支进行打包。`]);
     execaSync('exit', [1]);
     return;
   }
-
-  const spinner = ora(`${debug ? '开始调试...' : '开始打包部署...'}`).start();
-
-  execaSync('git', ['worktree', 'prune']);
+  spinner.text = `开始${debug ? '调试' : '打包部署'}...`;
+  spinner.start();
 
   try {
     await stat(path.join(__dirName, 'build'));
-    chdir(`build/${release}`);
-    execaSync('rm', ['-rf', '*']);
-    chdir(__dirName);
   } catch (e) {
-    console.log(e);
     execaSync('mkdir', ['build']);
-    execaSync('git', [
+  } finally {
+    const { stdout } = await execa('git', [
       'worktree',
       'add',
       '-B',
@@ -51,15 +60,21 @@ const publish = async ({
       `build/${release}`,
       `origin/${release}`
     ]);
+    console.log(stdout);
+    chdir(`build/${release}`);
+    execaSync('rm', ['-rf', '*']);
+    chdir(__dirName);
   }
-  // execaSync('git', ['clone', '--bare', repo, 'build/.bare']);
-  // execaSync('echo', ['"gitdir: ./.bare" > build/.git']);
-
+  spinner.text = `正在运行打包脚本 npm run ${npmScript}...`;
   if (customScript) {
     await customScript();
   } else {
-    const { stdout: bundleStatus } = await execa('npm', ['run', npmScript]);
+    const { stdout: bundleStatus, stderr: scriptErr } = await execa('npm', [
+      'run',
+      npmScript
+    ]);
     console.log(bundleStatus);
+    scriptErr ? printErr(scriptErr) : console.log(bundleStatus);
   }
 
   execaSync('cp', ['-rf', 'dist/topic-front-stage/*', `build/${release}`]);
@@ -82,14 +97,26 @@ const publish = async ({
   );
 
   const COMMITS = `built by branch-${currentSourceBranch}-git-commit-hash ${commits}`;
+
   execaSync('git', ['add', '-A']);
   execaSync('git', ['commit', '-m', COMMITS]);
-  const { stdout: publishStatus } = await ('git',
-  ['push', '-f', '--set-upstream', 'origin', release]);
 
-  console.log(publishStatus);
-  spinner.succeed('代码推送成功');
+  try {
+    const { stdout: publishStatus } = execaSync(
+      'git',
+      ['push', '-u', '--set-upstream', 'origin', release],
+      { shell: true }
+    );
+    console.log(publishStatus);
+    spinner.succeed('代码推送成功');
+  } catch (e) {
+    console.log('popop');
+    // console.log('publish-error', e);
+  } finally {
+    setTimeout(cleanWorktree, 1000);
+  }
 };
+
 export default function ({
   release = 'release',
   master = 'master',
@@ -98,7 +125,7 @@ export default function ({
   npmScript,
   customScript = null
 }) {
-  console.log(arguments);
+  // console.log(arguments);
   if (typeof release === 'string') {
     publish({ release, master, repo, npmScript, customScript, debug });
     return;
